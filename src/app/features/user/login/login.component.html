@@ -1,0 +1,32 @@
+<div class="container mt-5">
+  <div class="row justify-content-center">
+    <div class="col-md-6 border border-warning p-4">
+      <h2 class="text-center mb-4">Login</h2>
+      <form [formGroup]="loginForm">
+        <div class="mb-3">
+          <label for="loginEmail" class="form-label">Email address</label>
+          <input type="email" formControlName="email" class="form-control" id="loginEmail" required>
+          <div *ngIf="loginForm.get('email')?.touched && loginForm.get('email')?.invalid" class="text-danger">
+            Please enter a valid email.
+         </div>
+        </div>
+        <div class="mb-3">
+          <label for="loginPassword" class="form-label">Password</label>
+          <input type="password" formControlName="password" class="form-control" id="loginPassword" required>
+          <div *ngIf="loginForm.get('password')?.touched && loginForm.get('password')?.invalid" class="text-danger">
+            Please enter Password.
+         </div>
+        </div>
+        <div class="mb-3 text-center">
+          <a href="#" class="text-decoration-none">Forgot Password?</a>
+        </div>
+        <div class="mb-3 text-center">
+          <a routerLink="/register" class="text-decoration-none">Open an Account</a>
+        </div>
+        <div class="d-grid">
+          <button (click)="login()" [disabled]="!loginForm.valid" type="submit" class="btn btn-warning">Login</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
