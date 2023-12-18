@@ -39,10 +39,7 @@ export class AuthService {
     .pipe(
       tap(__ => this.log("User Authentication")),
       map((res:HttpResponse<any>)=>{
-        this.storage.saveToken(res.body.access_token);
-        // this.storage.saveUser(res.body.user)
-        this.storage.saveRefreshToken(res.body.refresh_token);
-
+        console.log(res.status)
         return res;
       })
     )

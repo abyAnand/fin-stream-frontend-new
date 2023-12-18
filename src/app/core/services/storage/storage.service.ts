@@ -71,7 +71,7 @@ export class StorageService {
     return this.getToken() !== null && role === "ROLE_ADMIN";
   }
 
-  static isStudentLoggedIn(): boolean {
+  static isUserLoggedIn(): boolean {
     const role: string = this.getUserRole();
     return this.getToken() !== null && role === "ROLE_USER";
   }
