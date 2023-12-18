@@ -12,13 +12,14 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { HttpClientModule } from '@angular/common/http';
-import {MatSnackBar, MatSnackBarAction} from '@angular/material/snack-bar';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
+import { UserModule } from './features/user/user.module';
+
 
 @NgModule({
   declarations: [
     AppComponent,
-    LoginComponent,
-    RegisterComponent,
+
 
   ],
   imports: [
@@ -31,7 +32,10 @@ import {MatSnackBar, MatSnackBarAction} from '@angular/material/snack-bar';
     MatFormFieldModule,
     NgbModule,
     HttpClientModule,
-    
+    MatSnackBarModule,
+    UserModule
+
+
 
   ],
   providers: [],
