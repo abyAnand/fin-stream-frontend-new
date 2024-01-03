@@ -1,0 +1,17 @@
+
+
+.container-fluid, .row, body, html {
+  height: 100%;
+}
+
+#sidebar ul {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+
+}
+
+.nav-link {
+  margin: 10px;
+
+}

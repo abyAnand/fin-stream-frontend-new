@@ -1,0 +1,44 @@
+.nav{
+  display: flex;
+  justify-content: space-between;
+}
+
+.nav h1{
+  color: orange;
+  margin: 0;
+  font-size: 40px;
+}
+
+.nav ul{
+  display: inline-flex;
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  padding-right: 50px;
+
+}
+
+.nav li{
+  padding-left: 15px;
+  padding-top: 15px;
+}
+
+.nav li a{
+  text-decoration: none;
+  color: orange;
+}
+
+.nav .nav-search input{
+  flex: 1;
+  color: orange;
+  border: 1px solid orange;
+  height: 35px;
+  border-right: 0px;
+}
+
+.nav .nav-search button{
+  color: orange;
+  border: 1px solid orange;
+  height: 39px;
+  border-left: 0px;
+}

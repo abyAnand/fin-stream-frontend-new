@@ -14,6 +14,7 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { HttpClientModule } from '@angular/common/http';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { UserModule } from './features/user/user.module';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
 
 @NgModule({
@@ -33,7 +34,9 @@ import { UserModule } from './features/user/user.module';
     NgbModule,
     HttpClientModule,
     MatSnackBarModule,
-    UserModule
+    UserModule,
+    FontAwesomeModule,
+    MatIconModule
 
 
 
