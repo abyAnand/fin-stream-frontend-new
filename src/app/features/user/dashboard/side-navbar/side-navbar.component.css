@@ -1,4 +1,13 @@
+.nav-link{
+  color: orange;
+  border-radius: 10px;
+}
 
+.nav-link.active {
+  background-color: orange;
+  color: white !important;
+  border-radius: 10px;
+}
 
 .container-fluid, .row, body, html {
   height: 100%;
