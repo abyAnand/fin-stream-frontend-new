@@ -11,10 +11,11 @@ import {MatInputModule} from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
-import { HttpClientModule } from '@angular/common/http';
+import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { UserModule } from './features/user/user.module';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { JwtInterceptorInterceptor } from './core/interceptors/jwt-interceptor.interceptor';
 
 
 @NgModule({
@@ -41,7 +42,9 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
 
   ],
-  providers: [],
+  providers: [
+    { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptorInterceptor, multi: true },
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

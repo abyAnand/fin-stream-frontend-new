@@ -4,6 +4,7 @@ import { jwtDecode } from 'jwt-decode';
 const USER = 'user';
 const TOKEN = 'token';
 const REFRESH = 'refresh';
+const DECODED = 'userId'
 
 
 @Injectable({
@@ -17,13 +18,14 @@ export class StorageService {
 
   public saveUser(user: any){
     window.localStorage.removeItem(USER);
-    window.localStorage.setItem(USER, JSON.stringify(user));
+    window.localStorage.setItem(USER, user);
   }
 
   public saveToken(token: any){
     window.localStorage.removeItem(TOKEN);
     window.localStorage.setItem(TOKEN, token);
     StorageService.decodedToken = jwtDecode(token);
+    localStorage.setItem(DECODED, StorageService.decodedToken.userId)
 
   }
 
@@ -51,12 +53,17 @@ export class StorageService {
     return true;
   }
 
-  public static getUserId():string{
-    const user = this.getUser();
-    if( user == null){
+  static getUserIdFromToken(): string {
+
+    if (this.hasToken()) {
+      console.log("inside");
+
+      return localStorage.getItem(DECODED);
+    } else {
+
+      console.error('User ID not found in the decoded token.');
       return '';
     }
-    return user.userId;
   }
 
   static getUserRole(): string {

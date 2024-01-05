@@ -7,14 +7,16 @@ import { noAuthGuard } from 'src/app/core/guards/noAuth-guard/no-auth.guard';
 import { HeaderComponent } from './header/header.component';
 import { ProfileComponent } from './dashboard/profile/profile.component';
 import { UserDashboardComponent } from './dashboard/user-dashboard/user-dashboard.component';
+import { ChangePasswordComponent } from './dashboard/change-password/change-password.component';
 
 const routes: Routes = [
   { path: 'dashboard', component: DashboardComponent,
 children:[
   {path: 'user', component: UserDashboardComponent},
-  {path: 'profile', component: ProfileComponent}
+  {path: 'profile', component: ProfileComponent},
+  {path: 'password', component: ChangePasswordComponent}
 ]},
-  
+
   {path: 'login', component: LoginComponent, canActivate: [noAuthGuard] },
   {path:'register', component: RegisterComponent, canActivate: [noAuthGuard]},
 

@@ -8,10 +8,10 @@
       <div class="collapse navbar-collapse justify-content-end me-5 " id="navbarNav">
         <ul class="navbar-nav display-flex  ">
           <li class="nav-item">
-            <a class="nav-link" href="#">User </a>
+            <a class="nav-link " routerLinkActive="active" [routerLink]="['/dashboard']" >User </a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="#">Banks</a>
+            <a class="nav-link" routerLinkActive="active" href="#">Banks</a>
           </li>
           <li class="nav-item">
             <a class="nav-link" href="#">Accounts</a>
@@ -34,8 +34,8 @@
             John Doe
           </a>
           <ul class="dropdown-menu" aria-labelledby="userDropdown">
-            <li><a class="dropdown-item" href="#">Profile Settings</a></li>
-            <li><a class="dropdown-item" href="#">Change Password</a></li>
+            <li><a class="dropdown-item" routerLinkActive="active" [routerLink]="['/dashboard/profile']">Profile Settings</a></li>
+            <li><a class="dropdown-item" routerLinkActive="active" [routerLink]="['/dashboard/password']">Change Password</a></li>
             <li><a class="dropdown-item" href="#">Logout</a></li>
           </ul>
         </div>

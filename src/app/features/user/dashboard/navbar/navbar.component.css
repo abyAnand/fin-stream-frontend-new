@@ -16,5 +16,14 @@ a.navbar-brand{
 
 a.nav-link{
   color: white;
+  padding: 10px;
+  border-radius: 10px;
 }
+
+a.nav-link.active {
+  background-color: white;
+  color: orange !important;
+  border-radius: 10px;
+}
+
 
