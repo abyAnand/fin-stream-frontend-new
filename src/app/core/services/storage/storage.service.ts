@@ -56,8 +56,6 @@ export class StorageService {
   static getUserIdFromToken(): string {
 
     if (this.hasToken()) {
-      console.log("inside");
-
       return localStorage.getItem(DECODED);
     } else {
 
@@ -87,5 +85,6 @@ export class StorageService {
     window.localStorage.removeItem(TOKEN);
     window.localStorage.removeItem(REFRESH);
     window.localStorage.removeItem(USER);
+    window.localStorage.removeItem(DECODED);
   }
 }

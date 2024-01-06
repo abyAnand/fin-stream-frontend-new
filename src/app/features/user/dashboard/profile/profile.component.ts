@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { UserDto } from 'src/app/core/models/UserDto.model';
 import { StorageService } from 'src/app/core/services/storage/storage.service';
+import { ToasterService } from 'src/app/core/services/toaster/toaster.service';
 import { UserService } from 'src/app/core/services/user/user.service';
 
 
@@ -24,6 +25,8 @@ export class ProfileComponent implements OnInit{
     private formBuilder: FormBuilder,
     private route: ActivatedRoute,
     private userService: UserService,
+    private notification: ToasterService,
+
 
     ){}
 
@@ -34,7 +37,6 @@ export class ProfileComponent implements OnInit{
   }
 
   getUserByUserId(userId: number): any{
-    console.log(this.userId);
     this.userService.getUserById(userId).subscribe((res) =>{
       this.updateForm.patchValue(res);
     });
@@ -70,10 +72,26 @@ export class ProfileComponent implements OnInit{
   }
 
   toggleEditMode() {
-    this.isEditMode = !this.isEditMode;
 
+    this.isEditMode = !this.isEditMode;
     if (!this.isEditMode) {
-      console.log("saved");
+      const userDto: UserDto = {
+        id: this.userId,
+        firstName: this.updateForm.get(['firstName'])!.value,
+        lastName: this.updateForm.get(['lastName'])!.value,
+        email: this.updateForm.get(['email'])!.value,
+      }
+
+      this.userService.updateUser(userDto).subscribe(
+        () =>{
+          this.notification.success("User updated Successfully", "Updated");
+        },
+        (error)=>{
+          this.notification.info("User updation failed", "Failed");
+        }
+      )
+
+
 
     }
   }

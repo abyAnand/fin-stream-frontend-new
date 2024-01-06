@@ -16,8 +16,9 @@ export class UserService {
     private http: HttpClient
   ) { }
 
-  updateUser(userId: number, userDto: UserDto): Observable<any>{
-    const apiUrl = `${URL}${userId}`;
+  updateUser( userDto: UserDto): Observable<any>{
+
+    const apiUrl = `${URL}`;
     return this.http.put(apiUrl, userDto, {headers})
     .pipe(
       catchError(this.handleError)

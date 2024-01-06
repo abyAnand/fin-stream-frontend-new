@@ -23,7 +23,7 @@ export class JwtInterceptorInterceptor implements HttpInterceptor {
    * Handles HTTP errors and attempts to refresh the token in case of an unauthorized error.
    */
   intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
-    console.log('Interceptor has been triggered!');
+   
     const token = this.getTokenFromLocalStorage();
 
 

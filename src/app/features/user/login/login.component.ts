@@ -47,7 +47,7 @@ export class LoginComponent {
       },
       (error: { status: number; }) => {
         if (error.status == 403) {
-          this.snackBar.open("Something Happened", "Close", {
+          this.snackBar.open("Incorrect email or password", "Close", {
             duration: 5000
           });
         } else {
