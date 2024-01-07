@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { BankRequest } from 'src/app/core/models/BankRequest.model';
 import { Role } from 'src/app/core/models/RegisterRequest.model';
+import { AuthService } from 'src/app/core/services/authentication/auth.service';
 import { BankService } from 'src/app/core/services/bank/bank.service';
 import { ToasterService } from 'src/app/core/services/toaster/toaster.service';
 
@@ -16,7 +17,7 @@ export class BankRegisterComponent implements OnInit {
 
   constructor(
     private formBuilder: FormBuilder,
-    private bankService: BankService,
+    private authService: AuthService,
     private notification: ToasterService
   ) { }
 
@@ -41,20 +42,19 @@ export class BankRegisterComponent implements OnInit {
       address: this.bankSignupForm.get(['address'])!.value,
       password: this.bankSignupForm.get(['password'])!.value,
       phoneNumber: this.bankSignupForm.get(['phoneNumber'])!.value,
-      role: Role.Bank 
+      role: Role.Bank
     };
-      this.bankService.registerBank(bankRequest);
-
-      // .subscribe(
-      //   () => {
-      //     // Show success message or redirect to another page
-      //     this.notification.success('Bank registered successfully', "Success");
-      //   },
-      //   (error) => {
-      //     // Handle error, show error message, etc.
-      //     this.notification.error( error, 'failed');
-      //   }
-      // );
+      this.authService.registerBank(bankRequest)
+      .subscribe(
+        () => {
+          // Show success message or redirect to another page
+          this.notification.success('Bank registered successfully', "Success");
+        },
+        (error) => {
+          // Handle error, show error message, etc.
+          this.notification.error( error, 'failed');
+        }
+      );
     }
 
   passwordMatchValidator(formGroup: FormGroup) {

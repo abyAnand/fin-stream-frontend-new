@@ -4,6 +4,7 @@ import { StorageService } from '../storage/storage.service';
 import { AuthRequest } from '../../models/AuthRequest.model';
 import { Observable, catchError, map, tap } from 'rxjs';
 import { RegisterRequest } from '../../models/RegisterRequest.model';
+import { BankRequest } from '../../models/BankRequest.model';
 
 const URL = ['http://localhost:8072/finStream/auth/auth/']
 
@@ -38,7 +39,7 @@ export class AuthService {
     return this.http.post(URL + 'logout', {}).pipe(
       catchError((error) => {
         console.error('Logout failed', error);
-        throw error; 
+        throw error;
       })
     );
   }
@@ -54,6 +55,15 @@ export class AuthService {
           return res;
         })
       )
+  }
+
+  registerBank(bankData: BankRequest): Observable<any> {
+    return this.http.post(URL + 'register/bank', bankData, { observe: 'response' })
+      .pipe(
+        tap((res: HttpResponse<any>) => {
+          return res;
+        })
+      );
   }
 
   log(message: string) {
