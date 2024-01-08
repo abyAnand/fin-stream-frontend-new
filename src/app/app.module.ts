@@ -21,6 +21,7 @@ import { StoreModule } from '@ngrx/store';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { EffectsModule } from '@ngrx/effects';
 import { ToastrModule } from 'ngx-toastr';
+import { BankModule } from './features/bank/bank.module';
 
 
 @NgModule({
@@ -41,6 +42,7 @@ import { ToastrModule } from 'ngx-toastr';
     HttpClientModule,
     MatSnackBarModule,
     UserModule,
+    BankModule,
     FontAwesomeModule,
     MatIconModule,
     ToastrModule.forRoot({}),
