@@ -13,7 +13,7 @@ import { BankDashboardComponent } from './bank-home/bank-top-navbar/bank-profile
 import { BankUpdateComponent } from './bank-home/bank-top-navbar/bank-profile/bank-side-navbar/bank-dashboard-home/bank-update/bank-update.component';
 import { BankRegisterComponent } from './bank-register/bank-register.component';
 import { BankLoginComponent } from './bank-login/bank-login.component';
-
+import { ChangeBankPasswordComponent } from './bank-home/bank-top-navbar/bank-profile/bank-side-navbar/bank-dashboard-home/bank-update/change-bank-password/change-bank-password.component';
 
 @NgModule({
   declarations: [
@@ -29,7 +29,9 @@ import { BankLoginComponent } from './bank-login/bank-login.component';
            BankDashboardComponent,
            BankUpdateComponent,
            BankRegisterComponent,
-           BankLoginComponent
+           BankLoginComponent,
+           ChangeBankPasswordComponent,
+
   ],
   imports: [
     CommonModule,
