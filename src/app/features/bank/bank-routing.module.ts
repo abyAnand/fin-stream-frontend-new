@@ -6,18 +6,26 @@ import { BankDashboardHomeComponent } from './bank-home/bank-top-navbar/bank-pro
 import { BankUpdateComponent } from './bank-home/bank-top-navbar/bank-profile/bank-side-navbar/bank-dashboard-home/bank-update/bank-update.component';
 import { BankRegisterComponent } from './bank-register/bank-register.component';
 import { BankLoginComponent } from './bank-login/bank-login.component';
+import { ChangeBankPasswordComponent } from './bank-home/bank-top-navbar/bank-profile/bank-side-navbar/bank-dashboard-home/bank-update/change-bank-password/change-bank-password.component';
 
 
 const routes: Routes = [
-  {path: 'register', component: BankRegisterComponent},
-  {path: 'login', component: BankLoginComponent},
-  { path: 'bank-home', component: BankHomeComponent},
-  {path: 'home', component: BankDashboardHomeComponent,
-  children:[
-    {path: 'dashboard', component:BankDashboardComponent },
-    {path: 'update', component: BankUpdateComponent}
-
-  ]},
+  { path: 'register', component: BankRegisterComponent },
+  { path: 'login', component: BankLoginComponent },
+  { path: 'bank-home', component: BankHomeComponent },
+  {
+    path: 'home', component: BankDashboardHomeComponent,
+    children: [
+      { path: 'dashboard', component: BankDashboardComponent },
+      {path: 'password', component: ChangeBankPasswordComponent},
+      {
+        path: 'update', component: BankUpdateComponent,
+        children: [
+          { path: 'password', component: ChangeBankPasswordComponent }
+        ]
+      }
+    ]
+  },
 ];
 
 @NgModule({
