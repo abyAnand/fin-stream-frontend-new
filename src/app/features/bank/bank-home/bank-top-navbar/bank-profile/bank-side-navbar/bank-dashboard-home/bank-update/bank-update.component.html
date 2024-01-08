@@ -1,1 +1,37 @@
-<p>bank-update works!</p>
+<div class="container-lg my-3">
+  <h2 class="text-center mb-4">Update Bank</h2>
+  <form class="row g-3" [formGroup]="updateForm">
+    <div class="col-md-6">
+      <label for="name" class="form-label">Name</label>
+      <input type="text" formControlName="name" class="form-control" [readonly]="!isEditMode" id="name" placeholder="Enter Bank Name">
+    </div>
+    <div class="col-md-6">
+      <label for="shortName" class="form-label">Short Name</label>
+      <input type="text" formControlName="shortName" class="form-control" [readonly]="!isEditMode" id="shortName" placeholder="Enter Short Name">
+    </div>
+
+    <div class="col-md-8">
+      <label for="address" class="form-label">Address</label>
+      <input type="text" formControlName="address" class="form-control" [readonly]="!isEditMode" id="address" placeholder="Enter Address">
+    </div>
+
+    <div class="col-md-4">
+      <label for="email" class="form-label">Email</label>
+      <div class="input-group">
+        <div class="input-group-text">@</div>
+        <input type="email" formControlName="email" [readonly]="!isEditMode" class="form-control" id="email" placeholder="Enter Email">
+      </div>
+    </div>
+
+    <div class="col-md-6">
+      <label for="phoneNumber" class="form-label">Phone Number</label>
+      <input type="tel" formControlName="phoneNumber" class="form-control" [readonly]="!isEditMode" id="phoneNumber" placeholder="Enter Phone Number">
+    </div>
+
+    <div class="col-12">
+      <button type="button" class="btn btn-update-bank btn-outline-primary" (click)="toggleEditMode()">
+        {{ isEditMode ? 'Save Changes' : 'Edit' }}
+      </button>
+    </div>
+  </form>
+</div>

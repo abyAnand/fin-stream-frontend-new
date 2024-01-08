@@ -4,7 +4,7 @@
 }
 
 .container-fluid{
-  background-color: orange;
+  background-color: #86B6F6;
   height: 80px;
 }
 
@@ -22,7 +22,7 @@ a.nav-link{
 
 a.nav-link.active {
   background-color: white;
-  color: orange !important;
+  color:  #86B6F6 !important;
   border-radius: 10px;
 }
 
