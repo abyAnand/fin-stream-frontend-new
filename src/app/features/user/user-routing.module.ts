@@ -8,10 +8,12 @@ import { HeaderComponent } from './header/header.component';
 import { ProfileComponent } from './dashboard/profile/profile.component';
 import { UserDashboardComponent } from './dashboard/user-dashboard/user-dashboard.component';
 import { ChangePasswordComponent } from './dashboard/change-password/change-password.component';
+import { BankListComponent } from './dashboard/navbar/bank-list/bank-list.component';
 
 const routes: Routes = [
   { path: 'dashboard', component: DashboardComponent,
 children:[
+  {path: 'bank', component: BankListComponent},
   {path: 'user', component: UserDashboardComponent},
   {path: 'profile', component: ProfileComponent},
   {path: 'password', component: ChangePasswordComponent}

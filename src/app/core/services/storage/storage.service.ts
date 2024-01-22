@@ -34,6 +34,15 @@ export class StorageService {
     window.localStorage.setItem(REFRESH, refresh);
   }
 
+  static setHasAccount(value: boolean) {
+    window.localStorage.setItem('hasAccount', value.toString());
+  }
+
+  static getHasAccount(): boolean {
+    const hasAccount = window.localStorage.getItem('hasAccount');
+    return hasAccount !== null ? JSON.parse(hasAccount) : false;
+  }
+
   static getToken(): string{
     return window.localStorage.getItem(TOKEN)! || '';
   }

@@ -14,6 +14,13 @@ import { BankUpdateComponent } from './bank-home/bank-top-navbar/bank-profile/ba
 import { BankRegisterComponent } from './bank-register/bank-register.component';
 import { BankLoginComponent } from './bank-login/bank-login.component';
 import { ChangeBankPasswordComponent } from './bank-home/bank-top-navbar/bank-profile/bank-side-navbar/bank-dashboard-home/bank-update/change-bank-password/change-bank-password.component';
+import { BankAccountSettingsComponent } from './bank-home/bank-top-navbar/bank-profile/bank-side-navbar/bank-dashboard-home/bank-account-settings/bank-account-settings.component';
+import { AccountsComponent } from './bank-home/bank-top-navbar/accounts/accounts.component';
+import { AccountSideNavbarComponent } from './bank-home/bank-top-navbar/accounts/account-side-navbar/account-side-navbar.component';
+import { AccountHomeComponent } from './bank-home/bank-top-navbar/accounts/account-side-navbar/account-home/account-home.component';
+import { AccountListComponent } from './bank-home/bank-top-navbar/accounts/account-side-navbar/account-home/account-list/account-list.component';
+import { AccountSettingsComponent } from './bank-home/bank-top-navbar/accounts/account-side-navbar/account-home/account-settings/account-settings.component';
+import { CreateAccountSettingComponent } from './bank-home/bank-top-navbar/accounts/account-side-navbar/account-home/create-account-setting/create-account-setting.component';
 
 @NgModule({
   declarations: [
@@ -31,6 +38,15 @@ import { ChangeBankPasswordComponent } from './bank-home/bank-top-navbar/bank-pr
            BankRegisterComponent,
            BankLoginComponent,
            ChangeBankPasswordComponent,
+           BankAccountSettingsComponent,
+           AccountsComponent,
+           AccountSideNavbarComponent,
+           AccountHomeComponent,
+           AccountListComponent,
+           AccountSettingsComponent,
+           CreateAccountSettingComponent,
+
+
 
   ],
   imports: [

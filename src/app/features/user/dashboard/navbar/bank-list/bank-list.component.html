@@ -1,0 +1,23 @@
+<div class="container mt-5">
+  <h2 class="text-center mb-4 sticky-top bg-white">List of Banks</h2>
+  <div class="bank-list-container border rounded p-3 shadow-lg orange-border">
+    <ng-container *ngIf="!error; else errorHandling">
+      <ng-container *ngIf="bankList.length > 0; else noBanks">
+        <ul class="list-group">
+          <li *ngFor="let bank of bankList" class="list-group-item list-group-item-action d-flex justify-content-between align-items-center p-4">
+            <div>
+              <span class="fw-bold h4">{{ bank.name }}</span> - {{ bank.shortName | uppercase }}
+            </div>
+            <button class="btn btn-primary btn-sm">Create Account</button>
+          </li>
+        </ul>
+      </ng-container>
+      <ng-template #noBanks>
+        <div class="text-center text-muted">No banks available.</div>
+      </ng-template>
+    </ng-container>
+    <ng-template #errorHandling>
+      <div class="text-center text-danger">Error fetching banks. Please try again later.</div>
+    </ng-template>
+  </div>
+</div>

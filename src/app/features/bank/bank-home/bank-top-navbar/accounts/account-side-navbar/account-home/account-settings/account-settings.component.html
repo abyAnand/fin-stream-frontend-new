@@ -1,0 +1,38 @@
+<div class="container mt-5">
+  <div class="d-flex justify-content-between align-items-center mb-4">
+    <button class="btn btn-sm btn-success" (click)="createAccount()">
+      <i class="bi bi-plus-circle"></i> Create Account
+    </button>
+
+
+    <h2 class="text-center mb-0">List of Accounts - {{ shortName }}</h2>
+
+    <button class="btn btn-sm btn-primary" routerLink="/bank/account/list">
+      <i class="bi bi-list"></i> Account List
+    </button>
+  </div>
+
+  <div class="bank-list-container p-3 shadow-lg blue-border">
+    <ng-container *ngIf="!error; else errorHandling">
+      <ng-container *ngIf="accountTypeList.length > 0; else noBanks">
+        <div class="list-group">
+          <div *ngFor="let accountType of accountTypeList" class="list-group-item list-group-item-action d-flex justify-content-between align-items-center p-4 bank-item">
+            <div class="d-flex flex-column">
+              <span class="fw-bold h4">{{ accountType.accountType }}</span>
+              <span class="text-muted">Name of Account: <span class="bg-primary rounded-pill text-white">{{ accountType.accountName }}</span></span>
+            </div>
+            <button class="btn btn-sm" routerLink="/bank/home/details">
+              <i class="bi bi-eye"></i>  'View Accounts' :
+            </button>
+          </div>
+        </div>
+      </ng-container>
+      <ng-template #noBanks>
+        <div class="text-center text-muted">No {{shortName}} Account Settings available.</div>
+      </ng-template>
+    </ng-container>
+    <ng-template #errorHandling>
+      <div class="text-center text-danger">Error fetching Account Types. Please try again later.</div>
+    </ng-template>
+  </div>
+</div>

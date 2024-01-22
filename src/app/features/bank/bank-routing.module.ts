@@ -6,26 +6,40 @@ import { BankDashboardHomeComponent } from './bank-home/bank-top-navbar/bank-pro
 import { BankUpdateComponent } from './bank-home/bank-top-navbar/bank-profile/bank-side-navbar/bank-dashboard-home/bank-update/bank-update.component';
 import { BankRegisterComponent } from './bank-register/bank-register.component';
 import { BankLoginComponent } from './bank-login/bank-login.component';
+import { BankAccountSettingsComponent } from './bank-home/bank-top-navbar/bank-profile/bank-side-navbar/bank-dashboard-home/bank-account-settings/bank-account-settings.component';
 import { ChangeBankPasswordComponent } from './bank-home/bank-top-navbar/bank-profile/bank-side-navbar/bank-dashboard-home/bank-update/change-bank-password/change-bank-password.component';
-
+import { AccountsComponent } from './bank-home/bank-top-navbar/accounts/accounts.component';
+import { AccountHomeComponent } from './bank-home/bank-top-navbar/accounts/account-side-navbar/account-home/account-home.component';
+import { AccountListComponent } from './bank-home/bank-top-navbar/accounts/account-side-navbar/account-home/account-list/account-list.component';
+import { AccountSettingsComponent } from './bank-home/bank-top-navbar/accounts/account-side-navbar/account-home/account-settings/account-settings.component';
+import { CreateAccountSettingComponent } from './bank-home/bank-top-navbar/accounts/account-side-navbar/account-home/create-account-setting/create-account-setting.component';
 
 const routes: Routes = [
   { path: 'register', component: BankRegisterComponent },
   { path: 'login', component: BankLoginComponent },
   { path: 'bank-home', component: BankHomeComponent },
   {
-    path: 'home', component: BankDashboardHomeComponent,
+    path: 'home',
+    component: BankDashboardHomeComponent,
     children: [
+      { path: '', redirectTo: 'dashboard', pathMatch: 'full' },
+      { path: 'setting', component: BankAccountSettingsComponent },
       { path: 'dashboard', component: BankDashboardComponent },
-      {path: 'password', component: ChangeBankPasswordComponent},
-      {
-        path: 'update', component: BankUpdateComponent,
-        children: [
-          { path: 'password', component: ChangeBankPasswordComponent }
-        ]
-      }
-    ]
+      { path: 'update', component: BankUpdateComponent },
+      { path: 'password', component: ChangeBankPasswordComponent },
+    ],
   },
+ {
+    path: 'account',
+    component: AccountHomeComponent,
+    children: [
+      { path: '', redirectTo: 'list', pathMatch: 'full' },
+      { path: 'list', component: AccountListComponent },
+      { path: 'settings/:shortName', component: AccountSettingsComponent },
+      { path: 'create', component: CreateAccountSettingComponent },
+    ],
+  },
+  { path: '**', redirectTo: 'home/dashboard', pathMatch: 'full' },
 ];
 
 @NgModule({

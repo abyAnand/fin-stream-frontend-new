@@ -15,10 +15,11 @@ import { MatIconModule } from '@angular/material/icon';
 import { ProfileComponent } from './dashboard/profile/profile.component';
 import { UserDashboardComponent } from './dashboard/user-dashboard/user-dashboard.component';
 import { ChangePasswordComponent } from './dashboard/change-password/change-password.component';
+import { BankListComponent } from './dashboard/navbar/bank-list/bank-list.component';
 
 
 @NgModule({
-  declarations: [LoginComponent, RegisterComponent, DashboardComponent, HeaderComponent, NavbarComponent, SideNavbarComponent, ProfileComponent, UserDashboardComponent, ChangePasswordComponent],
+  declarations: [LoginComponent, RegisterComponent, DashboardComponent, HeaderComponent, NavbarComponent, SideNavbarComponent, ProfileComponent, UserDashboardComponent, ChangePasswordComponent, BankListComponent],
   imports: [
     CommonModule,
     UserRoutingModule,
