@@ -1,0 +1,23 @@
+<div class="container mt-5">
+  <h2 class="text-center mb-4 sticky-top bg-white">Bank Accounts</h2>
+  <div *ngIf="!error; else errorHandling" class="bank-list-container border rounded p-3 shadow-lg orange-border">
+    <ng-container *ngIf="accountList.length > 0; else noAccounts">
+      <ul class="list-group">
+        <li *ngFor="let account of accountList" class="list-group-item list-group-item-action d-flex justify-content-between align-items-center p-4">
+          <div>
+            <span class="fw-bold h4">{{ account.accountName }}</span>
+            <br>
+            <span>{{ account.accountType }}</span>
+          </div>
+          <button class="btn btn-primary btn-sm" [routerLink]="['/dashboard/create/', account.accountType]" (click)="showAccountDetails(account)">Show Details</button>
+        </li>
+      </ul>
+    </ng-container>
+    <ng-template #noAccounts>
+      <div class="text-center text-muted">No accounts available for this bank.</div>
+    </ng-template>
+  </div>
+  <ng-template #errorHandling>
+    <div class="text-center text-danger">Error fetching accounts. Please try again later.</div>
+  </ng-template>
+</div>

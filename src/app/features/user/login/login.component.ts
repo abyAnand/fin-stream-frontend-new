@@ -42,7 +42,7 @@ export class LoginComponent {
 
     this.authService.login(auth).subscribe(
       (response) => {
-        this.router.navigate(['../dashboard'], { relativeTo: this.ActivatedRoute.parent });
+        this.router.navigate(['../dashboard/user'], { relativeTo: this.ActivatedRoute.parent });
 
       },
       (error: { status: number; }) => {

@@ -8,7 +8,7 @@
             <div>
               <span class="fw-bold h4">{{ bank.name }}</span> - {{ bank.shortName | uppercase }}
             </div>
-            <button class="btn btn-primary btn-sm">Create Account</button>
+            <button class="btn btn-primary btn-sm" [routerLink]="['/dashboard/accounts/', bank.id]">Show Bank Accounts</button>
           </li>
         </ul>
       </ng-container>

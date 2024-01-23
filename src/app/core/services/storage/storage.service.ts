@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { jwtDecode } from 'jwt-decode';
+import { BankSettingDto } from '../../models/BankSettingDto.model';
 
 const USER = 'user';
 const TOKEN = 'token';
@@ -41,6 +42,15 @@ export class StorageService {
   static getHasAccount(): boolean {
     const hasAccount = window.localStorage.getItem('hasAccount');
     return hasAccount !== null ? JSON.parse(hasAccount) : false;
+  }
+
+  static setAccount(value: BankSettingDto) {
+    window.localStorage.setItem('account', JSON.stringify(value));
+  }
+
+  static getAccount(): BankSettingDto {
+    const account = window.localStorage.getItem('account');
+    return account !== null ? JSON.parse(account) : false;
   }
 
   static getToken(): string{

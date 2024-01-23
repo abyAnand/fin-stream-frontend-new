@@ -98,6 +98,12 @@ export class BankService {
     );
   }
 
+  getAccountsByBankId(bankId: string):Observable<any>{
+    return this.http.get<BankDto>(`${URL}bank/${bankId}/accounts`, { headers: BankService.HEADERS }).pipe(
+      catchError(this.handleError)
+    );
+  }
+
   registerBank(bankData: BankRequest): Observable<any> {
     return this.http.post(URL + 'bank/register', bankData, { observe: 'response', headers: BankService.HEADERS }).pipe(
       tap((res: HttpResponse<any>) => {

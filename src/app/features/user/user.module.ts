@@ -16,10 +16,12 @@ import { ProfileComponent } from './dashboard/profile/profile.component';
 import { UserDashboardComponent } from './dashboard/user-dashboard/user-dashboard.component';
 import { ChangePasswordComponent } from './dashboard/change-password/change-password.component';
 import { BankListComponent } from './dashboard/navbar/bank-list/bank-list.component';
+import { ShowBankAccountsComponent } from './show-bank-accounts/show-bank-accounts.component';
+import { CreateBankAccountComponent } from './create-bank-account/create-bank-account.component';
 
 
 @NgModule({
-  declarations: [LoginComponent, RegisterComponent, DashboardComponent, HeaderComponent, NavbarComponent, SideNavbarComponent, ProfileComponent, UserDashboardComponent, ChangePasswordComponent, BankListComponent],
+  declarations: [LoginComponent, RegisterComponent, DashboardComponent, HeaderComponent, NavbarComponent, SideNavbarComponent, ProfileComponent, UserDashboardComponent, ChangePasswordComponent, BankListComponent, ShowBankAccountsComponent, CreateBankAccountComponent],
   imports: [
     CommonModule,
     UserRoutingModule,
