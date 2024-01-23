@@ -44,17 +44,37 @@ export class BankService {
   }
 
   createAccountSetting(bankSettingDto: BankSettingDto):Observable<any>{
-
-    return this.http.post(URL + 'accounts/settings/', bankSettingDto, { observe: 'response', headers: BankService.HEADERS }).pipe(
+    return this.http.post(URL + 'accounts/settings', bankSettingDto, { observe: 'response', headers: BankService.HEADERS }).pipe(
       tap((res: HttpResponse<any>) => {
         console.log(res.status);
-        if (res.status === 201) {
+        if (res.status === 201 || res.status === 200) {
           const bankDto = res.body;
           this.notification.success('Bank Created Successfully', 'Success');
           console.log('Bank registered successfully:', bankDto);
         } else {
           console.error('Bank registration failed:', res);
           this.notification.info('Bank Registration Failed', 'Fail');
+        }
+      }),
+      catchError(error => {
+        console.error('Bank registration failed:', error);
+        this.notification.error(error, 'Error Occurred');
+        throw error;
+      })
+    );
+  }
+
+  updateAccountSetting(bankSettingDto: BankSettingDto):Observable<any>{
+    return this.http.put(URL + 'accounts/settings', bankSettingDto, { observe: 'response', headers: BankService.HEADERS }).pipe(
+      tap((res: HttpResponse<any>) => {
+        console.log(res.status);
+        if (res.status === 201 || res.status === 200) {
+          const bankDto = res.body;
+          this.notification.success('Bank Updated Successfully', 'Success');
+          console.log('Bank updated successfully:', bankDto);
+        } else {
+          console.error('Bank Updation failed:', res);
+          this.notification.info('Bank Updation Failed', 'Fail');
         }
       }),
       catchError(error => {

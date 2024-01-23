@@ -3,6 +3,8 @@ import { FormBuilder, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { AccountType, BankSettingDto } from '../../../../../../../../core/models/BankSettingDto.model';
 import { StorageService } from 'src/app/core/services/storage/storage.service';
+import { BankService } from 'src/app/core/services/bank/bank.service';
+import { ToasterService } from 'src/app/core/services/toaster/toaster.service';
 
 @Component({
   selector: 'app-create-account-setting',
@@ -15,16 +17,16 @@ export class CreateAccountSettingComponent implements OnInit{
   @Input() shortName: string;
 
   error: boolean = false;
+  bankSetting: BankSettingDto;
 
   constructor(
-    private formBuilder: FormBuilder
+    private formBuilder: FormBuilder,
+    private bankService: BankService,
+    private notification: ToasterService
   ){
 
   }
   ngOnInit(): void {
-
-    console.log(this.shortName);
-
 
 
   }
@@ -34,6 +36,28 @@ export class CreateAccountSettingComponent implements OnInit{
     interestRate: ['', Validators.required]
   })
 
+  checkingAccountForm = this.formBuilder.group({
+    accountName: ['', [Validators.required]],
+    overdraftLimit: ['', Validators.required]
+  })
+
+  fdAccountForm = this.formBuilder.group({
+    accountName: ['', [Validators.required]],
+    interestRate: ['', Validators.required],
+    cdTerm: ['', Validators.required]
+  })
+
+  moneyMarketAccountForm = this.formBuilder.group({
+    accountName: ['', [Validators.required]],
+    maxMonthlyTransactions: ['', Validators.required],
+  })
+
+  jointAccountForm = this.formBuilder.group({
+    accountName: ['', [Validators.required]],
+    accountHoldersLimit: ['', Validators.required],
+  })
+
+
   createSavingsAccount(): void {
 
     const bankSettingDto: BankSettingDto = {
@@ -42,9 +66,103 @@ export class CreateAccountSettingComponent implements OnInit{
       accountName: this.savingsAccountForm.get(['accountName'])!.value,
       interestRate: this.savingsAccountForm.get(['interestRate'])!.value
     }
-
     console.log(bankSettingDto);
+    this.bankService.createAccountSetting(bankSettingDto).subscribe(
+      (banks) => {
+        this.bankSetting = banks;
+      },
+      (error) => {
+        this.notification.error(error, 'Error fetching Accounts:');
+        this.error = true;
+      }
+    );
+    this.onSubmit.emit();
+  }
 
+  createCheckingAccount(){
+    const bankSettingDto: BankSettingDto = {
+      bankId: StorageService.getUserIdFromToken(),
+      accountType: AccountType.CHECKING,
+      accountName: this.checkingAccountForm.get(['accountName'])!.value,
+      overdraftLimit: this.checkingAccountForm.get(['overdraftLimit'])!.value
+    }
+    console.log(bankSettingDto);
+    this.bankService.createAccountSetting(bankSettingDto).subscribe(
+      (banks) => {
+        this.bankSetting = banks;
+      },
+      (error) => {
+        this.notification.error(error, 'Error fetching Accounts:');
+        this.error = true;
+      }
+    );
+    this.onSubmit.emit();
+  }
+
+  createFdAccount(){
+
+    const bankSettingDto: BankSettingDto = {
+      bankId: StorageService.getUserIdFromToken(),
+      accountType: AccountType.FD,
+      accountName: this.fdAccountForm.get(['accountName'])!.value,
+      interestRate: this.fdAccountForm.get(['interestRate'])!.value,
+      cdTerm: this.fdAccountForm.get(['cdTerm'])!.value
+    }
+    console.log(bankSettingDto);
+    this.bankService.createAccountSetting(bankSettingDto).subscribe(
+      (banks) => {
+        this.bankSetting = banks;
+      },
+      (error) => {
+        this.notification.error(error, 'Error fetching Accounts:');
+        this.error = true;
+      }
+    );
+    this.onSubmit.emit();
+
+  }
+
+  createMoneyMarketAccount(){
+
+    const bankSettingDto: BankSettingDto = {
+      bankId: StorageService.getUserIdFromToken(),
+      accountType: AccountType.MONEY_MARKET,
+      accountName: this.moneyMarketAccountForm.get(['accountName'])!.value,
+      maxMonthlyTransactions: this.moneyMarketAccountForm.get(['maxMonthlyTransactions'])!.value,
+
+    }
+    console.log(bankSettingDto);
+    this.bankService.createAccountSetting(bankSettingDto).subscribe(
+      (banks) => {
+        this.bankSetting = banks;
+      },
+      (error) => {
+        this.notification.error(error, 'Error fetching Accounts:');
+        this.error = true;
+      }
+    );
+    this.onSubmit.emit();
+
+  }
+
+  createJointAccount(){
+    const bankSettingDto: BankSettingDto = {
+      bankId: StorageService.getUserIdFromToken(),
+      accountType: AccountType.JOINT,
+      accountName: this.jointAccountForm.get(['accountName'])!.value,
+      accountHoldersLimit: this.jointAccountForm.get(['accountHoldersLimit'])!.value,
+
+    }
+    console.log(bankSettingDto);
+    this.bankService.createAccountSetting(bankSettingDto).subscribe(
+      (banks) => {
+        this.bankSetting = banks;
+      },
+      (error) => {
+        this.notification.error(error, 'Error fetching Accounts:');
+        this.error = true;
+      }
+    );
     this.onSubmit.emit();
   }
 

@@ -1,4 +1,5 @@
 export interface BankSettingDto {
+  id?: string;
   bankId: string;
   accountType: AccountType;
   accountName: string;
@@ -6,7 +7,7 @@ export interface BankSettingDto {
   cdTerm?: number;
   accountHoldersLimit?: number;
   maxMonthlyTransactions?: number;
-  interestRate: number;
+  interestRate?: number;
 }
 
 export enum AccountType {

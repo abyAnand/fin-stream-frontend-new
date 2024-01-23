@@ -21,6 +21,7 @@ import { AccountHomeComponent } from './bank-home/bank-top-navbar/accounts/accou
 import { AccountListComponent } from './bank-home/bank-top-navbar/accounts/account-side-navbar/account-home/account-list/account-list.component';
 import { AccountSettingsComponent } from './bank-home/bank-top-navbar/accounts/account-side-navbar/account-home/account-settings/account-settings.component';
 import { CreateAccountSettingComponent } from './bank-home/bank-top-navbar/accounts/account-side-navbar/account-home/create-account-setting/create-account-setting.component';
+import { EditAccountSettingComponent } from './bank-home/bank-top-navbar/accounts/account-side-navbar/account-home/edit-account-setting/edit-account-setting.component';
 
 @NgModule({
   declarations: [
@@ -45,6 +46,7 @@ import { CreateAccountSettingComponent } from './bank-home/bank-top-navbar/accou
            AccountListComponent,
            AccountSettingsComponent,
            CreateAccountSettingComponent,
+           EditAccountSettingComponent,
 
 
 

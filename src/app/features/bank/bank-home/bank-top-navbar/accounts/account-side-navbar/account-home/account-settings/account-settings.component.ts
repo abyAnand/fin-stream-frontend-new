@@ -9,6 +9,7 @@ import { BankService } from 'src/app/core/services/bank/bank.service';
 import { StorageService } from 'src/app/core/services/storage/storage.service';
 import { ToasterService } from 'src/app/core/services/toaster/toaster.service';
 import { CreateAccountSettingComponent } from '../create-account-setting/create-account-setting.component';
+import { EditAccountSettingComponent } from '../edit-account-setting/edit-account-setting.component';
 
 @Component({
   selector: 'app-account-settings',
@@ -65,6 +66,17 @@ export class AccountSettingsComponent implements OnInit{
   createAccount(): void {
     const modalRef = this.modalService.open(CreateAccountSettingComponent, { centered: true });
     modalRef.componentInstance.shortName = this.shortName;
+    modalRef.componentInstance.onSubmit.subscribe(() => {
+      // Handle any logic after the form is submitted
+      modalRef.close();
+    });
+  }
+
+  viewAccounts(account: BankSettingDto): void {
+
+    const modalRef = this.modalService.open(EditAccountSettingComponent, { centered: true });
+    modalRef.componentInstance.shortName = this.shortName;
+    modalRef.componentInstance.account = account; // Pass the selected accountType
     modalRef.componentInstance.onSubmit.subscribe(() => {
       // Handle any logic after the form is submitted
       modalRef.close();
