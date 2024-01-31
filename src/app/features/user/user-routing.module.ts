@@ -11,6 +11,9 @@ import { ChangePasswordComponent } from './dashboard/change-password/change-pass
 import { BankListComponent } from './dashboard/navbar/bank-list/bank-list.component';
 import { ShowBankAccountsComponent } from './show-bank-accounts/show-bank-accounts.component';
 import { CreateBankAccountComponent } from './create-bank-account/create-bank-account.component';
+import { ShowUserAccountsComponent } from './show-user-accounts/show-user-accounts.component';
+import { ShowUserAccountDetailsComponent } from './show-user-account-details/show-user-account-details.component';
+import { EditUserAccountComponent } from './edit-user-account/edit-user-account.component';
 
 const routes: Routes = [
   { path: 'dashboard', component: DashboardComponent,
@@ -21,6 +24,9 @@ children:[
   {path: 'password', component: ChangePasswordComponent},
   { path: 'accounts/:bankId', component: ShowBankAccountsComponent },
   { path: 'create/:accountType', component: CreateBankAccountComponent },
+  {path: 'account', component: ShowUserAccountsComponent},
+  {path: 'details', component: ShowUserAccountDetailsComponent},
+  {path: 'edit', component: EditUserAccountComponent}
 ]},
 
   {path: 'login', component: LoginComponent, canActivate: [noAuthGuard] },

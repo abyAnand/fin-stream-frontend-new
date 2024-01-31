@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 import { BankRequest } from 'src/app/core/models/BankRequest.model';
 import { Role } from 'src/app/core/models/RegisterRequest.model';
 import { AuthService } from 'src/app/core/services/authentication/auth.service';
@@ -18,7 +19,8 @@ export class BankRegisterComponent implements OnInit {
   constructor(
     private formBuilder: FormBuilder,
     private authService: AuthService,
-    private notification: ToasterService
+    private notification: ToasterService,
+    private router: Router
   ) { }
 
   ngOnInit(): void {
@@ -49,6 +51,7 @@ export class BankRegisterComponent implements OnInit {
         () => {
           // Show success message or redirect to another page
           this.notification.success('Bank registered successfully', "Success");
+          this.router.navigate(['bank/login']);
         },
         (error) => {
           // Handle error, show error message, etc.
