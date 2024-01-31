@@ -1,0 +1,184 @@
+
+
+<ng-container *ngIf="shortName === 'SAVINGS'">
+  <div class="container mt-5 mb-5">
+    <div class="row justify-content-center">
+      <div class="col-md-10 border rounded p-4 shadow">
+        <h2 class="text-center mb-4">{{ shortName }} Account Settings</h2>
+
+        <form [formGroup]="savingsAccountForm" class="mb-3">
+          <div class="mb-3">
+            <label for="accountName" class="form-label">Account Name</label>
+            <input type="text" formControlName="accountName" class="form-control" id="accountName" required>
+            <div *ngIf="isInvalid('accountName')" class="text-danger mt-2">
+              Please enter an account name.
+            </div>
+          </div>
+
+          <div class="mb-3">
+            <label for="interestRate" class="form-label">Interest Rate</label>
+            <input type="number" formControlName="interestRate" class="form-control" id="interestRate" required>
+            <div *ngIf="isInvalid('interestRate')" class="text-danger mt-2">
+              Please enter a valid interest rate.
+            </div>
+          </div>
+
+          <div class="d-grid">
+
+            <button (click)="createSavingsAccount()" [disabled]="!savingsAccountForm.valid" type="submit" class="btn btn-primary">Create Account</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</ng-container>
+
+<ng-container *ngIf="shortName === 'CHECKING'">
+  <div class="container mt-5 mb-5">
+    <div class="row justify-content-center">
+      <div class="col-md-10 border rounded p-4 shadow">
+        <h2 class="text-center mb-4">{{ shortName }} Account Settings</h2>
+
+        <form [formGroup]="checkingAccountForm" class="mb-3">
+          <div class="mb-3">
+            <label for="accountName" class="form-label">Account Name</label>
+            <input type="text" formControlName="accountName" class="form-control" id="accountName" required>
+            <div *ngIf="isInvalid('accountName')" class="text-danger mt-2">
+              Please enter an account name.
+            </div>
+          </div>
+
+          <div class="mb-3">
+            <label for="overdraftLimit" class="form-label">Overdraft Limit</label>
+            <input type="number" formControlName="overdraftLimit" class="form-control" id="overdraftLimit" required>
+            <div *ngIf="isInvalid('overdraftLimit')" class="text-danger mt-2">
+              Please enter a valid overdraft limit.
+            </div>
+          </div>
+
+          <div class="d-grid">
+            <button (click)="createCheckingAccount()" [disabled]="!checkingAccountForm.valid" type="submit" class="btn btn-primary">Create Account</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</ng-container>
+
+<ng-container *ngIf="shortName === 'FD'">
+  <div class="container mt-5 mb-5">
+    <div class="row justify-content-center">
+      <div class="col-md-10 border rounded p-4 shadow">
+        <h2 class="text-center mb-4">{{ shortName }} Account Settings</h2>
+
+        <form [formGroup]="fdAccountForm" class="mb-3">
+          <div class="mb-3">
+            <label for="accountName" class="form-label">Account Name</label>
+            <input type="text" formControlName="accountName" class="form-control" id="accountName" required>
+            <div *ngIf="isInvalid('accountName')" class="text-danger mt-2">
+              Please enter an account name.
+            </div>
+          </div>
+
+          <div class="mb-3">
+            <label for="interestRate" class="form-label">Interest Rate</label>
+            <input type="number" formControlName="interestRate" class="form-control" id="interestRate" required>
+            <div *ngIf="isInvalid('interestRate')" class="text-danger mt-2">
+              Please enter a valid interest rate.
+            </div>
+          </div>
+
+          <div class="mb-3">
+            <label for="cdTerm" class="form-label">CD Term (in months)</label>
+            <input type="number" formControlName="cdTerm" class="form-control" id="cdTerm" required>
+            <div *ngIf="isInvalid('cdTerm')" class="text-danger mt-2">
+              Please enter a valid CD term.
+            </div>
+          </div>
+
+          <div class="d-grid">
+            <button (click)="createFdAccount()" [disabled]="!fdAccountForm.valid" type="submit" class="btn btn-primary">Create Account</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</ng-container>
+
+<ng-container *ngIf="shortName === 'MONEY_MARKET'">
+  <div class="container mt-5 mb-5">
+    <div class="row justify-content-center">
+      <div class="col-md-10 border rounded p-4 shadow">
+        <h2 class="text-center mb-4">{{ shortName }} Account Settings</h2>
+
+        <form [formGroup]="moneyMarketAccountForm" class="mb-3">
+          <div class="mb-3">
+            <label for="accountName" class="form-label">Account Name</label>
+            <input type="text" formControlName="accountName" class="form-control" id="accountName" required>
+            <div *ngIf="isInvalid('accountName')" class="text-danger mt-2">
+              Please enter an account name.
+            </div>
+          </div>
+
+          <div class="mb-3">
+            <label for="maxMonthlyTransactions" class="form-label">Max Monthly Transactions</label>
+            <input type="number" formControlName="maxMonthlyTransactions" class="form-control" id="maxMonthlyTransactions" required>
+            <div *ngIf="isInvalid('maxMonthlyTransactions')" class="text-danger mt-2">
+              Please enter a valid max monthly transactions value.
+            </div>
+          </div>
+
+          <div class="d-grid">
+            <button (click)="createMoneyMarketAccount()" [disabled]="!moneyMarketAccountForm.valid" type="submit" class="btn btn-primary">Create Account</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</ng-container>
+
+<ng-container *ngIf="shortName === 'JOINT'">
+  <div class="container mt-5 mb-5">
+    <div class="row justify-content-center">
+      <div class="col-md-10 border rounded p-4 shadow">
+        <h2 class="text-center mb-4">{{ shortName }} Account Settings</h2>
+
+        <form [formGroup]="jointAccountForm" class="mb-3">
+          <div class="mb-3">
+            <label for="accountName" class="form-label">Account Name</label>
+            <input type="text" formControlName="accountName" class="form-control" id="accountName" required>
+            <div *ngIf="isInvalid('accountName')" class="text-danger mt-2">
+              Please enter an account name.
+            </div>
+          </div>
+
+          <div class="mb-3">
+            <label for="accountHoldersLimit" class="form-label">Account Holders Limit</label>
+            <input type="number" formControlName="accountHoldersLimit" class="form-control" id="accountHoldersLimit" required>
+            <div *ngIf="isInvalid('accountHoldersLimit')" class="text-danger mt-2">
+              Please enter a valid account holders limit.
+            </div>
+          </div>
+
+          <div class="d-grid">
+            <button (click)="createJointAccount()" [disabled]="!jointAccountForm.valid" type="submit" class="btn btn-primary">Create Account</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</ng-container>
+
+<ng-container *ngIf="['IRA', 'BUSINESS', 'STUDENT', 'TRUST', 'CUSTODIAL'].includes(shortName)">
+  <div class="container mt-5 mb-5">
+    <div class="row justify-content-center">
+      <div class="col-md-10 border rounded p-4 shadow">
+        <h2 class="text-center mb-4">{{ shortName }} Account Settings</h2>
+
+        <div class="text-danger text-center">
+          Option not available at the current moment.
+        </div>
+      </div>
+    </div>
+  </div>
+</ng-container>

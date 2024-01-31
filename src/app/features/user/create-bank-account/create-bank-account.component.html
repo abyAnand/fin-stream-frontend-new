@@ -1,0 +1,175 @@
+<ng-container *ngIf="accountType === 'SAVINGS'">
+  <div class="container mt-5">
+    <h2 class="text-center mb-4">Create Savings Account</h2>
+
+    <form [formGroup]="savingsAccountForm" (ngSubmit)="createSavingsAccount()">
+      <!-- Account Details -->
+      <div class="mb-3">
+        <label for="accountName" class="form-label">Account Name</label>
+        <input type="text" formControlName="accountName" class="form-control" id="accountName" required>
+      </div>
+
+      <div class="mb-3">
+        <label for="initialDeposit" class="form-label">Initial Deposit Amount</label>
+        <input type="number" formControlName="initialDeposit" class="form-control" id="initialDeposit" (input)="calculateReturns()" required>
+      </div>
+
+      <div class="mb-3">
+        <label for="interestRate" class="form-label">Interest Rate (%)</label>
+        <input type="text" class="form-control" formControlName="interestRate" readonly>
+      </div>
+
+      <!-- Monthly and Yearly Return -->
+      <div class="mb-3">
+        <p>Estimated Returns:</p>
+        <p>Monthly Return: {{ monthlyReturn | number : '1.2-2' }}</p>
+  <p>Yearly Return: {{ yearlyReturn }}</p>
+      </div>
+
+      <!-- Notifications -->
+      <!-- <div class="mb-3">
+        <h5>Notifications</h5>
+        <div class="form-check">
+          <input type="checkbox" formControlName="transactionAlerts" class="form-check-input" id="transactionAlerts">
+          <label class="form-check-label" for="transactionAlerts">Alerts for Transactions</label>
+        </div>
+        <div class="form-check">
+          <input type="checkbox" formControlName="lowBalanceAlerts" class="form-check-input" id="lowBalanceAlerts">
+          <label class="form-check-label" for="lowBalanceAlerts">Alerts for Low Balance</label>
+        </div>
+      </div> -->
+
+      <!-- Account Management -->
+      <!-- <div class="mb-3">
+        <h5>Account Management</h5>
+        <div class="form-check">
+          <input type="checkbox" formControlName="overdraftProtection" class="form-check-input" id="overdraftProtection">
+          <label class="form-check-label" for="overdraftProtection">Overdraft Protection</label>
+        </div>
+      </div> -->
+
+      <!-- Create Button -->
+      <div class="d-grid">
+        <button [disabled]="!savingsAccountForm.valid" type="submit" class="btn btn-primary">Create Account</button>
+      </div>
+    </form>
+  </div>
+</ng-container>
+
+<ng-container *ngIf="accountType === 'CHECKING'">
+  <div class="container mt-5">
+    <h2 class="text-center mb-4">Create Checking Account</h2>
+
+    <form [formGroup]="checkingAccountForm" (ngSubmit)="createCheckingAccount()">
+      <!-- Account Details -->
+      <div class="mb-3">
+        <label for="accountName" class="form-label">Account Name</label>
+        <input type="text" formControlName="accountName" class="form-control" id="accountName" required>
+      </div>
+
+      <div class="mb-3">
+        <label for="initialDeposit" class="form-label">Initial Deposit Amount</label>
+        <input type="number" formControlName="initialDeposit" class="form-control" id="initialDeposit" (input)="calculateReturns()" required>
+      </div>
+
+      <div class="mb-3">
+        <label for="overdraftLimit" class="form-label">Overdraft Limit</label>
+        <input type="number" formControlName="overdraftLimit" class="form-control" id="overdraftLimit" readonly>
+      </div>
+
+      <!-- Linked Savings Account -->
+      <!-- <div class="mb-3">
+        <label for="linkedSavingsAccountId" class="form-label">Linked Savings Account ID</label>
+        <input type="text" formControlName="linkedSavingsAccountId" class="form-control" id="linkedSavingsAccountId" required>
+      </div> -->
+
+      <!-- Notifications -->
+      <!-- <div class="mb-3">
+        <h5>Notifications</h5>
+        <div class="form-check">
+          <input type="checkbox" formControlName="transactionAlerts" class="form-check-input" id="transactionAlerts">
+          <label class="form-check-label" for="transactionAlerts">Alerts for Transactions</label>
+        </div>
+        <div class="form-check">
+          <input type="checkbox" formControlName="lowBalanceAlerts" class="form-check-input" id="lowBalanceAlerts">
+          <label class="form-check-label" for="lowBalanceAlerts">Alerts for Low Balance</label>
+        </div>
+      </div> -->
+
+      <!-- Account Management -->
+      <!-- <div class="mb-3">
+        <h5>Account Management</h5>
+        <div class="form-check">
+          <input type="checkbox" formControlName="overdraftProtection" class="form-check-input" id="overdraftProtection">
+          <label class="form-check-label" for="overdraftProtection">Overdraft Protection</label>
+        </div>
+      </div> -->
+
+      <!-- Create Button -->
+      <div class="d-grid">
+        <button [disabled]="!checkingAccountForm.valid" type="submit" class="btn btn-primary">Create Account</button>
+      </div>
+    </form>
+  </div>
+</ng-container>
+
+<ng-container *ngIf="accountType === 'FD'">
+  <div class="container mt-5">
+    <h2 class="text-center mb-4">Create Fixed Deposit Account</h2>
+
+    <form [formGroup]="fdAccountForm" (ngSubmit)="createFdAccount()">
+      <!-- Account Details -->
+      <div class="mb-3">
+        <label for="accountName" class="form-label">Account Name</label>
+        <input type="text" formControlName="accountName" class="form-control" id="accountName" required>
+      </div>
+
+      <div class="mb-3">
+        <label for="initialDeposit" class="form-label">Initial Deposit Amount</label>
+        <input type="number" formControlName="initialDeposit" class="form-control" id="initialDeposit" (input)="calculateReturns()" required>
+      </div>
+
+      <div class="mb-3">
+        <label for="interestRate" class="form-label">Interest Rate (%)</label>
+        <input type="number" formControlName="interestRate" class="form-control" id="interestRate" required>
+      </div>
+
+      <div class="mb-3">
+        <label for="cdTerm" class="form-label">CD Term</label>
+        <input type="number" formControlName="cdTerm" class="form-control" id="cdTerm" required>
+      </div>
+
+      <div class="mb-3">
+        <p>Estimated Returns:</p>
+        <p>Total Return: {{ totalReturn | currency:'INR ':true }}</p>
+      </div>
+
+      <!-- Notifications -->
+      <!-- <div class="mb-3">
+        <h5>Notifications</h5>
+        <div class="form-check">
+          <input type="checkbox" formControlName="transactionAlerts" class="form-check-input" id="transactionAlerts">
+          <label class="form-check-label" for="transactionAlerts">Alerts for Transactions</label>
+        </div>
+        <div class="form-check">
+          <input type="checkbox" formControlName="lowBalanceAlerts" class="form-check-input" id="lowBalanceAlerts">
+          <label class="form-check-label" for="lowBalanceAlerts">Alerts for Low Balance</label>
+        </div>
+      </div> -->
+
+      <!-- Account Management -->
+      <!-- <div class="mb-3">
+        <h5>Account Management</h5>
+        <div class="form-check">
+          <input type="checkbox" formControlName="autoRenewal" class="form-check-input" id="autoRenewal">
+          <label class="form-check-label" for="autoRenewal">Auto Renewal</label>
+        </div>
+      </div> -->
+
+      <!-- Create Button -->
+      <div class="d-grid">
+        <button [disabled]="!fdAccountForm.valid" type="submit" class="btn btn-primary">Create Account</button>
+      </div>
+    </form>
+  </div>
+</ng-container>

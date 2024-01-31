@@ -1,0 +1,59 @@
+<ng-container *ngIf="selectedAccount.accountType === 'SAVINGS' && selectedAccount">
+  <div class="container mt-5">
+    <h2 class="text-center mb-4">Edit Savings Account</h2>
+
+    <form [formGroup]="savingsAccountForm" (ngSubmit)="editSavingsAccount()">
+      <!-- Account Details -->
+      <div class="mb-3">
+        <label for="accountName" class="form-label">Account Name</label>
+        <input type="text" formControlName="accountName" class="form-control" id="accountName" required [value]="selectedAccount.accountName">
+      </div>
+
+      <div class="mb-3">
+        <label for="initialDeposit" class="form-label">Initial Deposit Amount</label>
+        <input type="number" formControlName="initialDeposit" class="form-control" id="initialDeposit"  required [value]="selectedAccount.balance">
+      </div>
+
+      <div class="mb-3">
+        <label for="interestRate" class="form-label">Interest Rate (%)</label>
+        <input type="text" class="form-control" formControlName="interestRate" readonly [value]="selectedAccount.interestRate">
+      </div>
+
+
+      <!-- Create Button -->
+      <div class="d-grid">
+        <button [disabled]="!savingsAccountForm.valid" type="submit" class="btn btn-primary">Save Changes</button>
+      </div>
+    </form>
+  </div>
+</ng-container>
+
+<!-- Edit Checking Account Page -->
+<ng-container *ngIf="selectedAccount.accountType === 'CHECKING' && selectedAccount">
+  <div class="container mt-5">
+    <h2 class="text-center mb-4">Edit Checking Account</h2>
+
+    <form [formGroup]="checkingAccountForm" (ngSubmit)="editCheckingAccount()">
+      <!-- Account Details -->
+      <div class="mb-3">
+        <label for="accountName" class="form-label">Account Name</label>
+        <input type="text" formControlName="accountName" class="form-control" id="accountName" required [value]="selectedAccount.accountName">
+      </div>
+
+      <div class="mb-3">
+        <label for="initialDeposit" class="form-label">Initial Deposit Amount</label>
+        <input type="number" formControlName="initialDeposit" class="form-control" id="initialDeposit"  required [value]="selectedAccount.balance">
+      </div>
+
+      <div class="mb-3">
+        <label for="overdraftLimit" class="form-label">Overdraft Limit</label>
+        <input type="number" formControlName="overdraftLimit" class="form-control" id="overdraftLimit" readonly [value]="selectedAccount.overdraftLimit">
+      </div>
+
+      <!-- Create Button -->
+      <div class="d-grid">
+        <button [disabled]="!checkingAccountForm.valid" type="submit" class="btn btn-primary">Save Changes</button>
+      </div>
+    </form>
+  </div>
+</ng-container>

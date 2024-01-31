@@ -22,11 +22,15 @@ import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { EffectsModule } from '@ngrx/effects';
 import { ToastrModule } from 'ngx-toastr';
 import { BankModule } from './features/bank/bank.module';
+import { AdminHomeComponent } from './admin-home/admin-home.component';
+import { AdminTopNavbarComponent } from './admin-top-navbar/admin-top-navbar.component';
 
 
 @NgModule({
   declarations: [
     AppComponent,
+    AdminHomeComponent,
+    AdminTopNavbarComponent,
 
 
   ],

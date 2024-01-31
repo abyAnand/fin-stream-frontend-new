@@ -1,0 +1,13 @@
+<div class="container mt-5">
+  <div class="row gx-3">
+    <div class="col-sm-6 col-md-4" *ngFor="let account of userAccounts">
+      <div class="card h-100 bg-light shadow-sm">
+        <div class="card-body text-center d-flex flex-column justify-content-between">
+          <h3 class="card-title mb-4">{{ account.accountName }}</h3>
+          <span class="h2 fw-bold mb-3">{{ account.balance | currency:'INR ':true }}</span>
+          <a (click)="viewAccount(account)" class="btn btn-outline-primary stretched-link">View Details</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
