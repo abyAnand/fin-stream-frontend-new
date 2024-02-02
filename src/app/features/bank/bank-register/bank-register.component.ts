@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { BankRequest } from 'src/app/core/models/BankRequest.model';
-import { Role } from 'src/app/core/models/RegisterRequest.model';
+import { BankRequest } from 'src/app/core/models/auth/BankRequest.model';
+import { Role } from 'src/app/core/models/auth/RegisterRequest.model';
 import { AuthService } from 'src/app/core/services/authentication/auth.service';
 import { BankService } from 'src/app/core/services/bank/bank.service';
 import { ToasterService } from 'src/app/core/services/toaster/toaster.service';

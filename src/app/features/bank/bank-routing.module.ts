@@ -1,18 +1,18 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { BankHomeComponent } from './bank-home/bank-home.component';
-import { BankDashboardComponent } from './bank-home/bank-top-navbar/bank-profile/bank-side-navbar/bank-dashboard-home/bank-dashboard/bank-dashboard.component';
-import { BankDashboardHomeComponent } from './bank-home/bank-top-navbar/bank-profile/bank-side-navbar/bank-dashboard-home/bank-dashboard-home.component';
-import { BankUpdateComponent } from './bank-home/bank-top-navbar/bank-profile/bank-side-navbar/bank-dashboard-home/bank-update/bank-update.component';
+import { BankDashboardComponent } from './bank-home/bank-top-navbar/bank-profile/bank-dashboard/bank-dashboard.component';
+import { BankDashboardHomeComponent } from './bank-home/bank-top-navbar/bank-profile/bank-dashboard-home/bank-dashboard-home.component';
+import { BankUpdateComponent } from './bank-home/bank-top-navbar/bank-profile/bank-update/bank-update.component';
 import { BankRegisterComponent } from './bank-register/bank-register.component';
 import { BankLoginComponent } from './bank-login/bank-login.component';
-import { BankAccountSettingsComponent } from './bank-home/bank-top-navbar/bank-profile/bank-side-navbar/bank-dashboard-home/bank-account-settings/bank-account-settings.component';
-import { ChangeBankPasswordComponent } from './bank-home/bank-top-navbar/bank-profile/bank-side-navbar/bank-dashboard-home/bank-update/change-bank-password/change-bank-password.component';
+import { BankAccountSettingsComponent } from './bank-home/bank-top-navbar/bank-profile/bank-account-settings/bank-account-settings.component';
+import { ChangeBankPasswordComponent } from './bank-home/bank-top-navbar/bank-profile/change-bank-password/change-bank-password.component';
 import { AccountsComponent } from './bank-home/bank-top-navbar/accounts/accounts.component';
-import { AccountHomeComponent } from './bank-home/bank-top-navbar/accounts/account-side-navbar/account-home/account-home.component';
-import { AccountListComponent } from './bank-home/bank-top-navbar/accounts/account-side-navbar/account-home/account-list/account-list.component';
-import { AccountSettingsComponent } from './bank-home/bank-top-navbar/accounts/account-side-navbar/account-home/account-settings/account-settings.component';
-import { CreateAccountSettingComponent } from './bank-home/bank-top-navbar/accounts/account-side-navbar/account-home/create-account-setting/create-account-setting.component';
+import { AccountHomeComponent } from './bank-home/bank-top-navbar/accounts/account-home/account-home.component';
+import { AccountListComponent } from './bank-home/bank-top-navbar/accounts/account-list/account-list.component';
+import { AccountSettingsComponent } from './bank-home/bank-top-navbar/accounts/account-settings/account-settings.component';
+import { CreateAccountSettingComponent } from './bank-home/bank-top-navbar/accounts/create-account-setting/create-account-setting.component';
 
 const routes: Routes = [
   { path: 'register', component: BankRegisterComponent },

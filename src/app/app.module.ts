@@ -5,8 +5,6 @@ import { isDevMode } from '@angular/core';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { LoginComponent } from './features/user/login/login.component';
-import { RegisterComponent } from './features/user/register/register.component';
 import { MatIconModule } from '@angular/material/icon';
 import {MatInputModule} from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
@@ -22,15 +20,12 @@ import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { EffectsModule } from '@ngrx/effects';
 import { ToastrModule } from 'ngx-toastr';
 import { BankModule } from './features/bank/bank.module';
-import { AdminHomeComponent } from './admin-home/admin-home.component';
-import { AdminTopNavbarComponent } from './admin-top-navbar/admin-top-navbar.component';
+import { StoreRouterConnectingModule } from '@ngrx/router-store';
 
 
 @NgModule({
   declarations: [
-    AppComponent,
-    AdminHomeComponent,
-    AdminTopNavbarComponent,
+    AppComponent
 
 
   ],
@@ -55,11 +50,12 @@ import { AdminTopNavbarComponent } from './admin-top-navbar/admin-top-navbar.com
       maxAge: 25, // Retains last 25 states
       logOnly: !isDevMode(), // Restrict extension to log-only mode
       autoPause: true, // Pauses recording actions and state changes when the extension window is not open
-      trace: false, //  If set to true, will include stack trace for every dispatched action, so you can see it in trace tab jumping directly to that part of code
+      trace: true, //  If set to true, will include stack trace for every dispatched action, so you can see it in trace tab jumping directly to that part of code
       traceLimit: 75, // maximum stack trace frames to be stored (in case trace option was provided as true)
       connectOutsideZone: true // If set to true, the connection is established outside the Angular zone for better performance
     }),
-    EffectsModule.forRoot()
+    EffectsModule.forRoot(),
+    StoreRouterConnectingModule.forRoot()
 
 
 

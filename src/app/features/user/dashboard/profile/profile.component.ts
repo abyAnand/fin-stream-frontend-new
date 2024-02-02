@@ -1,7 +1,7 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
-import { UserDto } from 'src/app/core/models/UserDto.model';
+import { UserDto } from 'src/app/core/models/user/UserDto.model';
 import { StorageService } from 'src/app/core/services/storage/storage.service';
 import { ToasterService } from 'src/app/core/services/toaster/toaster.service';
 import { UserService } from 'src/app/core/services/user/user.service';

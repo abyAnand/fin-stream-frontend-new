@@ -1,7 +1,7 @@
 import { HttpClient, HttpHeaders, HttpResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { ToasterService } from '../toaster/toaster.service';
-import { AccountDto } from '../../models/bank/account/AccountDto.model';
+import { AccountDto } from '../../models/account/AccountDto.model';
 import { Observable, catchError, tap } from 'rxjs';
 
 const URL = 'http://localhost:8072/finStream/account/';

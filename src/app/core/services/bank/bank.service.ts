@@ -1,14 +1,10 @@
 import { Injectable } from '@angular/core';
 import { Observable, throwError } from 'rxjs';
 import { HttpClient, HttpErrorResponse, HttpHeaders, HttpResponse } from '@angular/common/http';
-import { catchError, map, tap } from 'rxjs/operators';
+import { catchError, tap } from 'rxjs/operators';
 import { ToasterService } from '../toaster/toaster.service';
-import { BankRequest } from '../../models/BankRequest.model';
-import { BankDto } from '../../models/BankDto.model';
-import { Bank } from '../../models/Bank.model';
-import { AccountTypeSetting } from '../../models/AccountTypeSetting.model';
-import { AccountTypeListRequestDto } from '../../models/AccountTypeListRequestDto.model';
-import { BankSettingDto, AccountType } from '../../models/BankSettingDto.model';
+import { BankRequest } from '../../models/auth/BankRequest.model';
+import { BankDto } from '../../models/bank/BankDto.model';
 
 const URL = 'http://localhost:8072/finStream/bank/';
 
@@ -24,64 +20,9 @@ export class BankService {
     private notification: ToasterService
   ) { }
 
-  getAllBanks(): Observable<Bank[]> {
-    return this.http.get<Bank[]>(`${URL}/bank`, { headers: BankService.HEADERS }).pipe(
+  getAllBanks(): Observable<BankDto[]> {
+    return this.http.get<BankDto[]>(`${URL}/bank`, { headers: BankService.HEADERS }).pipe(
       catchError(this.handleError)
-    );
-  }
-
-  getAccountTypes(bankId: number): Observable<AccountTypeSetting[]> {
-    return this.http.get<AccountTypeSetting[]>(`${URL}/accounts/settings/${bankId}`, { headers: BankService.HEADERS });
-  }
-
-  getAccountSettingsListByBankIdAndAccountType(listRequestDto: AccountTypeListRequestDto): Observable<BankSettingDto[]> {
-    return this.http.get<BankSettingDto[]>(`${URL}accounts/settings/list`, {
-      headers: BankService.HEADERS,
-      params: listRequestDto as any,
-    }).pipe(
-      catchError(this.handleError)
-    );
-  }
-
-  createAccountSetting(bankSettingDto: BankSettingDto):Observable<any>{
-    return this.http.post(URL + 'accounts/settings', bankSettingDto, { observe: 'response', headers: BankService.HEADERS }).pipe(
-      tap((res: HttpResponse<any>) => {
-        console.log(res.status);
-        if (res.status === 201 || res.status === 200) {
-          const bankDto = res.body;
-          this.notification.success('Bank Created Successfully', 'Success');
-          console.log('Bank registered successfully:', bankDto);
-        } else {
-          console.error('Bank registration failed:', res);
-          this.notification.info('Bank Registration Failed', 'Fail');
-        }
-      }),
-      catchError(error => {
-        console.error('Bank registration failed:', error);
-        this.notification.error(error, 'Error Occurred');
-        throw error;
-      })
-    );
-  }
-
-  updateAccountSetting(bankSettingDto: BankSettingDto):Observable<any>{
-    return this.http.put(URL + 'accounts/settings', bankSettingDto, { observe: 'response', headers: BankService.HEADERS }).pipe(
-      tap((res: HttpResponse<any>) => {
-        console.log(res.status);
-        if (res.status === 201 || res.status === 200) {
-          const bankDto = res.body;
-          this.notification.success('Bank Updated Successfully', 'Success');
-          console.log('Bank updated successfully:', bankDto);
-        } else {
-          console.error('Bank Updation failed:', res);
-          this.notification.info('Bank Updation Failed', 'Fail');
-        }
-      }),
-      catchError(error => {
-        console.error('Bank registration failed:', error);
-        this.notification.error(error, 'Error Occurred');
-        throw error;
-      })
     );
   }
 
@@ -94,12 +35,6 @@ export class BankService {
   updateBank(bankDto: BankDto): Observable<any> {
     const apiUrl = `${URL}/bank`;
     return this.http.put(apiUrl, bankDto, { headers: BankService.HEADERS }).pipe(
-      catchError(this.handleError)
-    );
-  }
-
-  getAccountsByBankId(bankId: string):Observable<any>{
-    return this.http.get<BankDto>(`${URL}bank/${bankId}/accounts`, { headers: BankService.HEADERS }).pipe(
       catchError(this.handleError)
     );
   }

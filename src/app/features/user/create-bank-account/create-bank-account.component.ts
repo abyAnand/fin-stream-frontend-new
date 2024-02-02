@@ -1,9 +1,9 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
-import { BankSettingDto } from 'src/app/core/models/BankSettingDto.model';
+import { AccountSettingDto } from 'src/app/core/models/bank/settings/AccountSettingDto.model';
 import { StorageService } from 'src/app/core/services/storage/storage.service';
-import { AccountDto } from '../../../core/models/bank/account/AccountDto.model';
+import { AccountDto } from '../../../core/models/account/AccountDto.model';
 import { AccountService } from 'src/app/core/services/account/account.service';
 import { ToasterService } from 'src/app/core/services/toaster/toaster.service';
 
@@ -16,7 +16,7 @@ export class CreateBankAccountComponent implements OnInit {
 
   accountType: string;
 
-  account: BankSettingDto;
+  account: AccountSettingDto;
   error: boolean = false;
 
   monthlyReturn: number = 0;

@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Route, Router } from '@angular/router';
-import { AccountDto } from 'src/app/core/models/bank/account/AccountDto.model';
+import { AccountDto } from 'src/app/core/models/account/AccountDto.model';
 import { AccountService } from 'src/app/core/services/account/account.service';
 import { StorageService } from 'src/app/core/services/storage/storage.service';
 import { ToasterService } from 'src/app/core/services/toaster/toaster.service';
