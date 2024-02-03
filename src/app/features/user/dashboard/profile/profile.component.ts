@@ -53,9 +53,17 @@ export class ProfileComponent implements OnInit{
     firstName: ['', Validators.required],
     lastName: ['', Validators.required],
     email: ['', [Validators.required, Validators.email]],
-    password: ['', [Validators.required,Validators.minLength(5)]],
+    password: ['', [Validators.required, Validators.minLength(5)]],
     confirmPassword: ['', Validators.required],
-    // phoneNumber: ['', [Validators.required, Validators.pattern(/^\d{10}$/)]],
+    employmentStatus: [''],
+    monthlyIncome: [''],
+    totalAssets: [''],
+    totalLiabilities: [''],
+    // collateralType: [''],
+    // collateralDescription: [''],
+    // collateralValue: [''],
+    // vehicleNumber: [''],
+    // collateralAccount: ['']
   }, { validator: this.passwordMatchValidator });
 
 
@@ -80,7 +88,18 @@ export class ProfileComponent implements OnInit{
         firstName: this.updateForm.get(['firstName'])!.value,
         lastName: this.updateForm.get(['lastName'])!.value,
         email: this.updateForm.get(['email'])!.value,
-      }
+        employmentStatus: this.updateForm.get(['employmentStatus'])!.value,
+        monthlyIncome: this.updateForm.get(['monthlyIncome'])!.value,
+        totalAssets: this.updateForm.get(['totalAssets'])!.value,
+        totalLiabilities: this.updateForm.get(['totalLiabilities'])!.value,
+        // collateralType: this.updateForm.get(['collateralType'])!.value,
+        // collateralDescription: this.updateForm.get(['collateralDescription'])!.value,
+        // collateralValue: this.updateForm.get(['collateralValue'])!.value,
+        // vehicleNumber: this.updateForm.get(['vehicleNumber'])!.value,
+        // collateralAccount: this.updateForm.get(['collateralAccount'])!.value
+      };
+      console.log(userDto);
+      
 
       this.userService.updateUser(userDto).subscribe(
         () =>{
