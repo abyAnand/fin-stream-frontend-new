@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { AccountDto } from 'src/app/core/models/bank/account/AccountDto.model';
+import { AccountDto } from 'src/app/core/models/account/AccountDto.model';
 
 @Component({
   selector: 'app-show-user-account-details',

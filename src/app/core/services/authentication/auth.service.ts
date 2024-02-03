@@ -1,10 +1,10 @@
 import { HttpClient, HttpResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { StorageService } from '../storage/storage.service';
-import { AuthRequest } from '../../models/AuthRequest.model';
+import { AuthRequest } from '../../models/auth/AuthRequest.model';
 import { Observable, catchError, map, tap } from 'rxjs';
-import { RegisterRequest } from '../../models/RegisterRequest.model';
-import { BankRequest } from '../../models/BankRequest.model';
+import { RegisterRequest } from '../../models/auth/RegisterRequest.model';
+import { BankRequest } from '../../models/auth/BankRequest.model';
 
 const URL = ['http://localhost:8072/finStream/auth/auth/']
 

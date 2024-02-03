@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
-import { AuthRequest } from 'src/app/core/models/AuthRequest.model';
+import { AuthRequest } from 'src/app/core/models/auth/AuthRequest.model';
 import { AuthService } from 'src/app/core/services/authentication/auth.service';
 import { ToasterService } from 'src/app/core/services/toaster/toaster.service';
 

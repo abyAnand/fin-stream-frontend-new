@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators, FormBuilder } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { ActivatedRoute, Router } from '@angular/router';
-import { RegisterRequest, Role } from 'src/app/core/models/RegisterRequest.model';
+import { RegisterRequest, Role } from 'src/app/core/models/auth/RegisterRequest.model';
 import { AuthService } from 'src/app/core/services/authentication/auth.service';
 
 @Component({

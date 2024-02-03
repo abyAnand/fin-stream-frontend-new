@@ -8,7 +8,7 @@ import { HeaderComponent } from './header/header.component';
 import { ProfileComponent } from './dashboard/profile/profile.component';
 import { UserDashboardComponent } from './dashboard/user-dashboard/user-dashboard.component';
 import { ChangePasswordComponent } from './dashboard/change-password/change-password.component';
-import { BankListComponent } from './dashboard/navbar/bank-list/bank-list.component';
+import { BankListComponent } from './dashboard/bank-list/bank-list.component';
 import { ShowBankAccountsComponent } from './show-bank-accounts/show-bank-accounts.component';
 import { CreateBankAccountComponent } from './create-bank-account/create-bank-account.component';
 import { ShowUserAccountsComponent } from './show-user-accounts/show-user-accounts.component';

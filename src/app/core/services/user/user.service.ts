@@ -1,6 +1,6 @@
 import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { UserDto } from '../../models/UserDto.model';
+import { UserDto } from '../../models/user/UserDto.model';
 import { Observable, catchError, throwError } from 'rxjs';
 
 const URL = 'http://localhost:8072/finStream/user/users';
@@ -32,6 +32,14 @@ export class UserService {
       catchError(this.handleError)
     );
   }
+
+  getAllUsers():Observable<UserDto[]>{
+    return this.http.get<UserDto[]>(`${URL}`, {headers})
+    .pipe(
+      catchError(this.handleError)
+    );
+  }
+
 
   private handleError(error: HttpErrorResponse): Observable<never> {
     let errorMessage = 'An unknown error occurred';
