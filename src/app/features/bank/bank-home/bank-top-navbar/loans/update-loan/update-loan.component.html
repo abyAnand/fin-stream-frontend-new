@@ -1,0 +1,60 @@
+<div class="container mt-5 mb-5">
+  <div class="row justify-content-center align-items-center">
+    <div class="col-md-8">
+      <div class="card">
+        <div class="card-header">
+          <h2 class="text-center">Edit Loan</h2>
+        </div>
+        <div class="card-body d-flex flex-column justify-content-center align-items-center">
+          <form [formGroup]="loanForm" (ngSubmit)="updateLoan()">
+            <div class="mb-3">
+              <label for="name" class="form-label">Name</label>
+              <input formControlName="name" type="text" class="form-control" id="name" placeholder="Enter name">
+              <div *ngIf="loanForm.get('name').invalid && (loanForm.get('name').dirty || loanForm.get('name').touched)"
+                class="text-danger mt-2">
+                Name is required
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="col-md-6">
+                <div class="mb-3">
+                  <label for="interestRate" class="form-label">Interest Rate (%)</label>
+                  <input formControlName="interestRate" type="number" class="form-control" id="interestRate"
+                    placeholder="Enter interest rate">
+                  <div *ngIf="loanForm.get('interestRate').invalid && (loanForm.get('interestRate').dirty || loanForm.get('interestRate').touched)"
+                    class="text-danger mt-2">
+                    Please enter a valid interest rate
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="mb-3">
+                  <label for="loanAmount" class="form-label">Loan Amount</label>
+                  <input formControlName="loanAmount" type="number" class="form-control" id="loanAmount"
+                    placeholder="Enter loan amount">
+                  <div *ngIf="loanForm.get('loanAmount').invalid && (loanForm.get('loanAmount').dirty || loanForm.get('loanAmount').touched)"
+                    class="text-danger mt-2">
+                    Please enter a valid loan amount
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="mb-3">
+              <label for="loanTermMonths" class="form-label">Loan Term (Months)</label>
+              <input formControlName="loanTermMonths" type="number" class="form-control" id="loanTermMonths"
+                placeholder="Enter loan term in months">
+              <div *ngIf="loanForm.get('loanTermMonths').invalid && (loanForm.get('loanTermMonths').dirty || loanForm.get('loanTermMonths').touched)"
+                class="text-danger mt-2">
+                Please enter a valid loan term
+              </div>
+            </div>
+            <div class="d-grid">
+              <button type="submit" [disabled]="loanForm.invalid" class="btn btn-primary">Update Loan</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
