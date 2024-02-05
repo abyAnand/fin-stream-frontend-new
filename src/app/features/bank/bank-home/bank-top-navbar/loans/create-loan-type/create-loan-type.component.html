@@ -1,0 +1,40 @@
+<div class="container mt-5 mb-5">
+  <div class="row justify-content-center align-items-center ">
+    <div class="col-md-8">
+      <div class="card">
+        <div class="card-header">
+          <h2 class="text-center">Create Loan Type </h2>
+        </div>
+        <div class="card-body d-flex flex-column justify-content-center align-items-center">
+          <form [formGroup]="loanForm" (ngSubmit)="createLoan()">
+            <div class="mb-3">
+              <label for="name" class="form-label">Name</label>
+              <input formControlName="name" type="text" class="form-control" id="name" placeholder="Enter name">
+              <div *ngIf="loanForm.get('name').invalid && (loanForm.get('name').dirty || loanForm.get('name').touched)"
+                class="text-danger mt-2">
+                Name is required
+              </div>
+            </div>
+            <div class="mb-3">
+              <label for="loanType" class="form-label">Loan Type</label>
+              <select formControlName="loanCategory" class="form-select" id="loanCategory">
+                <option value="">Select Loan Type</option>
+                <option value="PERSONAL">Personal</option>
+                <option value="BUSINESS">Business</option>
+                <option value="MORTGAGE">Mortgage</option>
+                <option value="STUDENT">Student</option>
+              </select>
+              <div *ngIf="loanForm.get('loanCategory').invalid && (loanForm.get('loanCategory').dirty || loanForm.get('loanCategory').touched)"
+                class="text-danger mt-2">
+                Loan Type is required
+              </div>
+            </div>
+            <div class="d-grid">
+              <button type="submit" [disabled]="loanForm.invalid" class="btn btn-primary">Create Loan</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

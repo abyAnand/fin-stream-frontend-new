@@ -18,7 +18,7 @@ import { EditUserAccountComponent } from './edit-user-account/edit-user-account.
 const routes: Routes = [
   { path: 'dashboard', component: DashboardComponent,
 children:[
-  {path: 'bank', component: BankListComponent},
+  { path: '', redirectTo: 'profile', pathMatch: 'full' },
   {path: 'user', component: UserDashboardComponent},
   {path: 'profile', component: ProfileComponent},
   {path: 'password', component: ChangePasswordComponent},
@@ -28,6 +28,7 @@ children:[
   {path: 'details', component: ShowUserAccountDetailsComponent},
   {path: 'edit', component: EditUserAccountComponent}
 ]},
+{path: 'bank', component: BankListComponent},
 
   {path: 'login', component: LoginComponent, canActivate: [noAuthGuard] },
   {path:'register', component: RegisterComponent, canActivate: [noAuthGuard]},
