@@ -46,6 +46,7 @@ export class BankLoansComponent implements OnInit {
     this.userLoanService.getAllUserLoans(userId).subscribe(
       (allUserLoans) => {
         this.userLoans = allUserLoans;
+        console.log(allUserLoans);
       },
       (error) => {
         this.notification.error(error, 'Error fetching Accounts:');

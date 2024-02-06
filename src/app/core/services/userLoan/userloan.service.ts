@@ -59,8 +59,17 @@ export class UserloanService {
     );
   }
 
-  getAllUserLoans(userId: string): Observable<LoanDto[]> {
+  getAllPendingUserLoans(userId: string): Observable<LoanDto[]> {
     return this.http.get<LoanDto[]>(`${URL}/pending/${userId}`, { headers: UserloanService.HEADERS })
+    .pipe(
+      tap(() => {
+      }),
+      catchError(this.handleError)
+    );
+  }
+
+  getAllUserLoans(userId: string): Observable<LoanDto[]> {
+    return this.http.get<LoanDto[]>(`${URL}/user/${userId}`, { headers: UserloanService.HEADERS })
     .pipe(
       tap(() => {
       }),
