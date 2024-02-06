@@ -25,7 +25,7 @@ export class UserService {
     );
   }
 
-  getUserById(userId: number):Observable<any>{
+  getUserById(userId: number | string):Observable<any>{
 
   return this.http.get<UserDto>(`${URL}/${userId}`, {headers})
     .pipe(

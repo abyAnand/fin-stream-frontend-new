@@ -13,7 +13,7 @@
             </div>
             <button class="btn btn-sm" [routerLink]="['/bank/account/settings/', accountType.shortName]"
               [ngClass]="{'btn-primary': accountType.numberOfAccounts > 0, 'btn-danger': accountType.numberOfAccounts === 0}">
-              <i class="bi bi-eye"></i> {{ accountType.numberOfAccounts > 0 ? 'View Accounts' : 'Create Account' }}
+              <i class="bi bi-eye"></i> {{ accountType.numberOfAccounts > 0 ? 'View Accounts' : 'Create Account'}}  
             </button>
           </div>
         </div>

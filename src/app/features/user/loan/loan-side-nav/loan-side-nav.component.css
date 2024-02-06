@@ -1,0 +1,26 @@
+.nav-link{
+  color:  #f97911;
+  border-radius: 10px;
+}
+
+.nav-link.active {
+  background-color:  #f97911;
+  color: white !important;
+  border-radius: 10px;
+}
+
+.container-fluid, .row, body, html {
+  height: 100%;
+}
+
+#sidebar ul {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+
+}
+
+.nav-link {
+  margin: 10px;
+
+}

@@ -32,6 +32,7 @@ export class ProfileComponent implements OnInit{
 
   ngOnInit(): void {
     this.userId = StorageService.getUserIdFromToken();
+    console.log("page ng on init invoked")
     this.getUserByUserId(this.userId);
 
   }
@@ -99,7 +100,7 @@ export class ProfileComponent implements OnInit{
         // collateralAccount: this.updateForm.get(['collateralAccount'])!.value
       };
       console.log(userDto);
-      
+
 
       this.userService.updateUser(userDto).subscribe(
         () =>{
