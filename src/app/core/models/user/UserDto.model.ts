@@ -12,6 +12,7 @@ export interface UserDto {
   totalLiabilities?: number;
   collateralType?: CollateralType;
   collateralDescription?: string;
+  accountList?: AccountDto[];
   collateralValue?: number;
   vehicleNumber?: string;
   collateralAccount?: AccountDto;

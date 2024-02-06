@@ -1,0 +1,98 @@
+<div class="container mt-5">
+  <div class="border border-primary rounded p-4">
+    <div class="row justify-content-center">
+      <div class="col-md-8">
+        <div class="card border-0 shadow-lg">
+          <div class="card-header bg-primary text-white">
+            <h4 class="card-title mb-0">Loan Details</h4>
+          </div>
+          <div class="card-body">
+            <div class="row mb-3">
+              <div class="col-md-6">
+                <p><strong>Loan Name:</strong></p>
+                <p>{{ userLoan.loanName }}</p>
+              </div>
+              <div class="col-md-6">
+                <p><strong>Loan Category:</strong></p>
+                <p>{{ userLoan.loanCategory }}</p>
+              </div>
+            </div>
+            <div class="row mb-3">
+              <div class="col-md-6">
+                <p><strong>Interest Rate:</strong></p>
+                <p>{{ userLoan.interestRate }}</p>
+              </div>
+              <div class="col-md-6">
+                <p><strong>Loan Amount:</strong></p>
+                <p>{{ userLoan.loanAmount }}</p>
+              </div>
+            </div>
+            <div class="row mb-3">
+              <div class="col-md-6">
+                <p><strong>Loan Term (Months):</strong></p>
+                <p>{{ userLoan.loanTermMonths }}</p>
+              </div>
+              <div class="col-md-6">
+                <p><strong>Approval Status:</strong></p>
+                <p>{{ userLoan.approvalStatus }}</p>
+              </div>
+            </div>
+            <div class="row mb-3">
+              <div class="col-md-12">
+                <p><strong>Selected Account:</strong></p>
+                <p>{{ userLoan.selectedAccount.accountName }}</p>
+              </div>
+            </div>
+            <!-- User Information -->
+            <div class="row mb-3">
+              <div class="col-md-6">
+                <p><strong>First Name:</strong></p>
+                <p>{{ user?.firstName }}</p>
+              </div>
+              <div class="col-md-6">
+                <p><strong>Last Name:</strong></p>
+                <p>{{ user?.lastName }}</p>
+              </div>
+            </div>
+            <div class="row mb-3">
+              <div class="col-md-6">
+                <p><strong>Email:</strong></p>
+                <p>{{ user?.email }}</p>
+              </div>
+              <div class="col-md-6">
+                <p><strong>Employment Status:</strong></p>
+                <p>{{ user?.employmentStatus }}</p>
+              </div>
+            </div>
+            <div class="row mb-3">
+              <div class="col-md-6">
+                <p><strong>Monthly Income:</strong></p>
+                <p>{{ user?.monthlyIncome }}</p>
+              </div>
+              <div class="col-md-6">
+                <p><strong>Total Assets:</strong></p>
+                <p>{{ user?.totalAssets }}</p>
+              </div>
+            </div>
+            <div class="row mb-3">
+              <div class="col-md-6">
+                <p><strong>Total Liabilities:</strong></p>
+                <p>{{ user?.totalLiabilities }}</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="row justify-content-center mt-4">
+      <div class="col-md-8">
+        <div class="card border-0 shadow-lg">
+          <div class="card-body text-center">
+            <button class="btn btn-success me-3" (click)="approveLoan(userLoan.id)">Approve</button>
+            <button class="btn btn-danger" (click)="rejectLoan(userLoan.id)">Reject</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

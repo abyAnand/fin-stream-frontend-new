@@ -34,6 +34,8 @@ import { LoanSideNavbarComponent } from './bank-home/bank-top-navbar/loans/loan-
 import { CreateLoanTypeComponent } from './bank-home/bank-top-navbar/loans/create-loan-type/create-loan-type.component';
 import { LoanTypeListComponent } from './bank-home/bank-top-navbar/loans/loan-type-list/loan-type-list.component';
 import { UpdateLoanTypeComponent } from './bank-home/bank-top-navbar/loans/update-loan-type/update-loan-type.component';
+import { BankLoanApplicationsComponent } from './bank-home/bank-top-navbar/loans/bank-loan-applications/bank-loan-applications.component';
+import { ViewSingleLoanApplicationComponent } from './bank-home/bank-top-navbar/loans/view-single-loan-application/view-single-loan-application.component';
 
 @NgModule({
   declarations: [
@@ -66,6 +68,8 @@ import { UpdateLoanTypeComponent } from './bank-home/bank-top-navbar/loans/updat
            CreateLoanTypeComponent,
            LoanTypeListComponent,
            UpdateLoanTypeComponent,
+           BankLoanApplicationsComponent,
+           ViewSingleLoanApplicationComponent,
 
 
 

@@ -1,0 +1,12 @@
+.loan-settings-container {
+  border: 1px solid #ccc; /* Border around the entire container */
+  padding: 20px; /* Add padding to the container */
+}
+
+.card {
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Add box shadow to each card */
+}
+
+.card-body {
+  padding: 20px; /* Add padding to the card body */
+}

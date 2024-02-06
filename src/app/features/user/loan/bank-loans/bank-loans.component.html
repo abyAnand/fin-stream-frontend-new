@@ -1,0 +1,31 @@
+<div class="container mt-5">
+  <div class="d-flex justify-content-center align-items-center mb-4">
+    <h2 class="text-center mb-0">List of Bank Loans</h2>
+
+  </div>
+
+  <div class="bank-list-container p-3 shadow-lg blue-border">
+    <ng-container *ngIf="!error; else errorHandling">
+      <ng-container *ngIf="bankLoanList else noBanks">
+        <div class="list-group">
+          <div *ngFor="let bankLoan of bankLoanList" class="list-group-item list-group-item-action d-flex justify-content-between align-items-center p-4 bank-item">
+            <div class="d-flex flex-column">
+              <h4 class="fw-bold mb-2">{{ bankLoan.loanCategory }}</h4>
+              <p class="text-muted mb-1">Loan Name:</p>
+              <span class="list-group-item-secondary list-group-item-text lead">{{ bankLoan.name }}</span>
+            </div>
+            <button class="btn btn-sm " [ngStyle]="{ 'background-color': getButtonColor(bankLoan.id),'color': getStatusColor(bankLoan.id) }" (click)="viewLoanPlans(bankLoan)">
+              {{ getStatus(bankLoan.id) }}
+            </button>
+          </div>
+        </div>
+      </ng-container>
+      <ng-template #noBanks>
+        <div class="text-center text-muted">No Bank Loans available.</div>
+      </ng-template>
+    </ng-container>
+    <ng-template #errorHandling>
+      <div class="text-center text-danger">Error  Fetching Bank Loans. Please try again later.</div>
+    </ng-template>
+  </div>
+</div>

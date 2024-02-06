@@ -28,6 +28,16 @@ export class LoanTypeService {
     );
   }
 
+  getAllLoanTypes(): Observable<LoanType[]> {
+    return this.http.get<LoanType[]>(`${URL}/list`, { headers: LoanTypeService.HEADERS })
+    .pipe(
+      tap(() => {
+
+      }),
+      catchError(this.handleError)
+    );
+  }
+
   createLoanType(loanType: LoanType): Observable<LoanType> {
     console.log("This is from service");
 

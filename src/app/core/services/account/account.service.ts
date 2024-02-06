@@ -76,4 +76,18 @@ export class AccountService {
       })
     );
   }
+
+  getUserSavingsAccountsByBankId(userId: string, bankId: string): Observable<AccountDto[]> {
+    const endpoint = `${URL}accounts/${bankId}/user/${userId}`;
+
+    return this.http.get<AccountDto[]>(endpoint, { headers: AccountService.HEADERS }).pipe(
+      tap((accounts: AccountDto[]) => {
+      }),
+      catchError(error => {
+        console.error('Error fetching user accounts:', error);
+        this.notification.error(error, 'Error Occurred');
+        throw error;
+      })
+    );
+  }
 }
