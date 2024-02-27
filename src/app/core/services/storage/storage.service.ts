@@ -5,7 +5,8 @@ import { AccountSettingDto } from '../../models/bank/settings/AccountSettingDto.
 const USER = 'user';
 const TOKEN = 'token';
 const REFRESH = 'refresh';
-const DECODED = 'userId'
+const DECODED = 'decoded'
+const DTOKEN = 'dToken';
 
 
 @Injectable({
@@ -27,7 +28,7 @@ export class StorageService {
     window.localStorage.setItem(TOKEN, token);
     StorageService.decodedToken = jwtDecode(token);
     localStorage.setItem(DECODED, StorageService.decodedToken.userId)
-
+    localStorage.setItem(DTOKEN, JSON.stringify(StorageService.decodedToken)) // stringify the object before saving to local storage
   }
 
   public saveRefreshToken(refresh: any){
@@ -65,11 +66,8 @@ export class StorageService {
     return JSON.parse(localStorage.getItem(USER)! || '');
   }
 
-  static hasToken(): boolean{
-    if(this.getToken() === null){
-      return false;
-    }
-    return true;
+  static hasToken(): boolean {
+    return !!this.getToken(); // Returns true if token exists, false otherwise
   }
 
   static getUserIdFromToken(): string {
@@ -87,6 +85,7 @@ export class StorageService {
     if (StorageService.decodedToken.roles == null || StorageService.decodedToken.roles.length === 0) {
       return '';
     }
+    console.log(StorageService.decodedToken.roles)
     return StorageService.decodedToken.roles[0];
   }
 

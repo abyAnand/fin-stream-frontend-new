@@ -20,6 +20,8 @@ import { UserLoansRejectedComponent } from './loan/user-loans-rejected/user-loan
 import { BankLoansComponent } from './loan/bank-loans/bank-loans.component';
 import { UserLoanApplyComponent } from './loan/user-loan-apply/user-loan-apply.component';
 import { UserLoansPendingComponent } from './loan/user-loans-pending/user-loans-pending.component';
+import { DepositComponent } from './transaction/deposit/deposit.component';
+import { TransferComponent } from './transaction/transfer/transfer.component';
 
 const routes: Routes = [
   { path: 'dashboard', component: DashboardComponent,
@@ -34,7 +36,11 @@ children:[
   {path: 'edit', component: EditUserAccountComponent}
 ]},
 {path: 'bank', component: BankListComponent},
-{path: 'account', component: ShowUserAccountsComponent},
+{path: 'account', component: ShowUserAccountsComponent, children:[
+  {path: '', redirectTo: 'deposit', pathMatch: 'full'},
+  {path: 'deposit', component: DepositComponent},
+  {path: 'transfer', component: TransferComponent}
+]},
 
 
 {

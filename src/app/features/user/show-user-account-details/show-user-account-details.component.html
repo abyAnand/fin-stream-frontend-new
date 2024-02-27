@@ -39,24 +39,62 @@
     </div>
   </div>
 
-  <!-- Transactions List -->
   <div class="row justify-content-center mt-4">
     <div class="col-md-8">
-      <div class="card">
-        <div class="card-header">
-          <h3>Transactions</h3>
-        </div>
-        <ul class="list-group list-group-flush">
-          <ng-container *ngIf="!transactions else transactionsList">
-            <li class="list-group-item">No transactions data available.</li>
-          </ng-container>
-          <ng-template #transactionsList>
-            <li *ngFor="let transaction of transactions" class="list-group-item">
-              {{ transaction.description }} - {{ transaction.amount | currency:'INR ':true }}
-            </li>
-          </ng-template>
-        </ul>
+      <div class="text-center">
+        <button class="btn btn-success me-2" (click)="deposit()">
+          <i class="bi bi-arrow-up-right"></i> Deposit
+        </button>
+        <button class="btn btn-success" (click)="transfer()">
+          <i class="bi bi-arrow-right-circle"></i> Transfer
+        </button>
       </div>
     </div>
   </div>
+
+<!-- Transactions List -->
+<div class="row justify-content-center mt-4">
+  <div class="col-md-10">
+    <div class="card">
+      <div class="card-header bg-primary text-white">
+        <h3 class="m-0">Transactions</h3>
+      </div>
+      <div class="table-responsive">
+        <table class="table table-striped">
+          <thead>
+            <tr>
+              <th>Action</th>
+              <th>Amount</th>
+              <th>Status</th>
+            </tr>
+          </thead>
+          <tbody *ngIf="transactions.length > 0; else noTransactions">
+            <tr *ngFor="let transaction of transactions">
+              <td>
+                <span *ngIf="transaction.self">Self</span>
+                <span *ngIf="!transaction.self && transaction.sender.userId === currentUserId">Sent</span>
+                <span *ngIf="!transaction.self && transaction.receiver.userId === currentUserId">Received</span>
+              </td>
+              <td>{{ transaction.amount | currency:'INR ':true }}</td>
+              <td [ngClass]="{
+                'text-success': transaction.status === 'COMPLETED',
+                'text-danger': transaction.status === 'FAILED',
+                'text-warning': transaction.status === 'PENDING'
+              }">{{ transaction.status }}</td>
+            </tr>
+          </tbody>
+          <ng-template #noTransactions>
+            <tr>
+              <td colspan="3">No transactions data available.</td>
+            </tr>
+          </ng-template>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+
+  <!-- Deposit and Transfer Buttons -->
+
+
 </div>

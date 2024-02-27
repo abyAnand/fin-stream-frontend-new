@@ -39,9 +39,6 @@ export class LoanTypeService {
   }
 
   createLoanType(loanType: LoanType): Observable<LoanType> {
-    console.log("This is from service");
-
-    console.log(loanType);
     return this.http.post<LoanType>(URL, loanType, { headers: LoanTypeService.HEADERS })
     .pipe(
       tap(() => {
