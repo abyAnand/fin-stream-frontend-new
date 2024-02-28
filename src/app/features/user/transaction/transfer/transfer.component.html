@@ -7,16 +7,27 @@
         </div>
         <div class="card-body">
           <form [formGroup]="transferForm">
-            <div class="mb-3">
+            <div class="mb-3" [ngClass]="{'has-error': !accountVerified, 'has-success': accountVerified}">
               <label for="accountNumber" class="form-label">Account Number</label>
-              <input type="string" class="form-control" id="accountNumber" formControlName="accountNumber" placeholder="Enter Account Number">
+              <div class="input-group">
+                <input type="string" class="form-control" id="accountNumber" formControlName="accountNumber" placeholder="Enter Account Number" (input)="onAccountNumberChange()">
+                <button *ngIf="showVerifyButton" type="button" class="btn btn-primary" (click)="verifyAccount()">Verify</button>
+                <span *ngIf="accountVerified" class="input-group-text bg-success text-white">
+                  <!-- Replace with your green tick icon -->
+                  <i class="bi bi-check-circle-fill"></i>
+                </span>
+                <span *ngIf="!accountVerified" class="input-group-text bg-danger text-white">
+                  <!-- Replace with your red exclamation icon -->
+                  <i class="bi bi-exclamation-circle-fill"></i>
+                </span>
+              </div>
             </div>
-            <div class="mb-3">
+            <div class="mb-3" *ngIf="accountVerified">
               <label for="depositAmount" class="form-label">Deposit Amount</label>
               <input type="number" class="form-control" id="depositAmount" formControlName="depositAmount" placeholder="Enter amount">
             </div>
             <div class="text-center">
-              <button type="submit" class="btn btn-success me-2" (click)="transfer()" [disabled]="transferForm.invalid">Deposit</button>
+              <button type="submit" class="btn btn-success me-2" (click)="transfer()" [disabled]="transferForm.invalid || !accountVerified">Deposit</button>
               <button type="button" class="btn btn-secondary" (click)="cancel()">Cancel</button>
             </div>
           </form>

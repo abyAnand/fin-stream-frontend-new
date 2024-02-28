@@ -42,7 +42,7 @@ export class RegisterComponent implements OnInit{
       email: this.signupForm.get(['email'])!.value,
       password: this.signupForm.get(['password'])!.value,
       phoneNumber: this.signupForm.get(['phoneNumber'])!.value,
-      role: Role.User // Assuming 'USER' role for registration, adjust as needed
+      role: Role.User
     };
     console.log(registerData)
     this.authService.register(registerData).subscribe(

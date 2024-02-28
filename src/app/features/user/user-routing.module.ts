@@ -57,7 +57,7 @@ children:[
 
   ]
 },
-{ path: '**', redirectTo: '/dashboard/user/profile', pathMatch: 'full' },
+// { path: '**', redirectTo: '/dashboard/user/profile', pathMatch: 'full' },
 
   {path: 'login', component: LoginComponent, canActivate: [noAuthGuard] },
   {path:'register', component: RegisterComponent, canActivate: [noAuthGuard]},

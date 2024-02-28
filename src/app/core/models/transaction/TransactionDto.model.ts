@@ -7,6 +7,7 @@ export interface TransactionDto {
   receiverId: string;
   receiverBankId: string;
   receiverAccountId: string;
+  receiverAccountName: string;
   status: TransactionStatus;
 }
 

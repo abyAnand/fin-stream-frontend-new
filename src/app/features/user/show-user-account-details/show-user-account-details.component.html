@@ -71,9 +71,9 @@
           <tbody *ngIf="transactions.length > 0; else noTransactions">
             <tr *ngFor="let transaction of transactions">
               <td>
-                <span *ngIf="transaction.self">Self</span>
-                <span *ngIf="!transaction.self && transaction.sender.userId === currentUserId">Sent</span>
-                <span *ngIf="!transaction.self && transaction.receiver.userId === currentUserId">Received</span>
+                <span *ngIf="transaction.self"><i class="bi bi-person"></i> Self</span>
+                <span *ngIf="!transaction.self && transaction.sender.userId === currentUserId"><i class="bi bi-arrow-up-circle"></i> Sent to {{ transaction.receiver.username }}</span>
+                <span *ngIf="!transaction.self && transaction.receiver.userId === currentUserId"><i class="bi bi-arrow-down-circle"></i> Received from {{ transaction.sender.username }}</span>
               </td>
               <td>{{ transaction.amount | currency:'INR ':true }}</td>
               <td [ngClass]="{

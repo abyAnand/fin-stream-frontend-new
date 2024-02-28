@@ -47,6 +47,7 @@ export class DepositComponent implements OnInit{
       receiverId: StorageService.getUserIdFromToken(),
       receiverAccountId: this.account.id,
       receiverBankId: this.account.bankId,
+      receiverAccountName: '',
       status: TransactionStatus.PENDING
     };
 
