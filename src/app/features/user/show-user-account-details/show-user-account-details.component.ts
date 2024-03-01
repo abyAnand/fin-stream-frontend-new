@@ -54,12 +54,16 @@ export class ShowUserAccountDetailsComponent implements OnInit {
   }
 
   mapTransactionWithStatus(transaction: TransactionHistory): TransactionHistory {
+    console.log(transaction.self)
     if (transaction.sender.userId === transaction.receiver.userId) {
       transaction.self = true; // If sender and receiver IDs are the same, set self to true
     } else if (transaction.sender.userId === this.currentUserId) {
       transaction.self = false; // If sender ID is the same as current user's ID, set self to false (sent)
-    } else {
-      transaction.self = true; // Otherwise, set self to true (received)
+    } else if(transaction.receiver.userId === null){
+      transaction.self = false;
+    }
+    else {
+      transaction.self = transaction.self; // Otherwise, set self to true (received)
     }
 
     return transaction;

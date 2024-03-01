@@ -104,5 +104,6 @@ export class StorageService {
     window.localStorage.removeItem(REFRESH);
     window.localStorage.removeItem(USER);
     window.localStorage.removeItem(DECODED);
+    window.localStorage.removeItem(DTOKEN);
   }
 }
