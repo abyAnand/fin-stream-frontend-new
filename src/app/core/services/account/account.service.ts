@@ -62,6 +62,20 @@ export class AccountService {
     );
   }
 
+  verifyAccount(accountNumber: string): Observable<boolean> {
+    const endpoint = `${URL}accounts/verify/${accountNumber}`;
+    return this.http.get<boolean>(endpoint, { headers: AccountService.HEADERS }).pipe(
+      tap((accounts: boolean) => {
+        console.log('Account verified fetched successfully:', accounts);
+      }),
+      catchError(error => {
+        console.error('Error verifying user accounts:', error);
+        this.notification.error(error, 'Error Occurred');
+        throw error;
+      })
+    );
+  }
+
   getUserAccounts(userId: string): Observable<AccountDto[]> {
     const endpoint = `${URL}accounts/user/${userId}`;
 

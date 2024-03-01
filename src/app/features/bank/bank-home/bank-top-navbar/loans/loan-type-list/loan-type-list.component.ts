@@ -55,6 +55,6 @@ export class LoanTypeListComponent implements OnInit{
   }
 
   viewLoans(loanType: LoanType){
-    this.router.navigate(['/loan/list'],{state: {loanType: loanType}});
+    this.router.navigate(['/bank/loan/list'],{state: {loanType: loanType}});
   }
 }

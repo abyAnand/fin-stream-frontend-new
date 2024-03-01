@@ -35,10 +35,12 @@ import { BankLoansComponent } from './loan/bank-loans/bank-loans.component';
 import { UserLoansComponent } from './loan/user-loans/user-loans.component';
 import { UserLoanApplyComponent } from './loan/user-loan-apply/user-loan-apply.component';
 import { UserLoansPendingComponent } from './loan/user-loans-pending/user-loans-pending.component';
+import { DepositComponent } from './transaction/deposit/deposit.component';
+import { TransferComponent } from './transaction/transfer/transfer.component';
 
 
 @NgModule({
-  declarations: [LoginComponent, RegisterComponent, DashboardComponent, HeaderComponent, NavbarComponent, SideNavbarComponent, ProfileComponent, UserDashboardComponent, ChangePasswordComponent, BankListComponent, ShowBankAccountsComponent, CreateBankAccountComponent, ShowUserAccountsComponent, ShowUserAccountDetailsComponent, EditUserAccountComponent, LoanComponent, LoanSideNavComponent, UserLoansComponent, UserLoansRejectedComponent, UserLoanDetailsComponent, CreateUserLoanComponent, UpdateUserLoanComponent, BankLoansComponent, UserLoanApplyComponent, UserLoansPendingComponent],
+  declarations: [LoginComponent, RegisterComponent, DashboardComponent, HeaderComponent, NavbarComponent, SideNavbarComponent, ProfileComponent, UserDashboardComponent, ChangePasswordComponent, BankListComponent, ShowBankAccountsComponent, CreateBankAccountComponent, ShowUserAccountsComponent, ShowUserAccountDetailsComponent, EditUserAccountComponent, LoanComponent, LoanSideNavComponent, UserLoansComponent, UserLoansRejectedComponent, UserLoanDetailsComponent, CreateUserLoanComponent, UpdateUserLoanComponent, BankLoansComponent, UserLoanApplyComponent, UserLoansPendingComponent, DepositComponent, TransferComponent],
   imports: [
     CommonModule,
     UserRoutingModule,

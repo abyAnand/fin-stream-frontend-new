@@ -72,7 +72,6 @@ import { ViewSingleLoanApplicationComponent } from './bank-home/bank-top-navbar/
            ViewSingleLoanApplicationComponent,
 
 
-
   ],
   imports: [
     CommonModule,
