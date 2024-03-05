@@ -37,10 +37,11 @@ import { UserLoanApplyComponent } from './loan/user-loan-apply/user-loan-apply.c
 import { UserLoansPendingComponent } from './loan/user-loans-pending/user-loans-pending.component';
 import { DepositComponent } from './transaction/deposit/deposit.component';
 import { TransferComponent } from './transaction/transfer/transfer.component';
+import { NotificationComponent } from './notification/notification.component';
 
 
 @NgModule({
-  declarations: [LoginComponent, RegisterComponent, DashboardComponent, HeaderComponent, NavbarComponent, SideNavbarComponent, ProfileComponent, UserDashboardComponent, ChangePasswordComponent, BankListComponent, ShowBankAccountsComponent, CreateBankAccountComponent, ShowUserAccountsComponent, ShowUserAccountDetailsComponent, EditUserAccountComponent, LoanComponent, LoanSideNavComponent, UserLoansComponent, UserLoansRejectedComponent, UserLoanDetailsComponent, CreateUserLoanComponent, UpdateUserLoanComponent, BankLoansComponent, UserLoanApplyComponent, UserLoansPendingComponent, DepositComponent, TransferComponent],
+  declarations: [LoginComponent, RegisterComponent, DashboardComponent, HeaderComponent, NavbarComponent, SideNavbarComponent, ProfileComponent, UserDashboardComponent, ChangePasswordComponent, BankListComponent, ShowBankAccountsComponent, CreateBankAccountComponent, ShowUserAccountsComponent, ShowUserAccountDetailsComponent, EditUserAccountComponent, LoanComponent, LoanSideNavComponent, UserLoansComponent, UserLoansRejectedComponent, UserLoanDetailsComponent, CreateUserLoanComponent, UpdateUserLoanComponent, BankLoansComponent, UserLoanApplyComponent, UserLoansPendingComponent, DepositComponent, TransferComponent, NotificationComponent],
   imports: [
     CommonModule,
     UserRoutingModule,

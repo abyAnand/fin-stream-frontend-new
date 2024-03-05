@@ -22,6 +22,7 @@ import { UserLoanApplyComponent } from './loan/user-loan-apply/user-loan-apply.c
 import { UserLoansPendingComponent } from './loan/user-loans-pending/user-loans-pending.component';
 import { DepositComponent } from './transaction/deposit/deposit.component';
 import { TransferComponent } from './transaction/transfer/transfer.component';
+import { NotificationComponent } from './notification/notification.component';
 
 const routes: Routes = [
   { path: 'dashboard', component: DashboardComponent,
@@ -36,6 +37,7 @@ children:[
   {path: 'edit', component: EditUserAccountComponent}
 ]},
 {path: 'bank', component: BankListComponent},
+{path: 'notification', component: NotificationComponent},
 {path: 'account', component: ShowUserAccountsComponent, children:[
   {path: '', redirectTo: 'deposit', pathMatch: 'full'},
   {path: 'deposit', component: DepositComponent},
@@ -57,7 +59,7 @@ children:[
 
   ]
 },
-// { path: '**', redirectTo: '/dashboard/user/profile', pathMatch: 'full' },
+{ path: '**', redirectTo: 'dashboard/user/profile', pathMatch: 'full' },
 
   {path: 'login', component: LoginComponent, canActivate: [noAuthGuard] },
   {path:'register', component: RegisterComponent, canActivate: [noAuthGuard]},
