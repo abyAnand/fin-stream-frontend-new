@@ -1,3 +1,4 @@
+import { BankLoanApplicationsComponent } from './bank-home/bank-top-navbar/loans/bank-loan-applications/bank-loan-applications.component';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { BankHomeComponent } from './bank-home/bank-home.component';
@@ -13,6 +14,12 @@ import { AccountHomeComponent } from './bank-home/bank-top-navbar/accounts/accou
 import { AccountListComponent } from './bank-home/bank-top-navbar/accounts/account-list/account-list.component';
 import { AccountSettingsComponent } from './bank-home/bank-top-navbar/accounts/account-settings/account-settings.component';
 import { CreateAccountSettingComponent } from './bank-home/bank-top-navbar/accounts/create-account-setting/create-account-setting.component';
+import { LoansComponent } from './bank-home/bank-top-navbar/loans/loans.component';
+import { LoanListComponent } from './bank-home/bank-top-navbar/loans/loan-list/loan-list.component';
+import { CreateLoanComponent } from './bank-home/bank-top-navbar/loans/create-loan/create-loan.component';
+import { UpdateLoanComponent } from './bank-home/bank-top-navbar/loans/update-loan/update-loan.component';
+import { LoanTypeListComponent } from './bank-home/bank-top-navbar/loans/loan-type-list/loan-type-list.component';
+import { ViewSingleLoanApplicationComponent } from './bank-home/bank-top-navbar/loans/view-single-loan-application/view-single-loan-application.component';
 
 const routes: Routes = [
   { path: 'register', component: BankRegisterComponent },
@@ -38,6 +45,19 @@ const routes: Routes = [
       { path: 'settings/:shortName', component: AccountSettingsComponent },
       { path: 'create', component: CreateAccountSettingComponent },
     ],
+  },
+  {
+    path: 'loan',
+    component: LoansComponent,
+    children: [
+      {path: '', redirectTo: 'type/list', pathMatch: 'full'},
+      {path: 'type/list', component: LoanTypeListComponent},
+      {path: 'list', component: LoanListComponent},
+      {path: 'create', component: CreateLoanComponent},
+      {path: 'update', component: UpdateLoanComponent},
+      {path: 'view', component: ViewSingleLoanApplicationComponent},
+      {path: 'application', component: BankLoanApplicationsComponent}
+    ]
   },
   { path: '**', redirectTo: 'home/dashboard', pathMatch: 'full' },
 ];

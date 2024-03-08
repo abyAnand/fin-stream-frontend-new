@@ -62,15 +62,42 @@ export class AccountService {
     );
   }
 
+  verifyAccount(accountNumber: string): Observable<boolean> {
+    const endpoint = `${URL}accounts/verify/${accountNumber}`;
+    return this.http.get<boolean>(endpoint, { headers: AccountService.HEADERS }).pipe(
+      tap((accounts: boolean) => {
+        console.log('Account verified fetched successfully:', accounts);
+      }),
+      catchError(error => {
+        console.error('Error verifying user accounts:', error);
+        this.notification.error(error, 'Error Occurred');
+        throw error;
+      })
+    );
+  }
+
   getUserAccounts(userId: string): Observable<AccountDto[]> {
     const endpoint = `${URL}accounts/user/${userId}`;
 
     return this.http.get<AccountDto[]>(endpoint, { headers: AccountService.HEADERS }).pipe(
       tap((accounts: AccountDto[]) => {
-        console.log('User accounts fetched successfully:', accounts);
       }),
       catchError(error => {
-        console.error('Error fetching user accounts:', error);
+
+        this.notification.error(error, 'Error Occurred');
+        throw error;
+      })
+    );
+  }
+
+  getUserSavingsAccountsByBankId(userId: string, bankId: string): Observable<AccountDto[]> {
+    const endpoint = `${URL}accounts/${bankId}/user/${userId}`;
+
+    return this.http.get<AccountDto[]>(endpoint, { headers: AccountService.HEADERS }).pipe(
+      tap((accounts: AccountDto[]) => {
+      }),
+      catchError(error => {
+    
         this.notification.error(error, 'Error Occurred');
         throw error;
       })

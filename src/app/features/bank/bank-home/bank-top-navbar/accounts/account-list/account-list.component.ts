@@ -31,6 +31,7 @@ export class AccountListComponent implements OnInit{
     this.accountSettingService.getAccountTypes(bankId).subscribe(
       (banks) => {
         this.accountTypeList = banks;
+
       },
       (error) => {
         this.notification.error(error, 'Error fetching Accounts:');

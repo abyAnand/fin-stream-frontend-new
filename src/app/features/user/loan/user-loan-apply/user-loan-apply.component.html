@@ -1,0 +1,25 @@
+<div class="loan-settings-container">
+  <div class="row">
+    <div class="col-md-4" *ngFor="let loanSetting of loanSettingList; let i = index">
+      <div class="card mb-4">
+        <div class="card-body">
+          <h5 class="card-title">{{ loanSetting.name }}</h5>
+          <p class="card-text">Interest Rate: {{ loanSetting.interestRate }}</p>
+          <p class="card-text">Maximum Amount: {{ loanSetting.loanAmount }}</p>
+          <p class="card-text">Duration (in months): {{ loanSetting.loanTermMonths }}</p>
+          <p class="card-text">Monthly Payment: {{ monthlyPayments[i] | currency:'INR':true:'1.2-2' }}</p>
+          <div class="mb-3">
+            <label for="accountSelect" class="form-label">Select Account</label>
+            <select class="form-select" id="accountSelect" [(ngModel)]="selectedAccountId">
+              <option disabled selected>Select an account</option>
+              <option *ngFor="let account of userSavingsAccounts" [ngValue]="account.id">{{ account.accountName }}</option>
+            </select>
+          </div>
+          <div class="card-footer d-flex justify-content-center">
+            <button class="btn btn-danger" [disabled]="!selectedAccountId" (click)="loanApply(loanSetting)">Apply</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

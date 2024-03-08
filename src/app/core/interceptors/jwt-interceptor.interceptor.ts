@@ -9,13 +9,15 @@ import {
 } from '@angular/common/http';
 import { Observable, catchError, switchMap, throwError } from 'rxjs';
 import { StorageService } from '../services/storage/storage.service';
+import { ToasterService } from '../services/toaster/toaster.service';
 
 @Injectable()
 export class JwtInterceptorInterceptor implements HttpInterceptor {
 
   constructor(
     private http: HttpClient,
-    private storage: StorageService
+    private storage: StorageService,
+    private notification: ToasterService
   ) { }
 
   /**
@@ -23,7 +25,7 @@ export class JwtInterceptorInterceptor implements HttpInterceptor {
    * Handles HTTP errors and attempts to refresh the token in case of an unauthorized error.
    */
   intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
-   
+
     const token = this.getTokenFromLocalStorage();
 
 
@@ -101,6 +103,7 @@ export class JwtInterceptorInterceptor implements HttpInterceptor {
    */
   private handleForbiddenError(): void {
     console.log('Access forbidden. User does not have permission to access the resource.');
+    this.notification.error('Access Forbidden. User does not have permission to access the resource',"FORBIDDEN");
   }
 
   /**

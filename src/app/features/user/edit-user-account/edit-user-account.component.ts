@@ -41,7 +41,7 @@ export class EditUserAccountComponent implements OnInit {
     this.savingsAccountForm = this.formBuilder.group({
       accountName: ['', Validators.required],
       initialDeposit: ['', Validators.required],
-      interestRate: ['', Validators.required],
+      // interestRate: ['', Validators.required],
       // transactionAlerts: [false],
       // lowBalanceAlerts: [false],
       // overdraftProtection: [false]
@@ -56,7 +56,7 @@ export class EditUserAccountComponent implements OnInit {
 
     this.savingsAccountForm.patchValue({
       accountName: this.selectedAccount.accountName,
-      interestRate: this.selectedAccount.interestRate,
+      // interestRate: this.selectedAccount.interestRate,
       initialDeposit: this.selectedAccount.balance
     });
 
@@ -83,12 +83,11 @@ export class EditUserAccountComponent implements OnInit {
 
     };
 
-    console.log(account);
 
     this.accountService.updateAccount(account).subscribe(
       (banks) => {
-        // this.account = banks;
-        this.router.navigate(['user/dashboard/account']);
+
+        // this.router.navigate(['user/dashboard/account']);
       },
       (error) => {
         this.notification.error(error, 'Error fetching Accounts:');

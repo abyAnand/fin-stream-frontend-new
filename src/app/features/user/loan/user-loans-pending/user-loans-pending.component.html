@@ -1,0 +1,25 @@
+<div class="container mt-5">
+  <div class="d-flex justify-content-between align-items-center mb-4">
+    <h2 class="text-center mb-0"> Pending Loan List</h2>
+  </div>
+  <div class="bank-list-container p-3 shadow-lg blue-border">
+    <ng-container *ngIf="!error; else errorHandling">
+      <ng-container *ngIf="loanList.length > 0 else noBanks">
+        <div class="list-group">
+          <div *ngFor="let loan of loanList" class="list-group-item list-group-item-action d-flex justify-content-between align-items-center p-4 bank-item">
+            <div class="d-flex flex-column">
+              <!-- <h4 class="fw-bold mb-2 ">{{ account.accountType }}</h4> -->
+              <p class="text-muted mb-1 ">Loan Name: <span class=" list-group-item-secondary list-group-item-text lead">{{ loan.loanName }}</span></p>
+            </div>
+          </div>
+        </div>
+      </ng-container>
+      <ng-template #noBanks>
+        <div class="text-center text-muted">No Pending Loans available.</div>
+      </ng-template>
+    </ng-container>
+    <ng-template #errorHandling>
+      <div class="text-center text-danger">Error fetching Pending Loans. Please try again later.</div>
+    </ng-template>
+  </div>
+</div>

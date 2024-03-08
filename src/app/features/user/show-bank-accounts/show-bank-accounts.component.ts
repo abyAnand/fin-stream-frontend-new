@@ -36,6 +36,7 @@ export class ShowBankAccountsComponent implements OnInit{
     this.accountSettingService.getAccountSettingsByBankId(bankId).subscribe(
       (accounts) => {
         this.accountList = accounts;
+        console.log(this.accountList);
       },
       (error) => {
         this.notification.error(error, 'Error fetching accounts:');

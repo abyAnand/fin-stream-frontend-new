@@ -26,6 +26,16 @@ import { StoreModule } from '@ngrx/store';
 import { accountSettingReducer } from 'src/app/Store/accountSetting/accountSetting.reducer';
 import { EffectsModule } from '@ngrx/effects';
 import { AccountSettingEffects } from 'src/app/Store/accountSetting/accountSetting.effects';
+import { LoansComponent } from './bank-home/bank-top-navbar/loans/loans.component';
+import { CreateLoanComponent } from './bank-home/bank-top-navbar/loans/create-loan/create-loan.component';
+import { UpdateLoanComponent } from './bank-home/bank-top-navbar/loans/update-loan/update-loan.component';
+import { LoanListComponent } from './bank-home/bank-top-navbar/loans/loan-list/loan-list.component';
+import { LoanSideNavbarComponent } from './bank-home/bank-top-navbar/loans/loan-side-navbar/loan-side-navbar.component';
+import { CreateLoanTypeComponent } from './bank-home/bank-top-navbar/loans/create-loan-type/create-loan-type.component';
+import { LoanTypeListComponent } from './bank-home/bank-top-navbar/loans/loan-type-list/loan-type-list.component';
+import { UpdateLoanTypeComponent } from './bank-home/bank-top-navbar/loans/update-loan-type/update-loan-type.component';
+import { BankLoanApplicationsComponent } from './bank-home/bank-top-navbar/loans/bank-loan-applications/bank-loan-applications.component';
+import { ViewSingleLoanApplicationComponent } from './bank-home/bank-top-navbar/loans/view-single-loan-application/view-single-loan-application.component';
 
 @NgModule({
   declarations: [
@@ -50,7 +60,16 @@ import { AccountSettingEffects } from 'src/app/Store/accountSetting/accountSetti
            AccountSettingsComponent,
            CreateAccountSettingComponent,
            EditAccountSettingComponent,
-
+           LoansComponent,
+           CreateLoanComponent,
+           UpdateLoanComponent,
+           LoanListComponent,
+           LoanSideNavbarComponent,
+           CreateLoanTypeComponent,
+           LoanTypeListComponent,
+           UpdateLoanTypeComponent,
+           BankLoanApplicationsComponent,
+           ViewSingleLoanApplicationComponent,
 
 
   ],

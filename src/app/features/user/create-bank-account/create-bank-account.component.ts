@@ -54,7 +54,6 @@ export class CreateBankAccountComponent implements OnInit {
 
   initializeForm(): void {
     this.savingsAccountForm = this.formBuilder.group({
-      accountName: ['', Validators.required],
       initialDeposit: ['', Validators.required],
       interestRate: ['', Validators.required],
       // transactionAlerts: [false],
@@ -63,14 +62,12 @@ export class CreateBankAccountComponent implements OnInit {
     });
 
     this.checkingAccountForm = this.formBuilder.group({
-      accountName: ['', Validators.required],
       initialDeposit: ['', Validators.required],
       overdraftLimit: ['', Validators.required],
       // linkedSavingsAccountId: ['', Validators.required],
     });
 
     this.fdAccountForm = this.formBuilder.group({
-      accountName: ['', Validators.required],
       initialDeposit: ['', Validators.required],
       interestRate: ['', Validators.required],
       cdTerm: ['', Validators.required],
@@ -143,7 +140,6 @@ export class CreateBankAccountComponent implements OnInit {
   createSavingsAccount(): void {
 
     const account: AccountDto = {
-      accountName: this.savingsAccountForm.get(['accountName'])!.value,
       bankId: this.account.bankId,
       accountSettingId: this.account.id,
       userId: StorageService.getUserIdFromToken(),
@@ -171,7 +167,6 @@ export class CreateBankAccountComponent implements OnInit {
   createCheckingAccount() {
 
     const account: AccountDto = {
-      accountName: this.checkingAccountForm.get(['accountName'])!.value,
       bankId: this.account.bankId,
       accountSettingId: this.account.id,
       userId: StorageService.getUserIdFromToken(),
@@ -198,7 +193,7 @@ export class CreateBankAccountComponent implements OnInit {
   createFdAccount() {
 
     const account: AccountDto = {
-      accountName: this.fdAccountForm.get(['accountName'])!.value,
+      // accountName: this.fdAccountForm.get(['accountName'])!.value,
       bankId: this.account.bankId,
       accountSettingId: this.account.id,
       userId: StorageService.getUserIdFromToken(),
@@ -213,7 +208,7 @@ export class CreateBankAccountComponent implements OnInit {
     this.accountService.createAccount(account).subscribe(
       (banks) => {
         // this.account = banks;
-        this.router.navigate(['dashboard/accounts']);
+        this.router.navigate(['/user/dashboard/bank']);
       },
       (error) => {
         this.notification.error(error, 'Error fetching Accounts:');
