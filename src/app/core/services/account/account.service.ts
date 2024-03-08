@@ -81,10 +81,9 @@ export class AccountService {
 
     return this.http.get<AccountDto[]>(endpoint, { headers: AccountService.HEADERS }).pipe(
       tap((accounts: AccountDto[]) => {
-        console.log('User accounts fetched successfully:', accounts);
       }),
       catchError(error => {
-        console.error('Error fetching user accounts:', error);
+
         this.notification.error(error, 'Error Occurred');
         throw error;
       })
@@ -98,7 +97,7 @@ export class AccountService {
       tap((accounts: AccountDto[]) => {
       }),
       catchError(error => {
-        console.error('Error fetching user accounts:', error);
+    
         this.notification.error(error, 'Error Occurred');
         throw error;
       })

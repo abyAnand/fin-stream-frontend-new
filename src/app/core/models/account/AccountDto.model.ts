@@ -14,7 +14,10 @@ export interface AccountDto {
   cdTerm?: number;
   accountHolders?: string[];
   maxMonthlyTransactions?: number;
-  linkedSavingsAccountId?: string
+  linkedSavingsAccountId?: string;
+  totalTransaction?: number;
+  monthlyTransaction?: number;
+  yearlyTransaction?: number;
 }
 
 export enum AccountType {
