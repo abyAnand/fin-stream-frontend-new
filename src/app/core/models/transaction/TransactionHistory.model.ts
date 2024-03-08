@@ -6,6 +6,9 @@ export interface TransactionHistory {
   receiver: UserInfo;
   status: TransactionStatus;
   self: boolean;
+  day?: number;
+  month?: string;
+  year?: number;
 }
 
 export enum TransactionStatus {

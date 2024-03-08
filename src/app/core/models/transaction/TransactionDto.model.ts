@@ -9,6 +9,9 @@ export interface TransactionDto {
   receiverAccountId: string;
   receiverAccountName: string;
   status: TransactionStatus;
+  day?: number;
+  month?: number;
+  year?: number;
 }
 
 export enum TransactionStatus {
