@@ -38,6 +38,12 @@ import { UserLoansPendingComponent } from './loan/user-loans-pending/user-loans-
 import { DepositComponent } from './transaction/deposit/deposit.component';
 import { TransferComponent } from './transaction/transfer/transfer.component';
 import { NotificationComponent } from './notification/notification.component';
+import { singleUserReducer } from 'src/app/Store/SingleUser/singleUser.reducers';
+import { SingleUserEffects } from 'src/app/Store/SingleUser/SingleUser.effects';
+import { accountReducer } from 'src/app/Store/Account/Account.reducer';
+import { UserAccountEffects } from 'src/app/Store/Account/Account.effects';
+import { transactionHistoryReducer } from 'src/app/Store/TransactionHistory/TransactionHistory.reducer';
+import { TransactionHistoryEffects } from 'src/app/Store/TransactionHistory/TransactionHistory.effects';
 
 
 @NgModule({
@@ -51,7 +57,13 @@ import { NotificationComponent } from './notification/notification.component';
     MatIconModule,
     FormsModule,
     StoreModule.forFeature('users', userReducers),
-    EffectsModule.forFeature([UserEffects])
+    EffectsModule.forFeature([UserEffects]),
+    StoreModule.forFeature('accountList', accountReducer),
+    EffectsModule.forFeature([UserAccountEffects]),
+    StoreModule.forFeature('transactionHistoryList', transactionHistoryReducer),
+    EffectsModule.forFeature([TransactionHistoryEffects]),
+    StoreModule.forFeature('user', singleUserReducer),
+    EffectsModule.forFeature([SingleUserEffects]),
   ]
 })
 export class UserModule { }

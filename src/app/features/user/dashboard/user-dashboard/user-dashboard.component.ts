@@ -1,3 +1,4 @@
+
 import { AfterViewInit, Component, OnInit } from '@angular/core';
 import { AccountService } from 'src/app/core/services/account/account.service';
 import { TransactionService } from 'src/app/core/services/transaction/transaction.service';
@@ -5,6 +6,14 @@ import { StorageService } from 'src/app/core/services/storage/storage.service';
 import { AccountDto } from 'src/app/core/models/account/AccountDto.model';
 import { Chart, registerables } from 'chart.js/auto';
 import { TransactionHistory } from 'src/app/core/models/transaction/TransactionHistory.model';
+import { Store, select } from '@ngrx/store';
+import { getSingleUser } from 'src/app/Store/SingleUser/singleUser.action';
+import { AppStateInterface } from 'src/app/Store/types/appState.interface';
+import { UserDto } from 'src/app/core/models/user/UserDto.model';
+import { Observable } from 'rxjs';
+import { SingleUserErrorSelector, SingleUserLoadingSelector, SingleUserSuccessSelector } from 'src/app/Store/SingleUser/SingleUser.selector';
+import { getAllUserAccounts } from 'src/app/Store/Account/Account.action';
+import { allUserAccountsSelector, userAccountsErrorSelector, userAccountsLoadingSelector } from 'src/app/Store/Account/Account.selector';
 
 
 
@@ -19,14 +28,39 @@ export class UserDashboardComponent implements OnInit, AfterViewInit {
   transactionDataByMonth: Map<string, Map<string, number>> = new Map(); // Nested map for transaction data by account and month
   currentUserId: string;
   chart: Chart | undefined;
+  isLoading$: Observable<boolean>;
+  error$: Observable<string | null>;
+  user$ : Observable<UserDto>;
+  accountDtoList$: Observable<AccountDto[]>
+  isAccountListLoading$: Observable<boolean>;
+  accountError$: Observable<string | null>;
+  transactionHistoryList$: Observable<TransactionHistory[]>;
+
+
 
   constructor(
     private accountService: AccountService,
-    private transactionService: TransactionService
-  ) { }
+    private transactionService: TransactionService,
+    private store: Store<AppStateInterface>
+  ) {
+
+
+  }
 
   ngOnInit(): void {
     this.currentUserId = StorageService.getUserIdFromToken();
+
+    this.store.dispatch(getSingleUser({userId: this.currentUserId}));
+    this.isLoading$ = this.store.pipe(select(SingleUserLoadingSelector));
+    this.error$ = this.store.pipe(select(SingleUserErrorSelector));
+    this.user$ = this.store.pipe(select(SingleUserSuccessSelector));
+
+    this.store.dispatch(getAllUserAccounts({userId: this.currentUserId}));
+    this.isAccountListLoading$ = this.store.pipe(select(userAccountsLoadingSelector));
+    this.accountError$ = this.store.pipe(select(userAccountsErrorSelector));
+    this.accountDtoList$ = this.store.pipe(select(allUserAccountsSelector));
+
+
     this.accountService.getUserAccounts(this.currentUserId).subscribe(res => {
       this.accountDtoList = res;
       this.fetchTransactionData();
