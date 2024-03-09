@@ -10,10 +10,12 @@ import { Store, select } from '@ngrx/store';
 import { getSingleUser } from 'src/app/Store/SingleUser/singleUser.action';
 import { AppStateInterface } from 'src/app/Store/types/appState.interface';
 import { UserDto } from 'src/app/core/models/user/UserDto.model';
-import { Observable } from 'rxjs';
+import { Observable, take } from 'rxjs';
 import { SingleUserErrorSelector, SingleUserLoadingSelector, SingleUserSuccessSelector } from 'src/app/Store/SingleUser/SingleUser.selector';
 import { getAllUserAccounts } from 'src/app/Store/Account/Account.action';
 import { allUserAccountsSelector, userAccountsErrorSelector, userAccountsLoadingSelector } from 'src/app/Store/Account/Account.selector';
+import { getTransactionHistory } from 'src/app/Store/TransactionHistory/TransactionHistory.action';
+import { getTransactionHistoryLoadingSelector, getTransactionHistorySelector, getTransationHistoryErrorSelector } from 'src/app/Store/TransactionHistory/TransactionHistory.selector';
 
 
 
@@ -23,8 +25,6 @@ import { allUserAccountsSelector, userAccountsErrorSelector, userAccountsLoading
   styleUrls: ['./user-dashboard.component.css']
 })
 export class UserDashboardComponent implements OnInit, AfterViewInit {
-  accountDtoList: AccountDto[] = [];
-  transactionHistoryList: TransactionHistory[] = [];
   transactionDataByMonth: Map<string, Map<string, number>> = new Map(); // Nested map for transaction data by account and month
   currentUserId: string;
   chart: Chart | undefined;
@@ -35,7 +35,8 @@ export class UserDashboardComponent implements OnInit, AfterViewInit {
   isAccountListLoading$: Observable<boolean>;
   accountError$: Observable<string | null>;
   transactionHistoryList$: Observable<TransactionHistory[]>;
-
+  transactionHistoryError$: Observable<string | null>;
+  isTransactionHistoryLoading$ : Observable<boolean>;
 
 
   constructor(
@@ -60,10 +61,10 @@ export class UserDashboardComponent implements OnInit, AfterViewInit {
     this.accountError$ = this.store.pipe(select(userAccountsErrorSelector));
     this.accountDtoList$ = this.store.pipe(select(allUserAccountsSelector));
 
+    this.fetchTransactionDataByStateManagement();
 
     this.accountService.getUserAccounts(this.currentUserId).subscribe(res => {
-      this.accountDtoList = res;
-      this.fetchTransactionData();
+      this.fetchTransactionDataByStateManagement();
     });
   }
 
@@ -71,33 +72,49 @@ export class UserDashboardComponent implements OnInit, AfterViewInit {
     this.createChart();
   }
 
-  fetchTransactionData(): void {
-    // Initialize transactionDataByMonth map for each account
-    this.accountDtoList.forEach(account => {
-      this.transactionDataByMonth.set(account.id, new Map());
-    });
-
-    // Fetch transaction history for each account
-    this.accountDtoList.forEach(account => {
-      this.transactionService.getTransactionsByAccountId(account.id).subscribe(transactions => {
-        // Add transactions to transactionHistoryList
-        this.transactionHistoryList.push(...transactions);
-
+  fetchTransactionDataByStateManagement(): void {
+    this.accountDtoList$.pipe(
+      take(1)
+    ).subscribe(accountDtos => {
+      if (accountDtos.length > 0) {
+        accountDtos.forEach(account => {
+          this.transactionDataByMonth.set(account.id, new Map());
+          this.store.dispatch(getTransactionHistory({ accountId: account.id }));
+        });
+      }
+  
+      // Subscribe to transactionHistoryList$ after accountDtoList$ emits a value
+      this.transactionHistoryList$ = this.store.pipe(select(getTransactionHistorySelector));
+      this.transactionHistoryList$.subscribe(transactions => {
         transactions.forEach(transaction => {
-          const key = `${transaction.month}-${transaction.year}`; // Unique key for each month and year
-          const accountTransactionMap = this.transactionDataByMonth.get(account.id);
+          const accountId = transaction.sender.userAccountId;
+          const key = `${transaction.month}-${transaction.year}`;
+  
+          // Ensure the account exists in transactionDataByMonth map
+          if (!this.transactionDataByMonth.has(accountId)) {
+            this.transactionDataByMonth.set(accountId, new Map());
+          }
+  
+          const accountTransactionMap = this.transactionDataByMonth.get(accountId);
           if (accountTransactionMap) {
             const amount = accountTransactionMap.get(key) || 0;
             accountTransactionMap.set(key, amount + transaction.amount);
           }
         });
-        // Once all transaction data is fetched, show chart
-        if (this.accountDtoList.every(acc => this.transactionDataByMonth.get(acc.id)?.size)) {
+  
+        // Once all transaction data is fetched and updated, show chart
+        if (accountDtos.every(acc => this.transactionDataByMonth.has(acc.id))) {
           this.showLineChartData();
         }
       });
+  
+      // Subscribe to loading and error states
+      this.isTransactionHistoryLoading$ = this.store.pipe(select(getTransactionHistoryLoadingSelector));
+      this.transactionHistoryError$ = this.store.pipe(select(getTransationHistoryErrorSelector));
     });
   }
+
+  
 
   createChart(): void {
     const ctx = document.getElementById('myChart') as HTMLCanvasElement;
@@ -125,16 +142,17 @@ export class UserDashboardComponent implements OnInit, AfterViewInit {
   }
 
   showLineChartData(): void {
-    // Clear previous data
-    this.chart.data.datasets = [];
-    this.chart.data.labels = [];
+  // Clear previous data
+  this.chart.data.datasets = [];
+  this.chart.data.labels = [];
 
-    // Extract months as labels
-    const months = Array.from(this.transactionDataByMonth.values().next().value.keys());
-    this.chart.data.labels = months;
+  // Extract months as labels
+  const months = Array.from(this.transactionDataByMonth.values().next().value.keys());
+  this.chart.data.labels = months;
 
-    // Iterate over the accounts and create a dataset for each account
-    this.accountDtoList.forEach(account => {
+  // Subscribe to the accountDtoList$ observable
+  this.accountDtoList$.subscribe(accountDtos => {
+    accountDtos.forEach(account => {
       const dataset: any = {
         label: account.accountName,
         data: [],
@@ -142,7 +160,7 @@ export class UserDashboardComponent implements OnInit, AfterViewInit {
       };
 
       // Populate dataset with transaction amounts for each month
-      months.forEach((month: string) => { // Explicitly define the type of month as string
+      months.forEach((month: string) => {
         const accountTransactionMap = this.transactionDataByMonth.get(account.id);
         const totalAmount = accountTransactionMap?.get(month) || 0;
         dataset.data.push(totalAmount);
@@ -151,8 +169,10 @@ export class UserDashboardComponent implements OnInit, AfterViewInit {
       this.chart.data.datasets.push(dataset);
     });
 
+    // Update the chart
     if (this.chart) {
       this.chart.update();
     }
-  }
+  });
+}
 }

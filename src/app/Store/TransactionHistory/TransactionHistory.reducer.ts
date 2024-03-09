@@ -11,25 +11,20 @@ export const initialState: TransactionHistoryStateInterface = {
 export const transactionHistoryReducer = createReducer(
   initialState,
 
-  // get all accountSettings
-
-  on(getTransactionHistory,(state)=>({
+  on(getTransactionHistory, (state) => ({
     ...state,
     isLoading: true
   })),
 
-
-  on(getTransactionHistorySuccess, (state, action)=>({
+  on(getTransactionHistorySuccess, (state, action) => ({
     ...state,
     isLoading: false,
-    transactionHistoryList: [...action.transactionHistoryList],
-
+    transactionHistoryList: [...state.transactionHistoryList, ...action.transactionHistoryList], // Concatenate the new transaction history with the existing list
   })),
 
-  on(getTransactionHistoryFail, (state, action)=>({
+  on(getTransactionHistoryFail, (state, action) => ({
     ...state,
-    isLoading : false,
+    isLoading: false,
     error: action.error
   })),
-
-)
+);
