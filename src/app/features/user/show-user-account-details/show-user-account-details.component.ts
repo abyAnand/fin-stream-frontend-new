@@ -9,6 +9,11 @@ import { TransactionDto } from 'src/app/core/models/transaction/TransactionDto.m
 import { TransactionService } from '../../../core/services/transaction/transaction.service';
 import { TransactionHistory } from 'src/app/core/models/transaction/TransactionHistory.model';
 import { StorageService } from '../../../core/services/storage/storage.service';
+import { Observable } from 'rxjs';
+import { AppStateInterface } from 'src/app/Store/types/appState.interface';
+import { Store, select } from '@ngrx/store';
+import { getTransactionHistory } from 'src/app/Store/TransactionHistory/TransactionHistory.action';
+import { getTransactionHistoryLoadingSelector, getTransactionHistorySelector, getTransationHistoryErrorSelector } from 'src/app/Store/TransactionHistory/TransactionHistory.selector';
 
 @Component({
   selector: 'app-show-user-account-details',
@@ -17,7 +22,9 @@ import { StorageService } from '../../../core/services/storage/storage.service';
 })
 export class ShowUserAccountDetailsComponent implements OnInit {
   selectedAccount: AccountDto | undefined;
-  transactions: TransactionHistory[] = [];
+  transactionList$: Observable<TransactionHistory[]>;
+  isLoading$ : Observable<boolean>;
+  error$: Observable<string>
   currentUserId: string; // Declare currentUserId variable
 
   constructor(
@@ -25,6 +32,7 @@ export class ShowUserAccountDetailsComponent implements OnInit {
     private router: Router,
     private modalService: NgbModal,
     private transactionService: TransactionService,
+    private store: Store<AppStateInterface>
   ) {}
 
   ngOnInit(): void {
@@ -33,8 +41,12 @@ export class ShowUserAccountDetailsComponent implements OnInit {
       this.selectedAccount = JSON.parse(accountString) as AccountDto;
     }
     this.currentUserId = StorageService.getUserIdFromToken();
+    this.store.dispatch(getTransactionHistory({accountId: this.selectedAccount.id}))
     this.getAccountTransactionList();
     console.log(this.selectedAccount);
+
+
+
   }
 
   editAccount(account: AccountDto) {
@@ -42,15 +54,16 @@ export class ShowUserAccountDetailsComponent implements OnInit {
   }
 
   getAccountTransactionList() {
-    this.transactionService.getTransactionsByAccountId(this.selectedAccount.id).subscribe(
-      (accountTransactions) => {
-        this.transactions = accountTransactions.map(transaction => this.mapTransactionWithStatus(transaction));
-        console.log('Transaction Completed:', this.transactions);
-      },
-      (error) => {
-        console.error('Error occurred while Transferring Money:', error);
+  
+    this.isLoading$ = this.store.pipe(select(getTransactionHistoryLoadingSelector))
+    this.error$ = this.store.pipe(select(getTransationHistoryErrorSelector));
+    this.transactionList$ = this.store.pipe(select(getTransactionHistorySelector))
+
+    this.transactionList$.subscribe(
+      transactionDtos => {
+        transactionDtos.map(transaction => this.mapTransactionWithStatus(transaction));
       }
-    );
+    )
   }
 
   mapTransactionWithStatus(transaction: TransactionHistory): TransactionHistory {
@@ -73,8 +86,9 @@ export class ShowUserAccountDetailsComponent implements OnInit {
     console.log(this.selectedAccount);
     const modalRef = this.modalService.open(DepositComponent, { centered: true, animation: true, size: 'lg' });
     modalRef.componentInstance.account = this.selectedAccount;
-    modalRef.componentInstance.onSubmit.subscribe(() => {
+    modalRef.componentInstance.depositCompleted.subscribe(() => {
       modalRef.close();
+      window.location.reload(); 
     });
 
   }
@@ -82,8 +96,9 @@ export class ShowUserAccountDetailsComponent implements OnInit {
   transfer() {
     const modalRef = this.modalService.open(TransferComponent, { centered: true, animation: true, size: 'lg' });
     modalRef.componentInstance.account = this.selectedAccount;
-    modalRef.componentInstance.onSubmit.subscribe(() => {
+    modalRef.componentInstance.transactionCompleted.subscribe(() => {
       modalRef.close();
+      window.location.reload(); // Reload the page
     });
 
   }

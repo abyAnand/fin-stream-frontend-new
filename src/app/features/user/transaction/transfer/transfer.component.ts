@@ -15,6 +15,7 @@ import { TransactionService } from 'src/app/core/services/transaction/transactio
 export class TransferComponent {
 
   @Output() onSubmit: EventEmitter<any> = new EventEmitter();
+  @Output() transactionCompleted: EventEmitter<any> = new EventEmitter();
   @Input() account: AccountDto;
   transferForm: FormGroup;
   accountVerified: boolean = false;
@@ -66,6 +67,7 @@ export class TransferComponent {
     );
 
     this.onSubmit.emit();
+    this.transactionCompleted.emit();
   }
 
   verifyAccount() {

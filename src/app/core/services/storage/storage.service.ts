@@ -7,6 +7,7 @@ const TOKEN = 'token';
 const REFRESH = 'refresh';
 const DECODED = 'decoded'
 const DTOKEN = 'dToken';
+const USERNAME = 'username';
 
 
 @Injectable({
@@ -28,7 +29,8 @@ export class StorageService {
     window.localStorage.setItem(TOKEN, token);
     StorageService.decodedToken = jwtDecode(token);
     localStorage.setItem(DECODED, StorageService.decodedToken.userId)
-    localStorage.setItem(DTOKEN, JSON.stringify(StorageService.decodedToken)) // stringify the object before saving to local storage
+    localStorage.setItem(DTOKEN, JSON.stringify(StorageService.decodedToken))
+    localStorage.setItem(USERNAME, StorageService.decodedToken.sub); // stringify the object before saving to local storage
   }
 
   public saveRefreshToken(refresh: any){
@@ -79,6 +81,10 @@ export class StorageService {
       console.error('User ID not found in the decoded token.');
       return '';
     }
+  }
+
+  static getUserName(): string {
+    return USERNAME;
   }
 
   static getUserRole(): string {

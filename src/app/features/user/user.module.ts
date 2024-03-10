@@ -44,10 +44,15 @@ import { accountReducer } from 'src/app/Store/Account/Account.reducer';
 import { UserAccountEffects } from 'src/app/Store/Account/Account.effects';
 import { transactionHistoryReducer } from 'src/app/Store/TransactionHistory/TransactionHistory.reducer';
 import { TransactionHistoryEffects } from 'src/app/Store/TransactionHistory/TransactionHistory.effects';
+import { bankReducer } from 'src/app/Store/Bank/Bank.reducer';
+import { BankEffects } from 'src/app/Store/Bank/Bank.effects';
+import { loanTypeReducer } from 'src/app/Store/LoanType/LoanType.reducer';
+import { LoanTypeEffects } from 'src/app/Store/LoanType/LoanType.effects';
+import { TransactionComponent } from './transaction/transaction/transaction.component';
 
 
 @NgModule({
-  declarations: [LoginComponent, RegisterComponent, DashboardComponent, HeaderComponent, NavbarComponent, SideNavbarComponent, ProfileComponent, UserDashboardComponent, ChangePasswordComponent, BankListComponent, ShowBankAccountsComponent, CreateBankAccountComponent, ShowUserAccountsComponent, ShowUserAccountDetailsComponent, EditUserAccountComponent, LoanComponent, LoanSideNavComponent, UserLoansComponent, UserLoansRejectedComponent, UserLoanDetailsComponent, CreateUserLoanComponent, UpdateUserLoanComponent, BankLoansComponent, UserLoanApplyComponent, UserLoansPendingComponent, DepositComponent, TransferComponent, NotificationComponent],
+  declarations: [LoginComponent, RegisterComponent, DashboardComponent, HeaderComponent, NavbarComponent, SideNavbarComponent, ProfileComponent, UserDashboardComponent, ChangePasswordComponent, BankListComponent, ShowBankAccountsComponent, CreateBankAccountComponent, ShowUserAccountsComponent, ShowUserAccountDetailsComponent, EditUserAccountComponent, LoanComponent, LoanSideNavComponent, UserLoansComponent, UserLoansRejectedComponent, UserLoanDetailsComponent, CreateUserLoanComponent, UpdateUserLoanComponent, BankLoansComponent, UserLoanApplyComponent, UserLoansPendingComponent, DepositComponent, TransferComponent, NotificationComponent, TransactionComponent],
   imports: [
     CommonModule,
     UserRoutingModule,
@@ -64,6 +69,10 @@ import { TransactionHistoryEffects } from 'src/app/Store/TransactionHistory/Tran
     EffectsModule.forFeature([TransactionHistoryEffects]),
     StoreModule.forFeature('user', singleUserReducer),
     EffectsModule.forFeature([SingleUserEffects]),
+    StoreModule.forFeature('bankList', bankReducer),
+    EffectsModule.forFeature([BankEffects]),
+    StoreModule.forFeature('loanTypeList', loanTypeReducer),
+    EffectsModule.forFeature([LoanTypeEffects]),
   ]
 })
 export class UserModule { }

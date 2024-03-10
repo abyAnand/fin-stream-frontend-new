@@ -154,7 +154,7 @@ export class CreateBankAccountComponent implements OnInit {
     this.accountService.createAccount(account).subscribe(
       (banks) => {
         // this.account = banks;
-        this.router.navigate(['dashboard/accounts']);
+        this.router.navigate(['/account/deposit']);
       },
       (error) => {
         this.notification.error(error, 'Error fetching Accounts:');
@@ -180,7 +180,7 @@ export class CreateBankAccountComponent implements OnInit {
     this.accountService.createAccount(account).subscribe(
       (banks) => {
         // this.account = banks;
-        this.router.navigate(['dashboard/accounts']);
+        this.router.navigate(['account/deposit']);
       },
       (error) => {
         this.notification.error(error, 'Error fetching Accounts:');
@@ -208,7 +208,7 @@ export class CreateBankAccountComponent implements OnInit {
     this.accountService.createAccount(account).subscribe(
       (banks) => {
         // this.account = banks;
-        this.router.navigate(['/user/dashboard/bank']);
+        this.router.navigate(['/account/deposit']);
       },
       (error) => {
         this.notification.error(error, 'Error fetching Accounts:');

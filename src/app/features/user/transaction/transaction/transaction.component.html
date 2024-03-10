@@ -1,0 +1,40 @@
+<div class="row justify-content-center mt-4">
+  <div class="col-md-10">
+    <div class="card">
+      <div class="card-header bg-primary text-white">
+        <h3 class="m-0">Transactions</h3>
+      </div>
+      <div class="table-responsive">
+        <table class="table table-striped">
+          <thead>
+            <tr>
+              <th>Action</th>
+              <th>Amount</th>
+              <th>Status</th>
+            </tr>
+          </thead>
+          <tbody *ngIf="(transactionHistoryList$ | async) && (transactionHistoryList$ | async).length > 0; else noTransactions">
+            <tr *ngFor="let transaction of transactionHistoryList$ | async">
+              <td>
+                <span *ngIf="transaction.self"><i class="bi bi-person"></i> Self</span>
+                <span *ngIf="!transaction.self && transaction.sender.userId === currentUserId"><i class="bi bi-arrow-up-circle"></i> Sent to {{ transaction.receiver.username }}</span>
+                <span *ngIf="!transaction.self && transaction.receiver.userId === currentUserId"><i class="bi bi-arrow-down-circle"></i> Received from {{ transaction.sender.username }}</span>
+              </td>
+              <td>{{ transaction.amount | currency:'INR ':true }}</td>
+              <td [ngClass]="{
+                'text-success': transaction.status === 'COMPLETED',
+                'text-danger': transaction.status === 'FAILED',
+                'text-warning': transaction.status === 'PENDING'
+              }">{{ transaction.status }}</td>
+            </tr>
+          </tbody>
+          <ng-template #noTransactions>
+            <tr>
+              <td colspan="3">No transactions data available.</td>
+            </tr>
+          </ng-template>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>

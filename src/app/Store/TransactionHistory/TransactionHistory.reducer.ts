@@ -16,11 +16,21 @@ export const transactionHistoryReducer = createReducer(
     isLoading: true
   })),
 
-  on(getTransactionHistorySuccess, (state, action) => ({
-    ...state,
-    isLoading: false,
-    transactionHistoryList: [...state.transactionHistoryList, ...action.transactionHistoryList], // Concatenate the new transaction history with the existing list
-  })),
+  on(getTransactionHistorySuccess, (state, action) => {
+    // Filter out existing transactions from the new data
+    const newTransactions = action.transactionHistoryList.filter(newTransaction => (
+      !state.transactionHistoryList.some(existingTransaction => (
+        existingTransaction.id === newTransaction.id 
+      ))
+    ));
+  
+    // Spread the new transactions into the existing list
+    return {
+      ...state,
+      isLoading: false,
+      transactionHistoryList: [...state.transactionHistoryList, ...newTransactions]
+    };
+  }),
 
   on(getTransactionHistoryFail, (state, action) => ({
     ...state,

@@ -25,7 +25,7 @@ import { getTransactionHistoryLoadingSelector, getTransactionHistorySelector, ge
   styleUrls: ['./user-dashboard.component.css']
 })
 export class UserDashboardComponent implements OnInit, AfterViewInit {
-  transactionDataByMonth: Map<string, Map<string, number>> = new Map(); // Nested map for transaction data by account and month
+  transactionDataByMonth: Map<string, Map<string, number>> = new Map(); 
   currentUserId: string;
   chart: Chart | undefined;
   isLoading$: Observable<boolean>;
@@ -61,6 +61,7 @@ export class UserDashboardComponent implements OnInit, AfterViewInit {
     this.accountError$ = this.store.pipe(select(userAccountsErrorSelector));
     this.accountDtoList$ = this.store.pipe(select(allUserAccountsSelector));
 
+
     this.fetchTransactionDataByStateManagement();
 
     this.accountService.getUserAccounts(this.currentUserId).subscribe(res => {
@@ -87,10 +88,23 @@ export class UserDashboardComponent implements OnInit, AfterViewInit {
       this.transactionHistoryList$ = this.store.pipe(select(getTransactionHistorySelector));
       this.transactionHistoryList$.subscribe(transactions => {
         transactions.forEach(transaction => {
-          const accountId = transaction.sender.userAccountId;
+          let accountId = '';
+
+          // Check if sender's account ID is in accountDtoList$
+          const senderAccount = accountDtos.find(acc => acc.id === transaction.sender.userAccountId);
+          
+          // Check if the sender's account is found in accountDtoList$
+          if (senderAccount) {
+            accountId = transaction.sender.userAccountId;
+          } else {
+            // Check if the receiver's account is found in accountDtoList$
+            const receiverAccount = accountDtos.find(acc => acc.id === transaction.receiver.userAccountId);
+            if (receiverAccount) {
+              accountId = transaction.receiver.userAccountId;
+            }
+          }
           const key = `${transaction.month}-${transaction.year}`;
   
-          // Ensure the account exists in transactionDataByMonth map
           if (!this.transactionDataByMonth.has(accountId)) {
             this.transactionDataByMonth.set(accountId, new Map());
           }
@@ -144,11 +158,11 @@ export class UserDashboardComponent implements OnInit, AfterViewInit {
   showLineChartData(): void {
   // Clear previous data
   this.chart.data.datasets = [];
-  this.chart.data.labels = [];
+    this.chart.data.labels = [];
 
-  // Extract months as labels
-  const months = Array.from(this.transactionDataByMonth.values().next().value.keys());
-  this.chart.data.labels = months;
+    // Extract months as labels
+    const months = Array.from(this.transactionDataByMonth.values().next().value.keys());
+    this.chart.data.labels = months;
 
   // Subscribe to the accountDtoList$ observable
   this.accountDtoList$.subscribe(accountDtos => {
@@ -160,8 +174,9 @@ export class UserDashboardComponent implements OnInit, AfterViewInit {
       };
 
       // Populate dataset with transaction amounts for each month
-      months.forEach((month: string) => {
+      months.forEach((month: string) => { // Explicitly define the type of month as string
         const accountTransactionMap = this.transactionDataByMonth.get(account.id);
+
         const totalAmount = accountTransactionMap?.get(month) || 0;
         dataset.data.push(totalAmount);
       });

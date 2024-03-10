@@ -59,6 +59,16 @@ export class UserloanService {
     );
   }
 
+  getRejectedLoans(userId: string): Observable<LoanDto[]> {
+    return this.http.get<LoanDto[]>(`${URL}/rejected/${userId}`, { headers: UserloanService.HEADERS })
+    .pipe(
+      tap(() => {
+        this.notification.success('Loan Applicaton Submitted Successfully', 'Success');
+      }),
+      catchError(this.handleError)
+    );
+  }
+
   getAllPendingUserLoans(userId: string): Observable<LoanDto[]> {
     return this.http.get<LoanDto[]>(`${URL}/pending/${userId}`, { headers: UserloanService.HEADERS })
     .pipe(

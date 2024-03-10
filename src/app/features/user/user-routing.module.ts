@@ -23,6 +23,7 @@ import { UserLoansPendingComponent } from './loan/user-loans-pending/user-loans-
 import { DepositComponent } from './transaction/deposit/deposit.component';
 import { TransferComponent } from './transaction/transfer/transfer.component';
 import { NotificationComponent } from './notification/notification.component';
+import { TransactionComponent } from './transaction/transaction/transaction.component';
 
 const routes: Routes = [
   { path: 'dashboard', component: DashboardComponent,
@@ -30,6 +31,7 @@ children:[
   { path: '', redirectTo: 'profile', pathMatch: 'full' },
   {path: 'user', component: UserDashboardComponent},
   {path: 'profile', component: ProfileComponent},
+  {path: 'transaction', component: TransactionComponent},
   {path: 'password', component: ChangePasswordComponent},
   { path: 'accounts/:bankId', component: ShowBankAccountsComponent },
   { path: 'create/:accountType', component: CreateBankAccountComponent },

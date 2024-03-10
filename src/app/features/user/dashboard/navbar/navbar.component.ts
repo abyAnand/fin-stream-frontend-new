@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthService } from 'src/app/core/services/authentication/auth.service';
 
@@ -7,12 +7,18 @@ import { AuthService } from 'src/app/core/services/authentication/auth.service';
   templateUrl: './navbar.component.html',
   styleUrls: ['./navbar.component.css']
 })
-export class NavbarComponent {
+export class NavbarComponent implements OnInit{
+
+  username: string;
 
   constructor(
     private authService: AuthService,
     private router: Router
   ){}
+
+  ngOnInit(): void {
+      this.username = localStorage.getItem('username');
+  }
 
   showNotifications: boolean = false;
   showProfile: boolean = false;

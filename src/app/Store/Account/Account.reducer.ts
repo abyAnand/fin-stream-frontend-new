@@ -33,7 +33,7 @@ export const accountReducer = createReducer(
   })),
 
 
-  //create account setting
+  //create account
 
   on(createUserAccount,(state, action)=>({
     ...state,
