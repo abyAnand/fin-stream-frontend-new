@@ -6,6 +6,12 @@ import { Router } from '@angular/router';
 import { UserloanService } from 'src/app/core/services/userLoan/userloan.service';
 import { ApprovalStatus, LoanDto } from 'src/app/core/models/loan/LoanDto.model';
 import { StorageService } from 'src/app/core/services/storage/storage.service';
+import { Observable } from 'rxjs';
+import { Store, select } from '@ngrx/store';
+import { AppStateInterface } from 'src/app/Store/types/appState.interface';
+import { getAllLoanTypesAction } from 'src/app/Store/LoanType/LoanType.action';
+import { allLoanTypeLoadingSelector, allLoanTypesErrorSelector } from 'src/app/Store/LoanType/LoanType.selector';
+import { allLoanTypesSelector } from '../../../../Store/LoanType/LoanType.selector';
 
 @Component({
   selector: 'app-bank-loans',
@@ -15,10 +21,18 @@ import { StorageService } from 'src/app/core/services/storage/storage.service';
 export class BankLoansComponent implements OnInit {
 
   bankLoanList: LoanType[] = []
+  bankLoanList$: Observable<LoanType[]>;
+  isLoanListLoading$: Observable<boolean>;
+  loanListError$: Observable<string>;
+
   userLoans: LoanDto[] = [];
+  userLoans$: Observable<LoanDto[]>;
+  error$: Observable<string>;
+  isUserLoansLoading: Observable<boolean>;
   error: boolean = false;
 
   ngOnInit(): void {
+    this.store.dispatch(getAllLoanTypesAction());
     this.fetchBankLoansList()
     this.fetchUserLoansList(StorageService.getUserIdFromToken());
   }
@@ -27,10 +41,17 @@ export class BankLoansComponent implements OnInit {
     private loanTypeService: LoanTypeService,
     private notification: ToasterService,
     private userLoanService: UserloanService,
-    private router: Router
+    private router: Router,
+    private store: Store<AppStateInterface>
   ) { }
 
   private fetchBankLoansList(): void {
+
+    this.isLoanListLoading$ = this.store.pipe(select(allLoanTypeLoadingSelector));
+    this.loanListError$ = this.store.pipe(select(allLoanTypesErrorSelector));
+    this.bankLoanList$ = this.store.pipe(select(allLoanTypesSelector));
+
+
     this.loanTypeService.getAllLoanTypes().subscribe(
       (loanList) => {
         this.bankLoanList = loanList;

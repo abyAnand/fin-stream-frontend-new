@@ -1,6 +1,7 @@
 import { UserInfo } from "./UserInfo.model";
 
 export interface TransactionHistory {
+  id: string;
   sender: UserInfo;
   amount: number;
   receiver: UserInfo;

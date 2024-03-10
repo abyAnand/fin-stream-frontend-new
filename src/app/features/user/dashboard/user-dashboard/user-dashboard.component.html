@@ -7,7 +7,6 @@
     </div>
   </div>
 
-
   <div class="col-md-6 d-flex flex-column justify-content-start" style="padding: 10px; padding-right: 20px;">
     <div class="card flex-grow-1">
       <div class="card-header bg-primary text-white">
@@ -23,8 +22,8 @@
                 <th>Status</th>
               </tr>
             </thead>
-            <tbody *ngIf="transactionHistoryList.length > 0; else noTransactions">
-              <tr *ngFor="let transaction of transactionHistoryList">
+            <tbody *ngIf="(transactionHistoryList$ | async)?.length > 0; else noTransactions">
+              <tr *ngFor="let transaction of transactionHistoryList$ | async">
                 <td>
                   <span *ngIf="transaction.self"><i class="bi bi-person"></i> Self</span>
                   <span *ngIf="!transaction.self && transaction.sender.userId === currentUserId"><i class="bi bi-arrow-up-circle"></i> Sent to {{ transaction.receiver.username }}</span>
@@ -47,6 +46,7 @@
         </div>
       </div>
     </div>
+    
   </div>
 
   <div class="col-md-6 d-flex flex-column justify-content-start" style="padding: 10px; padding-left: 20px;">
@@ -65,19 +65,22 @@
                 <th>Monthly Transactions</th>
               </tr>
             </thead>
-            <tbody>
-              <tr *ngFor="let account of accountDtoList">
+            <tbody *ngIf="(accountDtoList$ | async)?.length > 0; else noAccounts">
+              <tr *ngFor="let account of accountDtoList$ | async">
                 <td>{{ account.accountName }}</td>
                 <td>{{ account.bankId }}</td>
                 <td>{{ account.balance | currency:'INR ':true }}</td>
                 <td>{{ account.monthlyTransaction }}</td>
               </tr>
             </tbody>
+            <ng-template #noAccounts>
+              <tr>
+                <td colspan="4">No account data available.</td>
+              </tr>
+            </ng-template>
           </table>
         </div>
       </div>
     </div>
   </div>
-
-
 </div>

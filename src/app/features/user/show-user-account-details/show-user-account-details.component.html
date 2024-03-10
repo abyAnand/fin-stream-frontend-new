@@ -12,7 +12,7 @@
               <h5 class="card-title">{{ selectedAccount.accountName }}</h5>
               <p class="card-text">Account Type: Savings</p>
               <p class="card-text">Initial Deposit: {{ selectedAccount.balance | currency:'INR ':true }}</p>
-              <p class="card-text">Interest Rate: {{ selectedAccount.interestRate }}%</p>
+              <!-- <p class="card-text">Interest Rate: {{ selectedAccount.interestRate }}%</p> -->
               <!-- Add other savings account details here -->
             </ng-container>
             <ng-container *ngIf="selectedAccount.accountType === 'CHECKING'">
@@ -68,8 +68,8 @@
               <th>Status</th>
             </tr>
           </thead>
-          <tbody *ngIf="transactions.length > 0; else noTransactions">
-            <tr *ngFor="let transaction of transactions">
+          <tbody *ngIf="(transactionList$ | async).length > 0; else noTransactions">
+            <tr *ngFor="let transaction of transactionList$ | async">
               <td>
                 <span *ngIf="transaction.self"><i class="bi bi-person"></i> Self</span>
                 <span *ngIf="!transaction.self && transaction.sender.userId === currentUserId"><i class="bi bi-arrow-up-circle"></i> Sent to {{ transaction.receiver.username }}</span>

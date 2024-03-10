@@ -15,6 +15,7 @@ import { TransactionService } from 'src/app/core/services/transaction/transactio
 export class DepositComponent implements OnInit{
 
   @Output() onSubmit: EventEmitter<any> = new EventEmitter();
+  @Output() depositCompleted: EventEmitter<any> = new EventEmitter();
   @Input() account: AccountDto;
   depositForm: FormGroup;
 
@@ -64,6 +65,7 @@ export class DepositComponent implements OnInit{
     );
 
     this.onSubmit.emit();
+    this.depositCompleted.emit();
   }
 
   cancel(){
