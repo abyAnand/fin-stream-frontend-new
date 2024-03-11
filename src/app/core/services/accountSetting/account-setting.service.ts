@@ -71,8 +71,9 @@ export class AccountSettingService {
     );
   }
 
+  //here
   getAccountTypes(bankId: number): Observable<AccountTypeSetting[]> {
-    return this.http.get<AccountTypeSetting[]>(`${URL}/accounts/settings/${bankId}`, { headers: AccountSettingService.HEADERS });
+    return this.http.get<AccountTypeSetting[]>(`${URL}accounts/settings/${bankId}`, { headers: AccountSettingService.HEADERS });
   }
 
   getAccountSettingsByBankId(bankId: string): Observable<any> {

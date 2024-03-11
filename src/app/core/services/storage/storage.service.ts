@@ -8,6 +8,7 @@ const REFRESH = 'refresh';
 const DECODED = 'decoded'
 const DTOKEN = 'dToken';
 const USERNAME = 'username';
+const ROLE = 'role';
 
 
 @Injectable({
@@ -28,9 +29,15 @@ export class StorageService {
     window.localStorage.removeItem(TOKEN);
     window.localStorage.setItem(TOKEN, token);
     StorageService.decodedToken = jwtDecode(token);
-    localStorage.setItem(DECODED, StorageService.decodedToken.userId)
-    localStorage.setItem(DTOKEN, JSON.stringify(StorageService.decodedToken))
-    localStorage.setItem(USERNAME, StorageService.decodedToken.sub); // stringify the object before saving to local storage
+    if (StorageService.decodedToken) {
+      localStorage.setItem(DECODED, StorageService.decodedToken.userId);
+      localStorage.setItem(ROLE, StorageService.decodedToken.roles[0]);
+      localStorage.setItem(DTOKEN, JSON.stringify(StorageService.decodedToken));
+      localStorage.setItem(USERNAME, StorageService.decodedToken.sub);
+      console.log(StorageService.getUserRole());
+    } else {
+      console.error('Decoded token is undefined');
+    }
   }
 
   public saveRefreshToken(refresh: any){
@@ -88,11 +95,8 @@ export class StorageService {
   }
 
   static getUserRole(): string {
-    if (StorageService.decodedToken.roles == null || StorageService.decodedToken.roles.length === 0) {
-      return '';
-    }
-    console.log(StorageService.decodedToken.roles)
-    return StorageService.decodedToken.roles[0];
+    const storedRole = localStorage.getItem(ROLE);
+    return storedRole ? storedRole : '';
   }
 
   static isAdminLoggedIn(): boolean {
@@ -105,11 +109,19 @@ export class StorageService {
     return this.getToken() !== null && role === "ROLE_USER";
   }
 
+  static isBankLoggedIn(): boolean {
+    const role: string = this.getUserRole();
+    console.log(role);
+    return this.getToken() !== null && role === "ROLE_BANK";
+  }
+
   static logout(){
     window.localStorage.removeItem(TOKEN);
     window.localStorage.removeItem(REFRESH);
     window.localStorage.removeItem(USER);
     window.localStorage.removeItem(DECODED);
     window.localStorage.removeItem(DTOKEN);
+    window.localStorage.removeItem(USERNAME);
+    window.localStorage.removeItem(ROLE);
   }
 }

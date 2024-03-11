@@ -36,6 +36,10 @@ import { LoanTypeListComponent } from './bank-home/bank-top-navbar/loans/loan-ty
 import { UpdateLoanTypeComponent } from './bank-home/bank-top-navbar/loans/update-loan-type/update-loan-type.component';
 import { BankLoanApplicationsComponent } from './bank-home/bank-top-navbar/loans/bank-loan-applications/bank-loan-applications.component';
 import { ViewSingleLoanApplicationComponent } from './bank-home/bank-top-navbar/loans/view-single-loan-application/view-single-loan-application.component';
+import { accountTypeSettingReducer } from 'src/app/Store/AccountTypeSetting/AccountTypeSetting.reducer';
+import { AccountTypeSettingEffects } from 'src/app/Store/AccountTypeSetting/AccountTypeSetting.effects';
+import { loanTypeReducer } from 'src/app/Store/LoanType/LoanType.reducer';
+import { LoanTypeEffects } from 'src/app/Store/LoanType/LoanType.effects';
 
 @NgModule({
   declarations: [
@@ -78,7 +82,11 @@ import { ViewSingleLoanApplicationComponent } from './bank-home/bank-top-navbar/
     BankRoutingModule,
     ReactiveFormsModule,
     StoreModule.forFeature('accountSettings', accountSettingReducer),
-    EffectsModule.forFeature([AccountSettingEffects])
+    EffectsModule.forFeature([AccountSettingEffects]),
+    StoreModule.forFeature('accountTypeSettingList', accountTypeSettingReducer),
+    EffectsModule.forFeature([AccountTypeSettingEffects]),
+    StoreModule.forFeature('loanTypeList', loanTypeReducer),
+    EffectsModule.forFeature([LoanTypeEffects]),
   ]
 })
 export class BankModule { }

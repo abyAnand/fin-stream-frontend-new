@@ -7,6 +7,11 @@ import { Router } from '@angular/router';
 import { StorageService } from 'src/app/core/services/storage/storage.service';
 import { CreateLoanTypeComponent } from '../create-loan-type/create-loan-type.component';
 import { CreateLoanComponent } from '../create-loan/create-loan.component';
+import { Observable } from 'rxjs';
+import { Store, select } from '@ngrx/store';
+import { AppStateInterface } from 'src/app/Store/types/appState.interface';
+import { getAllLoanTypesAction, getAllLoanTypesByBankIdAction } from 'src/app/Store/LoanType/LoanType.action';
+import { allLoanTypeLoadingSelector, allLoanTypesErrorSelector, allLoanTypesSelector, loanTypeSelector } from 'src/app/Store/LoanType/LoanType.selector';
 
 @Component({
   selector: 'app-loan-type-list',
@@ -15,37 +20,35 @@ import { CreateLoanComponent } from '../create-loan/create-loan.component';
 })
 export class LoanTypeListComponent implements OnInit{
 
-  loanTypeList: LoanType[] = [];
-  error: boolean = false;
+
+  loanTypeList$: Observable<LoanType[]>;
+  error$: Observable<string>;
+  isLoading$: Observable<boolean>;
   bankId! : any;
 
   constructor(
     private loanTypeService: LoanTypeService,
     private notification: ToasterService,
     private modalService: NgbModal,
-    private router: Router
+    private router: Router,
+    private store: Store<AppStateInterface>
   ){
 
   }
 
   ngOnInit(): void {
     this.bankId = StorageService.getUserIdFromToken();
-    this.fetchLoanSettingListByBankId(this.bankId);
+    this.store.dispatch(getAllLoanTypesByBankIdAction({bankId: this.bankId}))
+    this.fetchAll();
+
   }
 
-  private fetchLoanSettingListByBankId(bankId: number): void {
-    this.loanTypeService.getLoanTypeListByBankId(bankId).subscribe(
-      (loanTypeList) => {
-        this.loanTypeList = loanTypeList;
 
-      },
-      (error) => {
-        this.notification.error(error, 'Error fetching Loan Settings:');
-        this.error = true;
-      }
-    );
+  fetchAll(){
+    this.isLoading$ = this.store.pipe(select(allLoanTypeLoadingSelector));
+    this.error$ = this.store.pipe(select(allLoanTypesErrorSelector));
+    this.loanTypeList$ = this.store.pipe(select(allLoanTypesSelector));
   }
-
 
   createLoanSetting(): void {
     const modalRef = this.modalService.open(CreateLoanTypeComponent, { centered: true, animation: true, size: 'lg' });

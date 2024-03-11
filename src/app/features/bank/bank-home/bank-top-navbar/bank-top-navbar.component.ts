@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthService } from 'src/app/core/services/authentication/auth.service';
 
@@ -7,7 +7,13 @@ import { AuthService } from 'src/app/core/services/authentication/auth.service';
   templateUrl: './bank-top-navbar.component.html',
   styleUrls: ['./bank-top-navbar.component.css']
 })
-export class BankTopNavbarComponent {
+export class BankTopNavbarComponent implements OnInit{
+
+  username: string;
+
+  ngOnInit(): void {
+    this.username = localStorage.getItem('username');
+}
 
   constructor(
     private authService: AuthService,
@@ -27,7 +33,7 @@ export class BankTopNavbarComponent {
 
   logout(){
     this.authService.logout();
-    this.router.navigate(['/'])
+    this.router.navigate(['/bank/login'])
   }
 
 }
