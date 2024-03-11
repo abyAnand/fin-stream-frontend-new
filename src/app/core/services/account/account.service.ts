@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { ToasterService } from '../toaster/toaster.service';
 import { AccountDto } from '../../models/account/AccountDto.model';
 import { Observable, catchError, tap } from 'rxjs';
+import { BankAccountDto } from '../../models/account/BankAccountDto.model';
 
 const URL = 'http://localhost:8072/finStream/account/';
 
@@ -90,6 +91,20 @@ export class AccountService {
     );
   }
 
+  getUserAccountsByBankId(bankId: string): Observable<BankAccountDto[]> {
+    const endpoint = `${URL}accounts/bank/${bankId}`;
+
+    return this.http.get<BankAccountDto[]>(endpoint, { headers: AccountService.HEADERS }).pipe(
+      tap((accounts: BankAccountDto[]) => {
+      }),
+      catchError(error => {
+
+        this.notification.error(error, 'Error Occurred');
+        throw error;
+      })
+    );
+  }
+
   getUserSavingsAccountsByBankId(userId: string, bankId: string): Observable<AccountDto[]> {
     const endpoint = `${URL}accounts/${bankId}/user/${userId}`;
 
@@ -97,7 +112,7 @@ export class AccountService {
       tap((accounts: AccountDto[]) => {
       }),
       catchError(error => {
-    
+
         this.notification.error(error, 'Error Occurred');
         throw error;
       })

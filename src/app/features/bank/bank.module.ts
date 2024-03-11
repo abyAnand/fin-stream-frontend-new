@@ -40,6 +40,8 @@ import { accountTypeSettingReducer } from 'src/app/Store/AccountTypeSetting/Acco
 import { AccountTypeSettingEffects } from 'src/app/Store/AccountTypeSetting/AccountTypeSetting.effects';
 import { loanTypeReducer } from 'src/app/Store/LoanType/LoanType.reducer';
 import { LoanTypeEffects } from 'src/app/Store/LoanType/LoanType.effects';
+import { UserAccountsComponent } from './bank-home/bank-top-navbar/user/user-accounts/user-accounts.component';
+import { NotificationsComponent } from './bank-home/bank-top-navbar/notifications/notifications.component';
 
 @NgModule({
   declarations: [
@@ -74,6 +76,8 @@ import { LoanTypeEffects } from 'src/app/Store/LoanType/LoanType.effects';
            UpdateLoanTypeComponent,
            BankLoanApplicationsComponent,
            ViewSingleLoanApplicationComponent,
+           UserAccountsComponent,
+           NotificationsComponent,
 
 
   ],

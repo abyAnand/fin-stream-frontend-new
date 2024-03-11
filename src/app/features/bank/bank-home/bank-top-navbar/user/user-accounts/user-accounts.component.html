@@ -1,0 +1,45 @@
+<app-bank-top-navbar></app-bank-top-navbar>
+<div class="row justify-content-center mt-4">
+  <div class="col-md-10">
+    <div class="card">
+      <div class="card-header bg-primary text-white">
+        <h3 class="m-0">Bank Accounts</h3>
+      </div>
+      <div class="table-responsive">
+        <table class="table table-striped">
+          <thead>
+            <tr>
+              <th>#</th>
+              <th>User</th>
+              <th>Account Name</th>
+              <th>Account Type</th>
+              <th>Balance</th>
+              <th>Total Transactions</th>
+              <th>Action</th>
+            </tr>
+          </thead>
+          <tbody *ngIf="bankAccounts && bankAccounts.length > 0; else noAccounts">
+            <tr *ngFor="let account of bankAccounts; let i = index">
+              <td>{{ i + 1 }}</td>
+              <td>{{ getUserFullName(account.userDto) }}</td>
+              <td>{{ account.accountSettingDto.accountName }}</td>
+              <td>{{ account.accountSettingDto.accountType }}</td>
+              <td>{{ account.balance | currency:'INR ':true }}</td>
+              <td>{{ account.totalTransaction }}</td>
+              <td>
+                <button class="btn btn-sm btn-primary" (click)="viewAccount(account.id)">
+                  View Account
+                </button>
+              </td>
+            </tr>
+          </tbody>
+          <ng-template #noAccounts>
+            <tr>
+              <td colspan="7">No bank accounts data available.</td>
+            </tr>
+          </ng-template>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
