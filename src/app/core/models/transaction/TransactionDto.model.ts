@@ -10,7 +10,7 @@ export interface TransactionDto {
   receiverAccountName: string;
   status: TransactionStatus;
   day?: number;
-  month?: number;
+  month?: string;
   year?: number;
 }
 

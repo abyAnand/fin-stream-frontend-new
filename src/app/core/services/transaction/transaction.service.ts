@@ -4,6 +4,7 @@ import { ToasterService } from '../toaster/toaster.service';
 import { TransactionDto } from '../../models/transaction/TransactionDto.model';
 import { Observable, catchError, tap, throwError } from 'rxjs';
 import { TransactionHistory } from '../../models/transaction/TransactionHistory.model';
+import { BankTransactionHistory } from '../../models/transaction/BankTransactionHistory.model';
 
 const URL = 'http://localhost:8072/finStream/transaction/transactions';
 
@@ -33,6 +34,14 @@ export class TransactionService {
 
   getTransactionsByAccountId(accountId: string):Observable<TransactionHistory[]>{
     return this.http.get<TransactionHistory[]>(`${URL}/account/${accountId}`, { headers: TransactionService.HEADERS })
+  }
+
+  getTransactionsByBankId(bankId: string):Observable<TransactionDto[]>{
+    return this.http.get<TransactionDto[]>(`${URL}/bank/${bankId}`, { headers: TransactionService.HEADERS })
+  }
+
+  getTransactionHistoryByBankId(bankId: string):Observable<BankTransactionHistory[]>{
+    return this.http.get<BankTransactionHistory[]>(`${URL}/bank/history/${bankId}`, { headers: TransactionService.HEADERS })
   }
 
   private handleError(error: HttpErrorResponse): Observable<never> {
