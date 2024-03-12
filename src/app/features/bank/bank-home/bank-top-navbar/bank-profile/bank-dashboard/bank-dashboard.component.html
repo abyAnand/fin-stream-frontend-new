@@ -1,1 +1,60 @@
-<p>bank-dashboard  works!</p>
+<div class="row">
+  <div class="col-md-6" style="padding: 10px;">
+    <div class="d-flex justify-content-center align-items-center" style="height: 300px;">
+      <div style="width: 90%; height: 100%;">
+        <canvas id="myChart" width="400" height="400"></canvas>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-md-12">
+    <div class="card flex-grow-1">
+      <div class="card-header bg-primary text-white">
+        <h3 class="m-0 text-center">Transactions</h3>
+      </div>
+      <div class="card-body">
+        <div class="table-container" style="max-height: 300px; overflow-y: auto;">
+          <table class="table table-striped">
+            <thead>
+              <tr>
+                <th>Username</th>
+                <th>Bank Name</th>
+                <th>Action</th>
+                <th>Receiver Username</th>
+                <th>Receiver Bank Name</th>
+                <th>Status</th>
+                <th>Amount</th>
+              </tr>
+            </thead>
+            <tbody *ngIf="transactionHistoryList?.length > 0; else noTransactions">
+              <tr *ngFor="let transaction of transactionHistoryList; let i = index">
+                <td>{{ transaction.sender.username }}</td>
+                <td>{{ transaction.senderBank.name }}</td>
+                <td>
+                  <span *ngIf="transaction.self"><i class="bi bi-person"></i> Self</span>
+                  <span *ngIf="transaction.senderBank.id != transaction.receiverBank.id && transaction.senderBank.id === bankId"><i class="bi bi-arrow-up-circle"></i> Sent</span>
+                  <span *ngIf="transaction.senderBank.id != transaction.receiverBank.id && transaction.receiverBank.id === bankId"><i class="bi bi-arrow-down-circle"></i> Received</span>
+                </td>
+                <td>{{ transaction.receiver.username }}</td>
+                <td>{{ transaction.receiverBank.name }}</td>
+                <td [ngClass]="{
+                  'text-success': transaction.status === 'COMPLETED',
+                  'text-danger': transaction.status === 'FAILED',
+                  'text-warning': transaction.status === 'PENDING'
+                }">{{ transaction.status }}</td>
+                <td>{{ transaction.amount | currency:'INR ':true }}</td>
+              </tr>
+            </tbody>
+            <ng-template #noTransactions>
+              <tr>
+                <td colspan="7">No transactions data available.</td>
+              </tr>
+            </ng-template>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,5 +1,6 @@
 import { AccountSettingStateInterface } from "./AccountSettingState.interface";
 import { AccountStateInterface } from "./AccountState.interface";
+import { AccountTypeSettingStateInterface } from "./AccountTypeSettingState.interface";
 import { BankStateInterface } from "./BankState.interface";
 import { LoanTypeStateInterface } from "./LoanTypeState.interface";
 import { SingleUserStateInterface } from "./SingleUserState.interface";
@@ -14,4 +15,5 @@ export interface AppStateInterface{
   transactionHistoryList: TransactionHistoryStateInterface;
   bankList: BankStateInterface;
   loanTypeList: LoanTypeStateInterface;
+  accountTypeSettingList: AccountTypeSettingStateInterface;
 }

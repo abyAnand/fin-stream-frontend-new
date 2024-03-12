@@ -20,11 +20,15 @@ import { CreateLoanComponent } from './bank-home/bank-top-navbar/loans/create-lo
 import { UpdateLoanComponent } from './bank-home/bank-top-navbar/loans/update-loan/update-loan.component';
 import { LoanTypeListComponent } from './bank-home/bank-top-navbar/loans/loan-type-list/loan-type-list.component';
 import { ViewSingleLoanApplicationComponent } from './bank-home/bank-top-navbar/loans/view-single-loan-application/view-single-loan-application.component';
+import { UserAccountsComponent } from './bank-home/bank-top-navbar/user/user-accounts/user-accounts.component';
+import { NotificationsComponent } from './bank-home/bank-top-navbar/notifications/notifications.component';
 
 const routes: Routes = [
   { path: 'register', component: BankRegisterComponent },
   { path: 'login', component: BankLoginComponent },
   { path: 'bank-home', component: BankHomeComponent },
+  {path: 'user', component: UserAccountsComponent},
+  {path: 'notification', component: NotificationsComponent},
   {
     path: 'home',
     component: BankDashboardHomeComponent,
