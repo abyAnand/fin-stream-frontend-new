@@ -1,0 +1,49 @@
+<app-top-navbar></app-top-navbar>
+<div class="row justify-content-center mt-4">
+  <div class="col-md-10">
+    <div class="card">
+      <div class="card-header bg-primary text-white">
+        <h3 class="m-0">User Information</h3>
+      </div>
+      <div class="card-body">
+        <button class="btn btn-sm btn-success mb-3" (click)="createUser()">Create User</button>
+        <div class="table-responsive">
+          <table class="table table-striped">
+            <thead>
+              <tr>
+                <th>#</th>
+                <th>User Name</th>
+                <th>Email</th>
+                <th>Employment Status</th>
+                <th>Number of Accounts</th>
+                <th>Number of Loans</th>
+                <th>Action</th>
+              </tr>
+            </thead>
+            <tbody *ngIf="users && users.length > 0; else noUsers">
+              <tr *ngFor="let user of users; let i = index">
+                <td>{{ i + 1 }}</td>
+                <td>{{ user.firstName }} {{ user.lastName }}</td>
+                <td>{{ user.email }}</td>
+                <td>{{ user.employmentStatus }}</td>
+                <td>{{ user.accountList.length }}</td>
+                <td>{{ user.loanList.length }}</td>
+                <td>
+                  <button class="btn btn-sm btn-primary" (click)="viewUser(user)">
+                    View User
+                  </button>
+                </td>
+              </tr>
+            </tbody>
+            <ng-template #noUsers>
+              <tr>
+                <td colspan="7">No user data available.</td>
+              </tr>
+            </ng-template>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+

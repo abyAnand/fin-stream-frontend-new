@@ -1,0 +1,47 @@
+<app-top-navbar></app-top-navbar>
+<div class="row justify-content-center mt-4">
+  <div class="col-md-10">
+    <div class="card">
+      <div class="card-header bg-primary text-white">
+        <h3 class="m-0">Bank Information</h3>
+      </div>
+      <div class="card-body">
+        <button class="btn btn-sm btn-success mb-3" (click)="createBank()">Create Bank</button>
+        <div class="table-responsive">
+          <table class="table table-striped">
+            <thead>
+              <tr>
+                <th>#</th>
+                <th>Bank Name</th>
+                <th>Email</th>
+                <th>Verified</th>
+                <th>Number of Account Settings</th>
+                <th>Number of Loan Settings</th>
+                <th>Action</th>
+              </tr>
+            </thead>
+            <tbody *ngIf="banks && banks.length > 0; else noBanks">
+              <tr *ngFor="let bank of banks; let i = index">
+                <td>{{ i + 1 }}</td>
+                <td>{{ bank.name }}</td>
+                <td>{{ bank.email }}</td>
+                <td [style.color]="bank.verified ? 'green' : 'red'">{{ bank.verified ? 'Yes' : 'No' }}</td>
+                <td>{{ bank.accountSettingDtoList.length }}</td>
+                <td>{{ bank.loanSettingDtoList.length }}</td>
+                <td>
+                  <button *ngIf="bank.verified" class="btn btn-sm btn-primary" (click)="viewDetails(bank)">View Details</button>
+                  <button *ngIf="!bank.verified" class="btn btn-sm btn-warning" (click)="verifyBank(bank)">Verify</button>
+                </td>
+              </tr>
+            </tbody>
+            <ng-template #noBanks>
+              <tr>
+                <td colspan="7">No bank data available.</td>
+              </tr>
+            </ng-template>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

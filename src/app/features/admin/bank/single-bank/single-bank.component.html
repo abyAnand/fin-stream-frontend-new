@@ -1,0 +1,102 @@
+<div class="container mt-5">
+  <div class="border border-primary rounded p-4">
+    <div class="row justify-content-center">
+      <div class="col-md-8">
+        <div class="card border-0 shadow-lg">
+          <div class="card-header bg-primary text-white">
+            <h4 class="card-title mb-0">Bank Details</h4>
+          </div>
+          <div class="card-body">
+            <!-- Bank Details -->
+            <div class="row mb-3">
+              <div class="col-md-6">
+                <p><strong>Name:</strong></p>
+                <p>{{ bank?.name }}</p>
+              </div>
+              <div class="col-md-6">
+                <p><strong>Short Name:</strong></p>
+                <p>{{ bank?.shortName }}</p>
+              </div>
+            </div>
+            <div class="row mb-3">
+              <div class="col-md-6">
+                <p><strong>Email:</strong></p>
+                <p>{{ bank?.email }}</p>
+              </div>
+              <div class="col-md-6">
+                <p><strong>Verified:</strong></p>
+                <p [style.color]="bank?.verified ? 'green' : 'red'">{{ bank?.verified ? 'Yes' : 'No' }}</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- Account Settings -->
+    <div class="row justify-content-center mt-4">
+      <div class="col-md-8">
+        <div class="card border-0 shadow-lg">
+          <div class="card-header bg-info text-white">
+            <h3 class="m-0 text-center">Account Settings</h3>
+          </div>
+          <div class="card-body" style="max-height: 300px; overflow-y: auto;">
+            <ng-container *ngIf="bank?.accountSettingDtoList?.length > 0; else noAccountSettings">
+              <table class="table table-striped">
+                <thead>
+                  <tr>
+                    <th>Account Type</th>
+                    <th>Account Name</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let accountSetting of bank?.accountSettingDtoList">
+                    <td>{{ accountSetting.accountType }}</td>
+                    <td>{{ accountSetting.accountName }}</td>
+                  </tr>
+                </tbody>
+              </table>
+            </ng-container>
+            <ng-template #noAccountSettings>
+              <p class="text-center">No account settings available.</p>
+            </ng-template>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- Loan Settings -->
+    <div class="row justify-content-center mt-4">
+      <div class="col-md-8">
+        <div class="card border-0 shadow-lg">
+          <div class="card-header bg-info text-white">
+            <h3 class="m-0 text-center">Loan Settings</h3>
+          </div>
+          <div class="card-body" style="max-height: 300px; overflow-y: auto;">
+            <ng-container *ngIf="bank?.loanSettingDtoList?.length > 0; else noLoanSettings">
+              <table class="table table-striped">
+                <thead>
+                  <tr>
+                    <th>Type</th>
+                    <th>Name</th>
+                    <th>Loan Amount</th>
+                    <th>Loan Term (Months)</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let loanSetting of bank?.loanSettingDtoList">
+                    <td>{{ loanSetting.loanTypeDto.loanCategory }}</td>
+                    <td>{{ loanSetting.name }}</td>
+                    <td>{{ loanSetting.loanAmount }}</td>
+                    <td>{{ loanSetting.loanTermMonths }}</td>
+                  </tr>
+                </tbody>
+              </table>
+            </ng-container>
+            <ng-template #noLoanSettings>
+              <p class="text-center">No loan settings available.</p>
+            </ng-template>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

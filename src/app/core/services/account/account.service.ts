@@ -105,6 +105,34 @@ export class AccountService {
     );
   }
 
+  getUserAccountsByAccountId(accountId: string): Observable<AccountDto> {
+    const endpoint = `${URL}accounts/${accountId}`;
+
+    return this.http.get<AccountDto>(endpoint, { headers: AccountService.HEADERS }).pipe(
+      tap((accounts: AccountDto) => {
+      }),
+      catchError(error => {
+
+        this.notification.error(error, 'Error Occurred');
+        throw error;
+      })
+    );
+  }
+
+  getAllAccounts(): Observable<BankAccountDto[]> {
+    const endpoint = `${URL}accounts`;
+
+    return this.http.get<BankAccountDto[]>(endpoint, { headers: AccountService.HEADERS }).pipe(
+      tap((accounts: BankAccountDto[]) => {
+      }),
+      catchError(error => {
+
+        this.notification.error(error, 'Error Occurred');
+        throw error;
+      })
+    );
+  }
+
   getUserSavingsAccountsByBankId(userId: string, bankId: string): Observable<AccountDto[]> {
     const endpoint = `${URL}accounts/${bankId}/user/${userId}`;
 

@@ -1,0 +1,29 @@
+*{
+  margin: 0;
+  padding: 0;
+}
+
+.container-fluid{
+  background-color: #86B6F6;
+  height: 80px;
+}
+
+a.navbar-brand{
+  color: white;
+  margin-left: 30px;
+  font-size: 25px;
+}
+
+a.nav-link{
+  color: white;
+  padding: 10px;
+  border-radius: 10px;
+}
+
+a.nav-link.active {
+  background-color: white;
+  color:  #86B6F6 !important;
+  border-radius: 10px;
+}
+
+

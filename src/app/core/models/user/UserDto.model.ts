@@ -1,4 +1,5 @@
 import { AccountDto } from "../account/AccountDto.model";
+import { LoanDto } from "../loan/LoanDto.model";
 
 
 export interface UserDto {
@@ -10,12 +11,8 @@ export interface UserDto {
   monthlyIncome?: number;
   totalAssets?: number;
   totalLiabilities?: number;
-  collateralType?: CollateralType;
-  collateralDescription?: string;
   accountList?: AccountDto[];
-  collateralValue?: number;
-  vehicleNumber?: string;
-  collateralAccount?: AccountDto;
+  loanList?: LoanDto[];
 }
 
 

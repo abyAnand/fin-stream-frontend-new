@@ -16,6 +16,15 @@ export class UserService {
     private http: HttpClient
   ) { }
 
+  createUser( userDto: UserDto): Observable<any>{
+
+    const apiUrl = `${URL}`;
+    return this.http.post(apiUrl, userDto, {headers})
+    .pipe(
+      catchError(this.handleError)
+    );
+  }
+
   updateUser( userDto: UserDto): Observable<any>{
 
     const apiUrl = `${URL}`;

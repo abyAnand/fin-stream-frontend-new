@@ -1,0 +1,145 @@
+<div class="container mt-5">
+  <div class="border border-primary rounded p-4">
+    <div class="row justify-content-center">
+      <div class="col-md-8">
+        <div class="card border-0 shadow-lg">
+          <div class="card-header bg-primary text-white">
+            <h4 class="card-title mb-0">User Details</h4>
+          </div>
+          <div class="card-body">
+            <!-- User Details -->
+            <div class="row mb-3">
+              <div class="col-md-6">
+                <p><strong>First Name:</strong></p>
+                <p>{{ user?.firstName }}</p>
+              </div>
+              <div class="col-md-6">
+                <p><strong>Last Name:</strong></p>
+                <p>{{ user?.lastName }}</p>
+              </div>
+            </div>
+            <div class="row mb-3">
+              <div class="col-md-6">
+                <p><strong>Email:</strong></p>
+                <p>{{ user?.email }}</p>
+              </div>
+              <div class="col-md-6">
+                <p><strong>Employment Status:</strong></p>
+                <p>{{ user?.employmentStatus }}</p>
+              </div>
+            </div>
+            <div class="row mb-3">
+              <div class="col-md-6">
+                <p><strong>Monthly Income:</strong></p>
+                <p>{{ user?.monthlyIncome }}</p>
+              </div>
+              <div class="col-md-6">
+                <p><strong>Total Assets:</strong></p>
+                <p>{{ user?.totalAssets }}</p>
+              </div>
+            </div>
+            <div class="row mb-3">
+              <div class="col-md-6">
+                <p><strong>Total Liabilities:</strong></p>
+                <p>{{ user?.totalLiabilities }}</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- Account List -->
+    <div class="row justify-content-center mt-4">
+      <div class="col-md-8">
+        <div class="card border-0 shadow-lg">
+          <div class="card-header bg-info text-white">
+            <h3 class="m-0 text-center">Account Details</h3>
+          </div>
+          <div class="card-body" style="max-height: 300px; overflow-y: auto;">
+
+            <ng-container *ngIf="!error; else errorHandling">
+              <ng-container *ngIf="user.accountList.length > 0; else noAccounts">
+                <table class="table table-striped">
+                  <thead>
+                    <tr>
+                      <th>Account Name</th>
+                      <th>Bank ID</th>
+                      <th>Balance</th>
+                      <th>Monthly Transactions</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr *ngFor="let account of user?.accountList">
+                      <td>{{ account.accountName }}</td>
+                      <td>{{ account.bankId }}</td>
+                      <td>{{ account.balance }}</td>
+                      <td>{{ account.monthlyTransaction }}</td>
+                    </tr>
+                  </tbody>
+                </table>
+                  
+              </ng-container>
+              <ng-template #noAccounts>
+                <p class="text-center">No account data available.</p>
+              </ng-template>
+            </ng-container>
+            <ng-template #errorHandling>
+              <div class="text-center text-danger">Error  Fetching Bank Loans. Please try again later.</div>
+            </ng-template>
+            
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- Loan List -->
+    <div class="row justify-content-center mt-4">
+      <div class="col-md-8">
+        <div class="card border-0 shadow-lg">
+          <div class="card-header bg-info text-white">
+            <h3 class="m-0 text-center">Loan Details</h3>
+          </div>
+          <div class="card-body" style="max-height: 300px; overflow-y: auto;">
+
+
+            <ng-container *ngIf="!error; else errorHandling">
+              <ng-container *ngIf="user.loanList.length > 0 else noLoans">
+                <table class="table table-striped">
+                  <thead>
+                    <tr>
+                      <th>Bank Name</th>
+                      <th>Loan Name</th>
+                      <th>Loan Category</th>
+                      <th>Loan Amount</th>
+                      <th>Loan Term (Months)</th>
+                      <th>Remaining Term (Months)</th>
+                      <th>Approved Date</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr *ngFor="let loan of user.loanList">
+                      <td>{{ loan.bank.name }}</td>
+                      <td>{{ loan.loanName }}</td>
+                      <td>{{ loan.loanCategory }}</td>
+                      <td>{{ loan.loanAmount }}</td>
+                      <td>{{ loan.loanTermMonths }}</td>
+                      <td>{{ loan.remainingTermMonths }}</td>
+                      <td>{{ loan.approvedDate }}</td>
+                    </tr>
+                  </tbody>
+                </table>
+                  
+              </ng-container>
+              <ng-template #noLoans>
+                <p class="text-center">No loan data available.</p>
+              </ng-template>
+            </ng-container>
+            <ng-template #errorHandling>
+              <div class="text-center text-danger">Error  Fetching Bank Loans. Please try again later.</div>
+            </ng-template>
+            
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

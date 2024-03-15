@@ -5,6 +5,7 @@ import { catchError, tap } from 'rxjs/operators';
 import { ToasterService } from '../toaster/toaster.service';
 import { BankRequest } from '../../models/auth/BankRequest.model';
 import { BankDto } from '../../models/bank/BankDto.model';
+import { BankInfoDto } from '../../models/bank/BankInfoDto.model';
 
 const URL = 'http://localhost:8072/finStream/bank/';
 
@@ -26,7 +27,20 @@ export class BankService {
     );
   }
 
+  verifyBankById(bankId: string): Observable<boolean> {
+    return this.http.get<boolean>(`${URL}/bank/verify/${bankId}`, { headers: BankService.HEADERS }).pipe(
+      catchError(this.handleError)
+    );
+  }
+
+  getAllBankInfos(): Observable<BankInfoDto[]> {
+    return this.http.get<BankInfoDto[]>(`${URL}/bank/all`, { headers: BankService.HEADERS }).pipe(
+      catchError(this.handleError)
+    );
+  }
+
   getUserById(userId: number): Observable<BankDto> {
+
     return this.http.get<BankDto>(`${URL}bank/${userId}`, { headers: BankService.HEADERS }).pipe(
       catchError(this.handleError)
     );

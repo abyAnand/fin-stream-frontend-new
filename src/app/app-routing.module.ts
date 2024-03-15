@@ -28,6 +28,11 @@ const routes: Routes = [
     path:"bank",
     loadChildren: () => import("./features/bank/bank.module").then(m => m.BankModule)
   },
+  {
+    path:"admin",
+    loadChildren: () => import("./features/admin/admin.module").then(m => m.AdminModule),
+    // canActivateChild: [userGuard]
+  }
 ];
 
 @NgModule({

@@ -63,7 +63,7 @@ const routes: Routes = [
       {path: 'application', component: BankLoanApplicationsComponent}
     ]
   },
-  { path: '**', redirectTo: 'home/dashboard', pathMatch: 'full' },
+  // { path: '**', redirectTo: 'home/dashboard', pathMatch: 'full' },
 ];
 
 @NgModule({

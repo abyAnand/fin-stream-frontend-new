@@ -1,0 +1,66 @@
+<app-top-navbar></app-top-navbar>
+<div class="container mt-3">
+  <div class="row justify-content-center">
+    <!-- Centered Bank Register Form -->
+    <div class="col-md-6 border border-info p-4">
+      <h2 class="text-center">Bank Register</h2>
+      <form [formGroup]="bankSignupForm" (ngSubmit)="registerBank()">
+        <div class="mb-3 row">
+          <div class="col">
+            <label for="name" class="form-label">Bank Name</label>
+            <input type="text" formControlName="name" class="form-control" id="name" required>
+            <div *ngIf="bankSignupForm.get('name')?.touched && bankSignupForm.get('name')?.invalid" class="text-danger">
+              Please enter a valid bank name.
+            </div>
+          </div>
+          <div class="col">
+            <label for="shortName" class="form-label">Short Name</label>
+            <input type="text" formControlName="shortName" class="form-control" id="shortName" required>
+            <div *ngIf="bankSignupForm.get('shortName')?.touched && bankSignupForm.get('shortName')?.invalid" class="text-danger">
+              Please enter a valid short name.
+            </div>
+          </div>
+        </div>
+        <div class="mb-3">
+          <label for="address" class="form-label">Bank Address</label>
+          <input type="text" formControlName="address" class="form-control" id="address" required>
+          <div *ngIf="bankSignupForm.get('address')?.touched && bankSignupForm.get('address')?.invalid" class="text-danger">
+            Please enter a valid bank address.
+          </div>
+        </div>
+        <div class="mb-3">
+          <label for="email" class="form-label">Email address</label>
+          <input type="email" formControlName="email" class="form-control" id="email" aria-describedby="emailHelp" required>
+          <div *ngIf="bankSignupForm.get('email')?.touched && bankSignupForm.get('email')?.invalid" class="text-danger">
+            Please enter a valid email.
+          </div>
+        </div>
+        <div class="mb-3 d-flex">
+          <div class="me-2 flex-grow-1">
+            <label for="password" class="form-label">Password</label>
+            <input type="password" formControlName="password" class="form-control" id="password" required>
+            <div *ngIf="bankSignupForm.get('password')?.hasError('minlength') && bankSignupForm.get('password')?.touched" class="text-danger">
+              Password must be at least 5 characters long.
+            </div>
+          </div>
+          <div class="flex-grow-1">
+            <label for="confirmPassword" class="form-label">Confirm Password</label>
+            <input type="password" formControlName="confirmPassword" class="form-control" id="confirmPassword" required>
+            <div *ngIf="bankSignupForm.get('confirmPassword')?.hasError('mismatch') && bankSignupForm.get('confirmPassword')?.touched" class="text-danger">
+              Passwords do not match.
+            </div>
+          </div>
+        </div>
+        <div class="mb-3">
+          <label for="phoneNumber" class="form-label">Phone Number</label>
+          <input type="tel" formControlName="phoneNumber" class="form-control" id="phoneNumber" required>
+          <div *ngIf="bankSignupForm.get('phoneNumber')?.touched && bankSignupForm.get('phoneNumber')?.invalid" class="text-danger">
+            Please enter a valid phone number.
+          </div>
+        </div>
+        <button type="submit" [disabled]="!bankSignupForm.valid" class="btn btn-info">Register</button>
+
+      </form>
+    </div>
+  </div>
+</div>

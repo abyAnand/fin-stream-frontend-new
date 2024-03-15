@@ -21,7 +21,7 @@ import { EffectsModule } from '@ngrx/effects';
 import { ToastrModule } from 'ngx-toastr';
 import { BankModule } from './features/bank/bank.module';
 import { StoreRouterConnectingModule } from '@ngrx/router-store';
-
+import { AdminModule } from './features/admin/admin.module';
 
 @NgModule({
   declarations: [
@@ -42,6 +42,7 @@ import { StoreRouterConnectingModule } from '@ngrx/router-store';
     MatSnackBarModule,
     UserModule,
     BankModule,
+    AdminModule,
     FontAwesomeModule,
     MatIconModule,
     ToastrModule.forRoot({}),

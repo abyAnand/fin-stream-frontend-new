@@ -15,12 +15,7 @@ export const initialState: SingleUserStateInterface = {
     monthlyIncome: null,
     totalAssets: null,
     totalLiabilities: null,
-    collateralType: null,
-    collateralDescription: null,
-    accountList: null,
-    collateralValue: null,
-    vehicleNumber: null,
-    collateralAccount: null
+    accountList: null
   },
   error: null
 };

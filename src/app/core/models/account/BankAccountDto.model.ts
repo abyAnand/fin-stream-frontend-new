@@ -1,8 +1,10 @@
+import { Bank } from "../transaction/BankTransactionHistory.model";
 import { AccountDto } from "./AccountDto.model";
 
 export interface BankAccountDto {
     id: string;
     bankId: string;
+    bank?: Bank;
     accountSettingDto: AccountSettingDto;
     userDto: UserDto;
     balance: number;

@@ -1,8 +1,11 @@
 import { AccountDto } from "../account/AccountDto.model";
+import { Bank } from "../transaction/BankTransactionHistory.model";
+
 
 export interface LoanDto {
   id?: string;
   bankId: string;
+  bank?: Bank;
   userId: string;
   loanName: string;
   loanSettingId: string;
@@ -16,6 +19,7 @@ export interface LoanDto {
   remainingTermMonths: number;
   selectedAccount: AccountDto;
   loanClosed: boolean;
+  missedPayments?: number;
   approvedDate?: Date | null;
 }
 
