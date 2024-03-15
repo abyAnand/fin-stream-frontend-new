@@ -31,7 +31,7 @@ export class AllUsersComponent implements OnInit{
 
   viewUser(user: UserDto){
 
-    this.router.navigate(['admin/user'], {queryParams: {userData: JSON.stringify(user)}});
+    this.router.navigate(['admin/user/single'], {queryParams: {userData: JSON.stringify(user)}});
   }
 
   createUser(){
