@@ -8,6 +8,7 @@ export interface AccountDto {
   userId: string;
   balance: number;
   isDeleted?: boolean;
+  isBlocked?: boolean;
   secondaryUserId?: string;
   interestRate?: number;
   overdraftLimit?: number;

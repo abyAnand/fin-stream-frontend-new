@@ -12,6 +12,8 @@ import { SingleBankComponent } from './bank/single-bank/single-bank.component';
 import { CreateBankComponent } from './bank/create-bank/create-bank.component';
 import { AllAccountComponent } from './account/all-account/all-account.component';
 import { SingleAccountComponent } from './account/single-account/single-account.component';
+import { DashboardComponent } from './dashboard/dashboard.component';
+import { LoginComponent } from './login/login.component';
 
 
 @NgModule({
@@ -24,7 +26,9 @@ import { SingleAccountComponent } from './account/single-account/single-account.
     SingleBankComponent,
     CreateBankComponent,
     AllAccountComponent,
-    SingleAccountComponent
+    SingleAccountComponent,
+    DashboardComponent,
+    LoginComponent
   ],
   imports: [
     AdminRoutingModule,

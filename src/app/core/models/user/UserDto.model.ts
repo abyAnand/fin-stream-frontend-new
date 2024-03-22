@@ -13,6 +13,7 @@ export interface UserDto {
   totalLiabilities?: number;
   accountList?: AccountDto[];
   loanList?: LoanDto[];
+  createdDate?: string;
 }
 
 

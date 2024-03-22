@@ -6,6 +6,7 @@ import { ToasterService } from '../toaster/toaster.service';
 import { BankRequest } from '../../models/auth/BankRequest.model';
 import { BankDto } from '../../models/bank/BankDto.model';
 import { BankInfoDto } from '../../models/bank/BankInfoDto.model';
+import { BankEntity } from '../../models/bank/BankEntity.model';
 
 const URL = 'http://localhost:8072/finStream/bank/';
 
@@ -23,6 +24,12 @@ export class BankService {
 
   getAllBanks(): Observable<BankDto[]> {
     return this.http.get<BankDto[]>(`${URL}/bank`, { headers: BankService.HEADERS }).pipe(
+      catchError(this.handleError)
+    );
+  }
+
+  getAllBankEntity(): Observable<BankEntity[]> {
+    return this.http.get<BankEntity[]>(`${URL}/bank/all/bank`, { headers: BankService.HEADERS }).pipe(
       catchError(this.handleError)
     );
   }

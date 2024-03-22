@@ -29,7 +29,10 @@
 
 
         <div class="mb-3 text-center">
-          <a routerLink="/bank/login" class="text-decoration-none">Login as Bank </a>
+          <a routerLink="/auth/bank/login" class="text-decoration-none">Login as Bank </a>
+        </div>
+        <div class="mb-3 text-center">
+          <a routerLink="/auth/admin/login" class="text-decoration-none">Login as Admin </a>
         </div>
         <div class="d-grid">
           <button (click)="login()" [disabled]="!loginForm.valid" type="submit" class="btn btn-warning">Login</button>

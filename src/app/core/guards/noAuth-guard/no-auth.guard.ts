@@ -21,6 +21,9 @@ export const noAuthGuard: CanActivateFn = (route, state) => {
   if(StorageService.getUserRole() === 'ROLE_USER'){
     router.navigateByUrl("user/dashboard");
   }
+  if(StorageService.getUserRole() === 'ROLE_ADMIN'){
+    router.navigateByUrl("admin/dashboard");
+  }
 
   return false; // Redirect logged in users away from login/register routes
 };

@@ -64,7 +64,7 @@ export class CreateUserComponent {
           this.snackBar.open("User created successfully", "Close", {
             duration: 5000
           });
-          this.router.navigate(['/admin/all-user']);
+          this.router.navigate(['/admin/user']);
         },
         (error) => {
           console.error(error);

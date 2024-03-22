@@ -9,9 +9,12 @@ import { SingleBankComponent } from './bank/single-bank/single-bank.component';
 import { CreateBankComponent } from './bank/create-bank/create-bank.component';
 import { AllAccountComponent } from './account/all-account/all-account.component';
 import { SingleAccountComponent } from './account/single-account/single-account.component';
+import { DashboardComponent } from './dashboard/dashboard.component';
+import { LoginComponent } from './login/login.component';
 
 const routes: Routes = [
-  {path: 'dashboard',component:TopNavbarComponent},
+  {path: 'login', component: LoginComponent},
+  {path: 'dashboard',component: DashboardComponent},
   {path:'user', component: AllUsersComponent},
   {path: 'user/single', component: SingleUserComponent},
   {path: 'user/create', component: CreateUserComponent},
