@@ -66,6 +66,45 @@ export class AuthService {
       );
   }
 
+  sendVerificationEmail(email: string): Observable<any>{
+    return this.http.post(URL + 'verification/email', email, { observe: 'response'})
+    .pipe(
+      tap(
+        (res: HttpResponse<any>) =>{
+          return res;
+        }
+      )
+    );
+  }
+
+  verifyOTP(otp: number, userEmail: string): Observable<any> {
+    return this.http.post(URL + 'verification/otp', { otp, email: userEmail }, { observe: 'response' })
+      .pipe(
+        tap((res: HttpResponse<any>) => {
+          return res;
+        }),
+        catchError((error) => {
+          console.error('OTP verification failed', error);
+          throw error;
+        })
+      );
+  }
+
+  resetPassword(newPassword: string, userEmail: string): Observable<any> {
+    return this.http.post(URL + 'reset/password', { newPassword, email: userEmail }, { observe: 'response' })
+      .pipe(
+        tap((res: HttpResponse<any>) => {
+          return res;
+        }),
+        catchError((error) => {
+          console.error('Password reset failed', error);
+          throw error;
+        })
+      );
+  }
+
+
+
   log(message: string) {
     console.log(message)
   }

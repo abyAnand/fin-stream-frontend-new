@@ -6,13 +6,15 @@ import { BankLoginComponent } from './bank-login/bank-login.component';
 import { AdminLoginComponent } from './admin-login/admin-login.component';
 import { BankRegisterComponent } from './bank-register/bank-register.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { ForgotPasswordComponent } from './forgot-password/forgot-password.component';
 
 
 @NgModule({
   declarations: [
     BankLoginComponent,
     AdminLoginComponent,
-    BankRegisterComponent
+    BankRegisterComponent,
+    ForgotPasswordComponent
   ],
   imports: [
     CommonModule,
