@@ -19,6 +19,7 @@ export class CreateAccountSettingComponent implements OnInit{
 
   error: boolean = false;
   accountSetting: AccountSettingDto;
+  selectedFile?: File;
 
   constructor(
     private formBuilder: FormBuilder,
