@@ -29,6 +29,13 @@ export class AccountSettingService {
     );
   }
 
+  addImageToAccountSetting(formData: FormData): Observable<AccountSettingDto> {
+  
+    return this.http.post<AccountSettingDto>(`${URL}accounts/settings/image`, formData).pipe(
+      catchError(this.handleError)
+    );
+  }
+
   createAccountSetting(accountSettingDto: AccountSettingDto): Observable<any> {
     return this.http.post(URL + 'accounts/settings', accountSettingDto, { observe: 'response', headers: AccountSettingService.HEADERS }).pipe(
       tap((res: HttpResponse<any>) => {

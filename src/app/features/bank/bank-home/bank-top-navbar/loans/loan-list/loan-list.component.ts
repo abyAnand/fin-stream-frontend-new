@@ -8,6 +8,7 @@ import { CreateLoanComponent } from '../create-loan/create-loan.component';
 import { LoanType } from 'src/app/core/models/loan/LoanType.model';
 import { Router } from '@angular/router';
 import { UpdateLoanComponent } from '../update-loan/update-loan.component';
+import { LoanCategory } from 'src/app/core/models/loan/LoanDto.model';
 
 @Component({
   selector: 'app-loan-list',
@@ -74,8 +75,24 @@ export class LoanListComponent implements OnInit{
     modalRef.componentInstance.currentLoan = loanSetting;
     modalRef.componentInstance.onSubmit.subscribe(() => {
       modalRef.close();
+      this.fetchLoanSettingListByLoanTypeId(this.currentLoanType.id);
     });
 
+  }
+
+  getImage(loanCategory: LoanCategory): string {
+    switch (loanCategory) {
+      case LoanCategory.PERSONAL:
+        return '/assets/loan/personal_loan.jpeg';
+      case LoanCategory.BUSINESS:
+        return '/assets/loan/business_loan.jpeg';
+      case LoanCategory.MORTGAGE:
+        return '/assets/loan/mortgage_loan.jpeg';
+      case LoanCategory.STUDENT:
+        return '/assets/loan/student_loan.jpeg';
+      default:
+        return '/assets/loan/loan.jpeg';
+    }
   }
 
 }

@@ -29,8 +29,8 @@ export class AccountSettingEffects {
   createAccountSetting$ = createEffect(() =>
     this.action$.pipe(
       ofType(createAccountSetting),
-      mergeMap(({ accountSetting }) => {
-        return this.accountSettingService.createAccountSetting(accountSetting)
+      mergeMap(({ accountSettingDto }) => {
+        return this.accountSettingService.createAccountSetting(accountSettingDto)
           .pipe(
             map(accountSetting => createAccountSettingSuccess(accountSetting)),
             catchError(error => of(createAccountSettingFail({ error: error.message })))

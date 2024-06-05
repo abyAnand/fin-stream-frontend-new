@@ -12,6 +12,8 @@ import { Store, select } from '@ngrx/store';
 import { AppStateInterface } from 'src/app/Store/types/appState.interface';
 import { getAllLoanTypesAction, getAllLoanTypesByBankIdAction } from 'src/app/Store/LoanType/LoanType.action';
 import { allLoanTypeLoadingSelector, allLoanTypesErrorSelector, allLoanTypesSelector, loanTypeSelector } from 'src/app/Store/LoanType/LoanType.selector';
+import { LoanCategory } from 'src/app/core/models/loan/LoanDto.model';
+import { ImageUploadComponent } from '../../accounts/account-settings/image-upload/image-upload.component';
 
 @Component({
   selector: 'app-loan-type-list',
@@ -51,13 +53,57 @@ export class LoanTypeListComponent implements OnInit{
   }
 
   createLoanSetting(): void {
-    const modalRef = this.modalService.open(CreateLoanTypeComponent, { centered: true, animation: true, size: 'lg' });
+    const modalRef = this.modalService.open(CreateLoanTypeComponent, { keyboard: true ,centered: true, animation: true, size: 'lg' });
     modalRef.componentInstance.onSubmit.subscribe(() => {
+      this.fetchAll();
       modalRef.close();
     });
+
   }
 
   viewLoans(loanType: LoanType){
     this.router.navigate(['/bank/loan/list'],{state: {loanType: loanType}});
   }
+
+  getImage(loanCategory: LoanCategory): string {
+    switch (loanCategory) {
+      case LoanCategory.PERSONAL:
+        return '/assets/loan/personal_loan.jpeg';
+      case LoanCategory.BUSINESS:
+        return '/assets/loan/business_loan.jpeg';
+      case LoanCategory.MORTGAGE:
+        return '/assets/loan/mortgage_loan.jpeg';
+      case LoanCategory.STUDENT:
+        return '/assets/loan/student_loan.jpeg';
+      default:
+        return '/assets/loan/loan.jpeg';
+    }
+  }
+
+  setPhoto(loanType: LoanType): void {
+    const imageModalRef = this.modalService.open(ImageUploadComponent, { centered: true });
+    imageModalRef.componentInstance.imageSelected.subscribe((file: File) => {
+      if (file) {
+        console.log("loan type id: " + loanType.id);
+        this.uploadImage(loanType.id, file);
+        imageModalRef.close();
+      }
+    });
+  }
+
+  uploadImage(loanTypeId: string, file: File) {
+    const formData: FormData = new FormData();
+    formData.append('loanTypeId', loanTypeId);
+    formData.append('image', file);
+
+    this.loanTypeService.addImageToLoanType(formData).subscribe(
+      (res) => {
+        this.notification.success("Image Added", "SUCCESS");
+      },
+      (err) => {
+        this.notification.error("Image Not Added", "ERROR")
+      }
+    )
+  }
+
 }

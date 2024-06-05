@@ -28,6 +28,13 @@ export class LoanTypeService {
     );
   }
 
+  addImageToLoanType(formData: FormData): Observable<LoanType> {
+    console.log(formData)
+    return this.http.post<LoanType>(`${URL}/image`, formData).pipe(
+      catchError(this.handleError)
+    );
+  }
+
   getAllLoanTypes(): Observable<LoanType[]> {
     return this.http.get<LoanType[]>(`${URL}/list`, { headers: LoanTypeService.HEADERS })
     .pipe(

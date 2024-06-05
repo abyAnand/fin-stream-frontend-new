@@ -1,5 +1,5 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { FormBuilder, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { AccountType, AccountSettingDto } from '../../../../../../core/models/bank/settings/AccountSettingDto.model';
 import { StorageService } from 'src/app/core/services/storage/storage.service';
@@ -28,47 +28,45 @@ export class CreateAccountSettingComponent implements OnInit{
   ){
 
   }
+
   ngOnInit(): void {
-
-
+    // Initialize any necessary setup
   }
 
   savingsAccountForm = this.formBuilder.group({
     accountName: ['', [Validators.required]],
     interestRate: ['', Validators.required]
-  })
+  });
 
   checkingAccountForm = this.formBuilder.group({
     accountName: ['', [Validators.required]],
     overdraftLimit: ['', Validators.required]
-  })
+  });
 
   fdAccountForm = this.formBuilder.group({
     accountName: ['', [Validators.required]],
     interestRate: ['', Validators.required],
     cdTerm: ['', Validators.required]
-  })
+  });
 
   moneyMarketAccountForm = this.formBuilder.group({
     accountName: ['', [Validators.required]],
     maxMonthlyTransactions: ['', Validators.required],
-  })
+  });
 
   jointAccountForm = this.formBuilder.group({
     accountName: ['', [Validators.required]],
     accountHoldersLimit: ['', Validators.required],
-  })
-
+  });
 
   createSavingsAccount(): void {
-
     const accountSettingDto: AccountSettingDto = {
       bankId: StorageService.getUserIdFromToken(),
       accountType: AccountType.SAVINGS,
       accountName: this.savingsAccountForm.get(['accountName'])!.value,
       interestRate: this.savingsAccountForm.get(['interestRate'])!.value
-    }
-    console.log(accountSettingDto);
+    };
+
     this.accountSettingService.createAccountSetting(accountSettingDto).subscribe(
       (banks) => {
         this.accountSetting = banks;
@@ -78,17 +76,21 @@ export class CreateAccountSettingComponent implements OnInit{
         this.error = true;
       }
     );
+
     this.onSubmit.emit();
   }
 
-  createCheckingAccount(){
+  createCheckingAccount(): void {
+    console.log("hello");
+
     const accountSettingDto: AccountSettingDto = {
       bankId: StorageService.getUserIdFromToken(),
       accountType: AccountType.CHECKING,
       accountName: this.checkingAccountForm.get(['accountName'])!.value,
       overdraftLimit: this.checkingAccountForm.get(['overdraftLimit'])!.value
-    }
+    };
     console.log(accountSettingDto);
+
     this.accountSettingService.createAccountSetting(accountSettingDto).subscribe(
       (banks) => {
         this.accountSetting = banks;
@@ -98,19 +100,19 @@ export class CreateAccountSettingComponent implements OnInit{
         this.error = true;
       }
     );
+
     this.onSubmit.emit();
   }
 
-  createFdAccount(){
-
+  createFdAccount(): void {
     const accountSettingDto: AccountSettingDto = {
       bankId: StorageService.getUserIdFromToken(),
       accountType: AccountType.FD,
       accountName: this.fdAccountForm.get(['accountName'])!.value,
       interestRate: this.fdAccountForm.get(['interestRate'])!.value,
       cdTerm: this.fdAccountForm.get(['cdTerm'])!.value
-    }
-    console.log(accountSettingDto);
+    };
+
     this.accountSettingService.createAccountSetting(accountSettingDto).subscribe(
       (banks) => {
         this.accountSetting = banks;
@@ -120,20 +122,18 @@ export class CreateAccountSettingComponent implements OnInit{
         this.error = true;
       }
     );
-    this.onSubmit.emit();
 
+    this.onSubmit.emit();
   }
 
-  createMoneyMarketAccount(){
-
+  createMoneyMarketAccount(): void {
     const accountSettingDto: AccountSettingDto = {
       bankId: StorageService.getUserIdFromToken(),
       accountType: AccountType.MONEY_MARKET,
       accountName: this.moneyMarketAccountForm.get(['accountName'])!.value,
-      maxMonthlyTransactions: this.moneyMarketAccountForm.get(['maxMonthlyTransactions'])!.value,
+      maxMonthlyTransactions: this.moneyMarketAccountForm.get(['maxMonthlyTransactions'])!.value
+    };
 
-    }
-    console.log(accountSettingDto);
     this.accountSettingService.createAccountSetting(accountSettingDto).subscribe(
       (banks) => {
         this.accountSetting = banks;
@@ -143,19 +143,19 @@ export class CreateAccountSettingComponent implements OnInit{
         this.error = true;
       }
     );
-    this.onSubmit.emit();
 
+    this.onSubmit.emit();
   }
 
-  createJointAccount(){
+  createJointAccount(): void {
     const accountSettingDto: AccountSettingDto = {
       bankId: StorageService.getUserIdFromToken(),
       accountType: AccountType.JOINT,
       accountName: this.jointAccountForm.get(['accountName'])!.value,
-      accountHoldersLimit: this.jointAccountForm.get(['accountHoldersLimit'])!.value,
+      accountHoldersLimit: this.jointAccountForm.get(['accountHoldersLimit'])!.value
+    };
 
-    }
-    console.log(accountSettingDto);
+
     this.accountSettingService.createAccountSetting(accountSettingDto).subscribe(
       (banks) => {
         this.accountSetting = banks;
@@ -165,6 +165,7 @@ export class CreateAccountSettingComponent implements OnInit{
         this.error = true;
       }
     );
+
     this.onSubmit.emit();
   }
 
@@ -172,5 +173,4 @@ export class CreateAccountSettingComponent implements OnInit{
     const control = this.savingsAccountForm.get(controlName);
     return control?.touched && control?.invalid;
   }
-
 }

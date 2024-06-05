@@ -45,4 +45,20 @@ export class AccountListComponent implements OnInit{
     this.accountTypeList$ = this.store.pipe(select(accountTypeSettingSelectorSuccess))
   }
 
+  getImage(shortName: string): string {
+
+    switch(shortName) {
+      case 'CHECKING':
+        return '/assets/checking.jpeg';
+      case 'SAVINGS':
+        return '/assets/savings.jpeg';
+      case 'IRA':
+        return '/assets/ira.jpeg';
+      case 'MONEY_MARKET':
+        return '/assets/money_market.jpg';
+      default:
+        return '/assets/default.jpeg';
+    }
+  }
+
 }

@@ -31,11 +31,14 @@ export class BankListComponent implements OnInit{
   ){}
 
   ngOnInit(): void {
-
     this.store.dispatch(getAllBanksAction());
     this.bankList$ = this.store.pipe(select(allBankSelector));
     this.isLoading$ = this.store.pipe(select(allBankLoadingSelector));
     this.error$ = this.store.pipe(select(allBankErrorSelector));
+
+    this.bankList$.subscribe(
+      bank => console.log(bank)
+    )
   }
 
 

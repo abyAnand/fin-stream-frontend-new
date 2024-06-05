@@ -18,13 +18,12 @@ export class BankLoginComponent {
     private ActivatedRoute: ActivatedRoute,
     private authService: AuthService,
     private notification: ToasterService
-
-    ){}
+  ) {}
 
   loginForm = this.formBuilder.group({
     email: ['', [Validators.required, Validators.email]],
     password: ['', Validators.required]
-  })
+  });
 
   login() {
     const auth: AuthRequest = {
@@ -33,11 +32,11 @@ export class BankLoginComponent {
     };
 
     this.authService.login(auth).subscribe(
+
       (response) => {
         this.router.navigate(['/bank/home/dashboard'], { relativeTo: this.ActivatedRoute.parent });
-
       },
-      (error: { status: number; }) => {
+      (error) => {
         if (error.status == 403) {
           this.notification.warning("Incorrect email or password", "Warning");
         } else {
@@ -46,10 +45,4 @@ export class BankLoginComponent {
       }
     );
   }
-
-  navigateToRegister() {
-    this.router.navigateByUrl('/register');
-  }
-
-
 }

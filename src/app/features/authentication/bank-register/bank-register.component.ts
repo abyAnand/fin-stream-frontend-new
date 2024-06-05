@@ -34,7 +34,6 @@ export class BankRegisterComponent implements OnInit {
     }, { validator: this.passwordMatchValidator });
   }
 
-
   registerBank(): void {
     const bankRequest: BankRequest = {
       name: this.bankSignupForm.get(['name'])!.value,
@@ -45,19 +44,17 @@ export class BankRegisterComponent implements OnInit {
       phoneNumber: this.bankSignupForm.get(['phoneNumber'])!.value,
       role: Role.Bank
     };
-      this.authService.registerBank(bankRequest)
+    this.authService.registerBank(bankRequest)
       .subscribe(
         () => {
-          // Show success message or redirect to another page
           this.notification.success('Bank registered successfully', "Success");
           this.router.navigate(['bank/login']);
         },
         (error) => {
-          // Handle error, show error message, etc.
-          this.notification.error( error, 'failed');
+          this.notification.error(error, 'Failed');
         }
       );
-    }
+  }
 
   passwordMatchValidator(formGroup: FormGroup) {
     const password = formGroup.get('password')?.value;

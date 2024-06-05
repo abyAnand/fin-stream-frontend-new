@@ -15,6 +15,9 @@ const URL = 'http://localhost:8072/finStream/bank/';
 })
 export class BankService {
 
+
+
+
   private static readonly HEADERS = new HttpHeaders({ 'Content-Type': 'application/json' });
 
   constructor(
@@ -36,6 +39,12 @@ export class BankService {
 
   verifyBankById(bankId: string): Observable<boolean> {
     return this.http.get<boolean>(`${URL}/bank/verify/${bankId}`, { headers: BankService.HEADERS }).pipe(
+      catchError(this.handleError)
+    );
+  }
+
+  addImageToBank(formData: FormData): Observable<BankDto> {
+    return this.http.post<BankDto>(`${URL}/bank/image`, formData).pipe(
       catchError(this.handleError)
     );
   }

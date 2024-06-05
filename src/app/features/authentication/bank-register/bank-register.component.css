@@ -1,11 +1,47 @@
-input.ng-invalid.ng-touched{
-  border-color: red;
+/* bank-register.component.css */
+
+.container {
+  max-width: 1200px;
+  margin: auto;
 }
 
-.btn{
+.img-fluid {
+  max-width: 70%;
+  height: auto;
+}
+
+.text-success {
+  color: #28a745 !important;
+}
+
+.btn-outline-success {
+  border-color: #28a745;
+  color: #28a745;
+}
+
+.btn-outline-success:hover {
+  background-color: #28a745;
   color: white;
 }
 
-.btn:hover{
-  background-color: #0f5b97;
+.border-success {
+  border-color: #28a745 !important;
+}
+
+.btn-success {
+  background-color: #28a745;
+  border-color: #28a745;
+}
+
+.btn-success:hover {
+  background-color: #218838;
+  border-color: #1e7e34;
+}
+
+.text-danger {
+  font-size: 0.875rem;
+}
+
+.text-decoration-none {
+  text-decoration: none;
 }

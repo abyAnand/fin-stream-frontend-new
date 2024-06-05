@@ -3,18 +3,23 @@
   <div class="bank-list-container border rounded p-3 shadow-lg orange-border">
     <ng-container *ngIf="!error; else errorHandling">
       <ng-container *ngIf="(accountTypeList$ | async)?.length > 0; else noBanks">
-        <div class="list-group">
-          <div *ngFor="let accountType of (accountTypeList$ | async)"
-            class="list-group-item list-group-item-action d-flex justify-content-between align-items-center p-4">
-            <div class="d-flex flex-column">
-              <span class="fw-bold h4">{{ accountType.displayName }}</span>
-              <span class="text-muted ">Number of Accounts: <span class=" bg-primary rounded-pill text-white">{{
-                  accountType.numberOfAccounts }}</span></span>
+        <div class="row row-cols-1 row-cols-md-3 g-4">
+          <div *ngFor="let accountType of (accountTypeList$ | async)" class="col">
+            <div class="card">
+              <img class="card-img-top card-img-fixed" [src]="getImage(accountType.shortName)" alt="Account Image">
+              <div class="card-body">
+                <h2 class="card-title">{{ accountType.displayName }}</h2>
+                <p class="card-text">Number of Accounts:
+                  <span class="bg-primary rounded-pill text-white px-2">{{ accountType.numberOfAccounts }}</span>
+                </p>
+                <div class="d-flex justify-content-between">
+                  <button class="btn btn-sm" [routerLink]="['/bank/account/settings/', accountType.shortName]"
+                    [ngClass]="{'btn-primary': accountType.numberOfAccounts > 0, 'btn-danger': accountType.numberOfAccounts === 0}">
+                    <i class="bi bi-eye"></i> {{ accountType.numberOfAccounts > 0 ? 'View Accounts' : 'Create Account'}}
+                  </button>
+                </div>
+              </div>
             </div>
-            <button class="btn btn-sm" [routerLink]="['/bank/account/settings/', accountType.shortName]"
-              [ngClass]="{'btn-primary': accountType.numberOfAccounts > 0, 'btn-danger': accountType.numberOfAccounts === 0}">
-              <i class="bi bi-eye"></i> {{ accountType.numberOfAccounts > 0 ? 'View Accounts' : 'Create Account'}}
-            </button>
           </div>
         </div>
       </ng-container>

@@ -1,5 +1,5 @@
-<div class="container mt-5 d-flex flex-column align-items-center">
-  <div class="d-flex justify-content-between align-items-center mb-4 w-100">
+<div class="container mt-5">
+  <div class="d-flex justify-content-between align-items-center mb-4">
     <button class="btn btn-sm btn-success" (click)="createLoanSetting()">
       <i class="bi bi-plus-circle"></i> Create Loan
     </button>
@@ -11,18 +11,30 @@
     </button>
   </div>
 
-  <div class="container  rounded-4 shadow blue-border">
+  <div class="mb-custom">
+
+  </div>
+  <div class="container rounded-4 shadow blue-border">
     <ng-container *ngIf="!error; else errorHandling">
-      <ng-container *ngIf="loanSettingList.length > 0 else noBanks">
-        <div *ngFor="let loanSetting of loanSettingList" class="row">
-          <div class="col ">
-            <div class="card mb-4">
-              <h5 class="card-header">{{ loanSetting.name }}</h5>
+      <ng-container *ngIf="loanSettingList.length > 0; else noBanks">
+        <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4 ">
+          <div *ngFor="let loanSetting of loanSettingList" class="col">
+            <div class="card mb-4 shadow">
+              <img class="card-img-top card-img-fixed" [src]="loanSetting.loanTypeDto.image ? loanSetting.loanTypeDto.image.imageUrl : getImage(loanSetting.loanTypeDto.loanCategory)" alt="Loan Type Image">
+              <div class="card-header bg-primary text-white">
+                <h2 class="card-title m-0">{{ loanSetting.name }}</h2>
+              </div>
               <div class="card-body">
-                <h3 class="card-title">Interest Rate: {{ loanSetting.interestRate }}</h3>
-                <h3 class="card-text">Loan Amount: {{ loanSetting.loanAmount }}</h3>
-                <h3 class="card-text">Years: {{ loanSetting.loanTermMonths/12}}</h3>
-                <button class="btn btn-sm btn-info mt-3" (click)="updateLoanSetting(loanSetting)">
+                <div class="card-text mb-3">
+                  <strong>Interest Rate:</strong> {{ loanSetting.interestRate }}%
+                </div>
+                <div class="card-text mb-3">
+                  <strong>Loan Amount:</strong> {{ loanSetting.loanAmount | currency:'INR' }}
+                </div>
+                <div class="card-text mb-3">
+                  <strong>Years:</strong> {{ loanSetting.loanTermMonths / 12 }}
+                </div>
+                <button class="btn btn-sm btn-info mt-3 btn-custom" (click)="updateLoanSetting(loanSetting)">
                   <i class="bi bi-pencil"></i> Edit Loan Setting
                 </button>
               </div>

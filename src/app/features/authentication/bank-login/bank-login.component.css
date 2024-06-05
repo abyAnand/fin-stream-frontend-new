@@ -1,0 +1,58 @@
+/* bank-login.component.css */
+
+.background-container {
+  background-image: url('/assets/login_bg1.jpg');
+  background-size: cover;
+  background-position: center;
+  height: 100vh; /* Full height */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.container {
+  max-width: 800px;
+  margin: auto;
+}
+
+.text-success {
+  color: #28a745 !important;
+}
+
+.btn-success {
+  background-color: #28a745;
+  border-color: #28a745;
+}
+
+.btn-success:hover {
+  background-color: #218838;
+  border-color: #1e7e34;
+}
+
+.text-danger {
+  font-size: 0.875rem;
+}
+
+.card {
+  border-radius: 10px;
+  border: none;
+}
+
+.shadow {
+  box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.075) !important;
+}
+
+.text-decoration-none {
+  text-decoration: none;
+}
+
+.form-check-input {
+  margin-top: 0.3rem;
+  margin-left: 0;
+}
+
+.form-check-label {
+  margin-left: 1.25rem;
+  margin-top: 0.25rem;
+  font-weight: normal;
+}

@@ -18,6 +18,7 @@ export class AuthService {
     private storage: StorageService) { }
 
   login(authRequest: AuthRequest): Observable<any> {
+    console.log(authRequest);
     return this.http.post(URL + 'authenticate',
       authRequest
       , { observe: 'response' })

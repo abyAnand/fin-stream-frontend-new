@@ -10,11 +10,13 @@ import { ToasterService } from 'src/app/core/services/toaster/toaster.service';
 import { CreateAccountSettingComponent } from '../create-account-setting/create-account-setting.component';
 import { EditAccountSettingComponent } from '../edit-account-setting/edit-account-setting.component';
 import { AccountSettingService } from '../../../../../../core/services/accountSetting/account-setting.service';
-import { Observable, of } from 'rxjs';
+import { isEmpty, Observable, of } from 'rxjs';
 import { Store, select } from '@ngrx/store';
 import { AppStateInterface } from 'src/app/Store/types/appState.interface';
 import { getAccountSettings } from 'src/app/Store/accountSetting/accountSetting.action';
 import { accountSettingErrorSelector, accountSettingSuccessSelector, isLoadingAccountSettingSelector } from 'src/app/Store/accountSetting/accountSetting.selector';
+import { ImageUploadComponent } from './image-upload/image-upload.component';
+import { NotificationService } from 'src/app/core/services/notification/notification.service';
 @Component({
   selector: 'app-account-settings',
   templateUrl: './account-settings.component.html',
@@ -59,7 +61,6 @@ export class AccountSettingsComponent implements OnInit{
     this.fetchAccountTypeSettingList()
 
 
-
   }
 
   private fetchAccountTypeSettingList(){
@@ -68,22 +69,7 @@ export class AccountSettingsComponent implements OnInit{
     this.error$ = this.store.pipe(select(accountSettingErrorSelector));
     this.accountSettingList$ = this.store.pipe(select(accountSettingSuccessSelector));
 
-
   }
-
-  // private fetchAccountTypeSettingList(accountTypeRequestDto: AccountTypeListRequestDto): void {
-  //   this.accountSettingService.getAccountSettingsListByBankIdAndAccountType(accountTypeRequestDto).subscribe(
-  //     (banks) => {
-  //       this.accountTypeList = banks;
-  //       this.hasAccount = this.accountTypeList.length > 0;
-  //       StorageService.setHasAccount(this.hasAccount);
-  //     },
-  //     (error) => {
-  //       this.notification.error(error, 'Error fetching Accounts:');
-  //       this.error = true;
-  //     }
-  //   );
-  // }
 
   createAccount(): void {
     const modalRef = this.modalService.open(CreateAccountSettingComponent, { centered: true });
@@ -99,10 +85,40 @@ export class AccountSettingsComponent implements OnInit{
     modalRef.componentInstance.shortName = this.shortName;
     modalRef.componentInstance.account = account; // Pass the selected accountType
     modalRef.componentInstance.onSubmit.subscribe(() => {
-      // Handle any logic after the form is submitted
       modalRef.close();
     });
   }
+
+  setPhoto(account: AccountSettingDto): void {
+    const imageModalRef = this.modalService.open(ImageUploadComponent, { centered: true });
+    imageModalRef.componentInstance.imageSelected.subscribe((file: File) => {
+      if (file) {
+        console.log("account id: " + account.id);
+        this.uploadImage(account.id, file);
+        imageModalRef.close();
+      }
+    });
+  }
+
+  uploadImage(accountSettingId: string, file: File) {
+    const formData: FormData = new FormData();
+    formData.append('accountSettingId', accountSettingId);
+    formData.append('image', file);
+
+    this.accountSettingService.addImageToAccountSetting(formData).subscribe(
+      (response) => {
+        console.log('Image uploaded successfully');
+        this.notification.success("Uploaded Successfully", "Image");
+      },
+      (error) => {
+        console.error('Error uploading image', error);
+        this.notification.error("Uploading Failed", "Image");
+      }
+    );
+
+  }
+
+
 
 
 }

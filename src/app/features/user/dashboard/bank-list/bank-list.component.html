@@ -1,17 +1,28 @@
 <app-navbar></app-navbar>
 <div class="container mt-5">
   <h2 class="text-center mb-4 sticky-top bg-white">List of Banks</h2>
-  <div class="bank-list-container border rounded p-3 shadow-lg orange-border">
+  <div class="bank-list-container p-3 shadow-lg orange-border">
     <ng-container *ngIf="!error; else errorHandling">
       <ng-container *ngIf="(bankList$ | async).length > 0; else noBanks">
-        <ul class="list-group">
-          <li *ngFor="let bank of (bankList$ | async)" class="list-group-item list-group-item-action d-flex justify-content-between align-items-center p-4">
-            <div>
-              <span class="fw-bold h4">{{ bank.name }}</span> - {{ bank.shortName | uppercase }}
+        <div class="row row-cols-1 row-cols-md-3 g-4">
+          <div *ngFor="let bank of (bankList$ | async)" class="col">
+            <div class="card">
+              <img
+                class="card-img-top card-img-fixed"
+                [src]="bank?.image?.imageUrl || '/assets/bank_profile.jpeg'"
+                alt="Bank Image">
+              <div class="card-body">
+                <h2 class="card-title">{{ bank.name }}</h2>
+                <p class="card-text">{{ bank.shortName | uppercase }}</p>
+                <div class="d-flex justify-content-between">
+                  <button class="btn btn-primary btn-sm" [routerLink]="['/dashboard/accounts/', bank.id]">
+                    <i class="bi bi-eye"></i> Show Bank Accounts
+                  </button>
+                </div>
+              </div>
             </div>
-            <button class="btn btn-primary btn-sm" [routerLink]="['/dashboard/accounts/', bank.id]">Show Bank Accounts</button>
-          </li>
-        </ul>
+          </div>
+        </div>
       </ng-container>
       <ng-template #noBanks>
         <div class="text-center text-muted">No banks available.</div>

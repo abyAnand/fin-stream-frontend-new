@@ -1,6 +1,9 @@
+import { Image } from "../../Image.model";
+
 export interface AccountSettingDto {
   id?: string;
   bankId: string;
+  image?: Image;
   accountType: AccountType;
   accountName: string;
   overdraftLimit?: number;

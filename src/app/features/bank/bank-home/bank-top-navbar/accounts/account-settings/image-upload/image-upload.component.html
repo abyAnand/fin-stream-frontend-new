@@ -1,0 +1,14 @@
+<div class="modal-header">
+  <h5 class="modal-title">Upload Image</h5>
+  <button type="button" class="btn-close" aria-label="Close" (click)="closeModal()"></button>
+</div>
+<div class="modal-body">
+  <input type="file" (change)="onFileSelected($event)" accept="image/*">
+  <div *ngIf="previewUrl">
+    <img [src]="previewUrl" alt="Image Preview" class="img-thumbnail mt-3">
+    <button class="btn btn-danger mt-3" (click)="removeImage()">Remove</button>
+  </div>
+</div>
+<div class="modal-footer">
+  <button class="btn btn-primary" [disabled]="!selectedFile" (click)="submitImage()">Submit</button>
+</div>

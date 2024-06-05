@@ -23,7 +23,7 @@ export const getAccountSettingsFail = createAction(
 // CREATE ACCOUNT SETTINGS
 export const createAccountSetting = createAction(
   '[ACCOUNT-SETTING] CREATE',
-  props<{ accountSetting: AccountSettingDto }>()
+  props<{ accountSettingDto: AccountSettingDto }>()
 );
 
 export const createAccountSettingSuccess = createAction(

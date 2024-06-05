@@ -1,26 +1,57 @@
 .container-lg {
-  background-color: #fff;
-  padding: 20px;
+  background-color: #f8f9fa;
+  padding: 2rem;
   border-radius: 8px;
-  box-shadow: 0 4px 8px rgba(0, 9, 90, 0.1);
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  max-width: 700px;
+  margin: auto;
+}
+
+h2 {
+  font-family: 'Arial', sans-serif;
+  font-weight: bold;
+  color: #007bff;
 }
 
 .form-label {
-  color: #86B6F6;
+  color: #007bff;
 }
 
 .form-control {
-  border-color: #86B6F6;
+  border-color: #007bff;
 }
 
 .input-group-text {
-  background-color: #86B6F6;
+  background-color: #007bff;
   color: #fff;
 }
 
-.btn-update-user:hover {
-  background-color: #86B6F6;
-  border-color: #86B6F6;
+.btn-update-bank:hover {
+  background-color: #007bff;
+  border-color: #007bff;
   color: #fff;
 }
 
+.img-thumbnail {
+  object-fit: cover;
+}
+
+.btn-update-bank {
+  width: 200px;
+  margin-top: 20px;
+}
+
+.profile-pic-container {
+  position: relative;
+  display: inline-block;
+}
+
+.edit-icon {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  background: #007bff;
+  color: white;
+  border-radius: 50%;
+  padding: 5px;
+}
