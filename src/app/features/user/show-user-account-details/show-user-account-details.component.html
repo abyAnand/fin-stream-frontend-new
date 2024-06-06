@@ -1,39 +1,25 @@
 <div class="container mt-5">
-
-  <div class="row justify-content-center ">
+  <div class="row justify-content-center">
     <div class="col-md-8">
       <div class="card">
-        <div class="card-header">
-          <h3>Account Details</h3>
+        <div class="card-header bg-primary text-white">
+          <h3 class="m-0">Account Details</h3>
         </div>
         <div class="card-body">
           <ng-container *ngIf="selectedAccount">
-            <ng-container *ngIf="selectedAccount.accountType === 'SAVINGS'">
-              <h5 class="card-title">{{ selectedAccount.accountName }}</h5>
-              <p class="card-text">Account Type: Savings</p>
-              <p class="card-text">Initial Deposit: {{ selectedAccount.balance | currency:'INR ':true }}</p>
-              <!-- <p class="card-text">Interest Rate: {{ selectedAccount.interestRate }}%</p> -->
-              <!-- Add other savings account details here -->
-            </ng-container>
+            <h5 class="card-title">{{ selectedAccount.accountName }}</h5>
+            <p class="card-text">Account Type: {{ selectedAccount.accountType }}</p>
+            <p class="card-text">Initial Deposit: {{ selectedAccount.balance | currency:'INR ':true }}</p>
             <ng-container *ngIf="selectedAccount.accountType === 'CHECKING'">
-              <h3 class="card-title">{{ selectedAccount.accountName }}</h3>
-              <p class="card-text">Account Type: Checking</p>
-              <p class="card-text">Initial Deposit: {{ selectedAccount.balance | currency:'INR ':true }}</p>
               <p class="card-text">Overdraft Limit: {{ selectedAccount.overdraftLimit | currency:'INR ':true }}</p>
-              <!-- Add other checking account details here -->
             </ng-container>
             <ng-container *ngIf="selectedAccount.accountType === 'FD'">
-              <h5 class="card-title">{{ selectedAccount.accountName }}</h5>
-              <p class="card-text">Account Type: Fixed Deposit</p>
-              <p class="card-text">Initial Deposit: {{ selectedAccount.balance | currency:'INR ':true }}</p>
-              <p class="card-text">Total years: {{ selectedAccount.cdTerm/12  }}</p>
-              <!-- Add other checking account details here -->
+              <p class="card-text">Total years: {{ selectedAccount.cdTerm/12 }}</p>
             </ng-container>
-            <!-- Add more conditions for other account types as needed -->
+            <div class="text-end mt-3">
+              <!-- <button class="btn btn-primary" [disabled]="selectedAccount.accountType === 'FD'" (click)="editAccount(selectedAccount)">Edit Account</button> -->
+            </div>
           </ng-container>
-          <div class="text-end">
-            <button class="btn btn-primary" [disabled]="selectedAccount.accountType === 'FD'" (click)="editAccount(selectedAccount)">Edit Account</button>
-          </div>
         </div>
       </div>
     </div>
@@ -52,49 +38,47 @@
     </div>
   </div>
 
-<!-- Transactions List -->
-<div class="row justify-content-center mt-4">
-  <div class="col-md-10">
-    <div class="card">
-      <div class="card-header bg-primary text-white">
-        <h3 class="m-0">Transactions</h3>
-      </div>
-      <div class="table-responsive">
-        <table class="table table-striped">
-          <thead>
-            <tr>
-              <th>Action</th>
-              <th>Amount</th>
-              <th>Status</th>
-            </tr>
-          </thead>
-          <tbody *ngIf="(transactionList$ | async).length > 0; else noTransactions">
-            <tr *ngFor="let transaction of transactionList$ | async">
-              <td>
-                <span *ngIf="transaction.self"><i class="bi bi-person"></i> Self</span>
-                <span *ngIf="!transaction.self && transaction.sender.userId === currentUserId"><i class="bi bi-arrow-up-circle"></i> Sent to {{ transaction.receiver.username }}</span>
-                <span *ngIf="!transaction.self && transaction.receiver.userId === currentUserId"><i class="bi bi-arrow-down-circle"></i> Received from {{ transaction.sender.username }}</span>
-              </td>
-              <td>{{ transaction.amount | currency:'INR ':true }}</td>
-              <td [ngClass]="{
-                'text-success': transaction.status === 'COMPLETED',
-                'text-danger': transaction.status === 'FAILED',
-                'text-warning': transaction.status === 'PENDING'
-              }">{{ transaction.status }}</td>
-            </tr>
-          </tbody>
-          <ng-template #noTransactions>
-            <tr>
-              <td colspan="3">No transactions data available.</td>
-            </tr>
-          </ng-template>
-        </table>
+  <!-- Transactions List -->
+  <div class="row justify-content-center mt-4">
+    <div class="col-md-10">
+      <div class="card">
+        <div class="card-header bg-primary text-white">
+          <h3 class="m-0">Transactions</h3>
+        </div>
+        <div class="card-body">
+          <div class="table-responsive">
+            <table class="table table-striped">
+              <thead>
+                <tr>
+                  <th>Action</th>
+                  <th>Amount</th>
+                  <th>Status</th>
+                </tr>
+              </thead>
+              <tbody *ngIf="(transactionList$ | async).length > 0; else noTransactions">
+                <tr *ngFor="let transaction of transactionList$ | async">
+                  <td>
+                    <span *ngIf="transaction.self"><i class="bi bi-person"></i> Self</span>
+                    <span *ngIf="!transaction.self && transaction.sender.userId === currentUserId"><i class="bi bi-arrow-up-circle"></i> Sent to {{ transaction.receiver.username }}</span>
+                    <span *ngIf="!transaction.self && transaction.receiver.userId === currentUserId"><i class="bi bi-arrow-down-circle"></i> Received from {{ transaction.sender.username }}</span>
+                  </td>
+                  <td>{{ transaction.amount | currency:'INR ':true }}</td>
+                  <td [ngClass]="{
+                    'text-success': transaction.status === 'COMPLETED',
+                    'text-danger': transaction.status === 'FAILED',
+                    'text-warning': transaction.status === 'PENDING'
+                  }">{{ transaction.status }}</td>
+                </tr>
+              </tbody>
+              <ng-template #noTransactions>
+                <tr>
+                  <td colspan="3">No transactions data available.</td>
+                </tr>
+              </ng-template>
+            </table>
+          </div>
+        </div>
       </div>
     </div>
   </div>
-</div>
-
-  <!-- Deposit and Transfer Buttons -->
-
-
 </div>

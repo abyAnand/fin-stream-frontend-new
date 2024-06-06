@@ -1,12 +1,36 @@
-.loan-settings-container {
-  border: 1px solid #ccc; /* Border around the entire container */
-  padding: 20px; /* Add padding to the container */
+/* Add your custom styles here */
+.container {
+  margin-top: 20px;
 }
 
 .card {
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Add box shadow to each card */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  transition: box-shadow 0.3s ease-in-out;
+}
+
+.card:hover {
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+}
+
+.card-img-top {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
 }
 
 .card-body {
-  padding: 20px; /* Add padding to the card body */
+  padding: 20px;
+}
+
+.card-footer {
+  padding: 10px;
+}
+
+.btn {
+  margin-top: 10px;
+}
+
+.loan-settings-container {
+  border: 1px solid #ccc;
+  padding: 20px;
 }

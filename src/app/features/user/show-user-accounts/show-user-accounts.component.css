@@ -1,0 +1,80 @@
+.card-box {
+  min-height: 160px;
+  background: #f37d1c;
+  box-shadow: 0px 0px 15px -2px rgba(0, 0, 0, 0.1);
+  border-radius: 18px;
+  margin: 16px;
+  padding: 1.5em;
+  flex-direction: column;
+  justify-content: space-around;
+  gap: 1.2em;
+}
+
+.card-head {
+  justify-content: space-between;
+  align-items: center;
+}
+
+.card-chip svg {
+  width: 32px;
+  height: 32px;
+}
+
+.card-chip svg path {
+  fill: #faf7f7;
+}
+
+.card-logo svg {
+  width: 48px;
+  height: 48px;
+}
+
+.card-number-row {
+  justify-content: center;
+  word-spacing: 1em;
+  font-size: 1.3em;
+  font-weight: 600;
+}
+
+.card-box:hover .card-number-row {
+  font-size: 1.32em;
+}
+
+.card-details {
+  justify-content: space-between;
+  text-transform: uppercase;
+}
+
+.card-holder-col {
+  flex-direction: column;
+  gap: 2px;
+}
+
+.card-holder-name,
+.card-date-sub {
+  font-size: 1.2em;
+  color: #333;
+}
+
+.card-holder-title,
+.card-date-title {
+  color: #555; 
+  font-size: 0.9em;
+}
+
+.card-holder-title,
+.card-date-title {
+  color: #fefefe;
+  font-size: 1em;
+}
+
+.card-holder-name {
+  font-size: 1.1em;
+  font-weight: 600;
+}
+
+.card-date-col {
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 2px;
+}

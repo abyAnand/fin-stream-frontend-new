@@ -63,7 +63,7 @@ export class CreateBankAccountComponent implements OnInit {
 
     this.checkingAccountForm = this.formBuilder.group({
       initialDeposit: ['', Validators.required],
-      overdraftLimit: ['', Validators.required],
+      // overdraftLimit: ['', Validators.required],
       // linkedSavingsAccountId: ['', Validators.required],
     });
 

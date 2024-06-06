@@ -1,7 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { LoanType } from 'src/app/core/models/loan/LoanType.model';
 import { LoanSetting } from '../../../../core/models/loan/LoanSetting.model';
-import { LoanDto, Collateral, ApprovalStatus } from '../../../../core/models/loan/LoanDto.model';
+import { LoanDto, Collateral, ApprovalStatus, LoanCategory } from '../../../../core/models/loan/LoanDto.model';
 import { CollateralType } from 'src/app/core/models/user/UserDto.model';
 import { StorageService } from 'src/app/core/services/storage/storage.service';
 import { UserloanService } from 'src/app/core/services/userLoan/userloan.service';
@@ -46,6 +46,21 @@ export class UserLoanApplyComponent implements OnInit{
         console.error('Error occurred while Fetching User Savings Account:', error);
       }
     );
+  }
+
+  getImage(loanCategory: LoanCategory): string {
+    switch (loanCategory) {
+      case LoanCategory.PERSONAL:
+        return '/assets/loan/personal_loan.jpeg';
+      case LoanCategory.BUSINESS:
+        return '/assets/loan/business_loan.jpeg';
+      case LoanCategory.MORTGAGE:
+        return '/assets/loan/mortgage_loan.jpeg';
+      case LoanCategory.STUDENT:
+        return '/assets/loan/student_loan.jpeg';
+      default:
+        return '/assets/loan/loan.jpeg';
+    }
   }
 
   calculateMonthlyPayments(): void {

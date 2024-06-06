@@ -4,7 +4,7 @@ import { LoanTypeService } from '../../../../core/services/loanType/loan-type.se
 import { ToasterService } from 'src/app/core/services/toaster/toaster.service';
 import { Router } from '@angular/router';
 import { UserloanService } from 'src/app/core/services/userLoan/userloan.service';
-import { ApprovalStatus, LoanDto } from 'src/app/core/models/loan/LoanDto.model';
+import { ApprovalStatus, LoanCategory, LoanDto } from 'src/app/core/models/loan/LoanDto.model';
 import { StorageService } from 'src/app/core/services/storage/storage.service';
 import { Observable } from 'rxjs';
 import { Store, select } from '@ngrx/store';
@@ -109,6 +109,21 @@ export class BankLoansComponent implements OnInit {
       }
     } else {
       return 'blue';
+    }
+  }
+
+  getImage(loanCategory: LoanCategory): string {
+    switch (loanCategory) {
+      case LoanCategory.PERSONAL:
+        return '/assets/loan/personal_loan.jpeg';
+      case LoanCategory.BUSINESS:
+        return '/assets/loan/business_loan.jpeg';
+      case LoanCategory.MORTGAGE:
+        return '/assets/loan/mortgage_loan.jpeg';
+      case LoanCategory.STUDENT:
+        return '/assets/loan/student_loan.jpeg';
+      default:
+        return '/assets/loan/loan.jpeg';
     }
   }
 

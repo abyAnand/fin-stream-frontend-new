@@ -1,0 +1,71 @@
+.card {
+  border: none;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.card-header {
+  background-color: #007bff;
+  color: #fff;
+}
+
+.card-title {
+  color: #333;
+  font-weight: bold;
+}
+
+.card-text {
+  color: #555;
+}
+
+.text-end {
+  margin-top: 15px;
+}
+
+/* Deposit and Transfer Buttons */
+.btn-success {
+  background-color: #28a745;
+  border-color: #28a745;
+}
+
+.btn-success:hover {
+  background-color: #218838;
+  border-color: #1e7e34;
+}
+
+/* Transactions Table */
+.table th,
+.table td {
+  border: none;
+  padding: 12px 20px;
+}
+
+.table th {
+  background-color: #007bff;
+  color: #fff;
+}
+
+.table-striped tbody tr:nth-child(odd) {
+  background-color: #f8f9fa;
+}
+
+.table-striped tbody tr:nth-child(even) {
+  background-color: #ffffff;
+}
+
+/* Transaction Status */
+.text-success {
+  color: #28a745;
+}
+
+.text-danger {
+  color: #dc3545;
+}
+
+.text-warning {
+  color: #ffc107;
+}
+
+/* No Transactions Message */
+.text-muted {
+  font-style: italic;
+}
