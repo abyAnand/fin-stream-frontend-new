@@ -22,6 +22,9 @@ import { ToastrModule } from 'ngx-toastr';
 import { BankModule } from './features/bank/bank.module';
 import { StoreRouterConnectingModule } from '@ngrx/router-store';
 import { AdminModule } from './features/admin/admin.module';
+import { MatDialogActions, MatDialogModule } from '@angular/material/dialog';
+import { NgChartsModule } from 'ng2-charts';
+import { NgApexchartsModule } from 'ng-apexcharts';
 
 @NgModule({
   declarations: [
@@ -40,11 +43,13 @@ import { AdminModule } from './features/admin/admin.module';
     NgbModule,
     HttpClientModule,
     MatSnackBarModule,
+    MatDialogModule,
     UserModule,
     BankModule,
     AdminModule,
     FontAwesomeModule,
     MatIconModule,
+    NgApexchartsModule,
     ToastrModule.forRoot({}),
     StoreModule.forRoot({}),
     StoreDevtoolsModule.instrument({
@@ -56,7 +61,8 @@ import { AdminModule } from './features/admin/admin.module';
       connectOutsideZone: true // If set to true, the connection is established outside the Angular zone for better performance
     }),
     EffectsModule.forRoot(),
-    StoreRouterConnectingModule.forRoot()
+    StoreRouterConnectingModule.forRoot(),
+    NgChartsModule
 
 
 

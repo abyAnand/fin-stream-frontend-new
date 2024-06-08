@@ -1,0 +1,29 @@
+/* Custom CSS for styling */
+
+.card {
+  background-color: #f9f9f9;
+}
+
+.card-header {
+  background: linear-gradient(to right, #3a77ff, #43e97b);
+}
+
+.table-striped tbody tr:nth-of-type(odd) {
+  background-color: rgba(0, 0, 0, 0.05);
+}
+
+.text-primary {
+  color: #3a77ff;
+}
+
+.text-success {
+  color: #43e97b;
+}
+
+.text-danger {
+  color: #ff4b5c;
+}
+
+.text-warning {
+  color: #ffb547;
+}

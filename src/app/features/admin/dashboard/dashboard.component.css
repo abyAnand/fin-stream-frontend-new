@@ -1,5 +1,38 @@
-.list-group-item-sm {
-    padding: 0.25rem 0.5rem; /* Adjust the padding as needed */
-    margin-bottom: 0.5rem; /* Adjust the margin between list items */
-  }
-  
+/* Custom CSS for Dashboard */
+.chart-container {
+  position: relative;
+  height: 300px;
+  margin-bottom: 20px;
+}
+
+.card {
+  border-radius: 10px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  height: 100%;
+}
+
+.card-body {
+  padding: 20px;
+}
+
+.card-title {
+  color: #333;
+  font-size: 1.5rem;
+  margin-bottom: 20px;
+}
+
+.list-group {
+  margin-top: 20px;
+}
+
+.list-group-item {
+  border: none;
+  border-radius: 5px;
+  padding: 10px 15px;
+  margin-bottom: 5px;
+  font-size: 1rem;
+}
+
+.list-group-item:hover {
+  background-color: #f0f0f0;
+}

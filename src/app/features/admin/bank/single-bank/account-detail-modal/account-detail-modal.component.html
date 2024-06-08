@@ -1,0 +1,52 @@
+<div class="modal" [ngClass]="{'open': isOpen}">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h2 class="modal-title">{{ data.accountName || data.name }}</h2>
+        <button class="close" (click)="closeModal()">X</button>
+      </div>
+      <div class="modal-body">
+        <!-- Account Settings Section -->
+        <ng-container *ngIf="isAccountSetting; else loanSettingSection">
+          <div *ngIf="data.accountName">
+            <div class="text-center">
+              <img [src]="data.image?.imageUrl || getImage(data.accountType)" alt="{{ data.accountName || data.name }}" class="card-img-fixed">
+            </div>
+            <p *ngIf="data.accountType"><strong>Account Type:</strong> {{ data.accountType }}</p>
+            <p *ngIf="data.balance"><strong>Overdraft Limit:</strong> {{ data.balance }}</p>
+            <p *ngIf="data.totalTransaction"><strong>Total Transactions:</strong> {{ data.totalTransaction }}</p>
+            <p *ngIf="data.overdraftLimit"><strong>Overdraft Limit:</strong> {{ data.overdraftLimit }}</p>
+            <p *ngIf="data.cdTerm"><strong>CD Term:</strong> {{ data.cdTerm }}</p>
+            <p *ngIf="data.accountHoldersLimit"><strong>Account Holders Limit:</strong> {{ data.accountHoldersLimit }}</p>
+            <p *ngIf="data.maxMonthlyTransactions"><strong>Max Monthly Transactions:</strong> {{ data.maxMonthlyTransactions }}</p>
+            <p *ngIf="data.interestRate"><strong>Interest Rate:</strong> {{ data.interestRate }}</p>
+          </div>
+        </ng-container>
+        <!-- Loan Settings Section -->
+        <ng-template #loanSettingSection>
+          <div *ngIf="!isAccountSetting">
+            <div class="text-center">
+              <img [src]="data.loanTypeDto?.image?.imageUrl || getImageLoan(data.loanTypeDto?.loanCategory)" alt="{{ data.accountName || data.name }}" class="card-img-fixed">
+            </div>
+            <p><strong>Loan Id:</strong> {{ data.id }}</p>
+            <p><strong>Loan Type:</strong> {{ data.loanTypeDto?.loanCategory || data.loanCategory }}</p>
+            <p><strong>Loan Name:</strong> {{ data.loanTypeDto?.name || data.loanName }}</p>
+            <p><strong>Loan Amount:</strong> {{ data.loanAmount }}</p>
+            <p *ngIf="data.approvalStatus">
+              <strong>Approval Status:</strong>
+              <span [ngClass]="{'text-success': data.approvalStatus === 'APPROVED', 'text-danger': data.approvalStatus !== 'APPROVED'}">
+                {{ data.approvalStatus }}
+              </span>
+            </p>
+            <p *ngIf="data.loanTermMonths"><strong>Loan Term (Months):</strong> {{ data.loanTermMonths }}</p>
+            <p *ngIf="data.remainingTermMonths"><strong>Loan Remaining (Months):</strong> {{ data.remainingTermMonths }}</p>
+            <p><strong>Loan Missed (Months):</strong> {{ data.missedPayments }}</p>
+          </div>
+        </ng-template>
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-secondary" (click)="closeModal()">Close</button>
+      </div>
+    </div>
+  </div>
+</div>

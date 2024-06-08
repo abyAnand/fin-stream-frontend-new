@@ -1,0 +1,29 @@
+<app-top-navbar></app-top-navbar>
+
+<div class="container mt-5">
+    <div class="title">
+        <h3>Notifications</h3>
+    </div>
+</div>
+
+<div class="container mt-3">
+    <ng-container *ngIf="notifications.length > 0; else noNotificationsTemplate">
+        <div *ngFor="let notification of notifications" class="notification-card" [ngClass]="getAlertClass(notification)">
+            <div class="card-header">
+                <i class="material-icons icon">{{ getIcon(notification.event) }}</i>
+                <span class="event">{{ getEventTitle(notification.event) }}</span>
+                <button type="button" class="close" aria-label="Close" (click)="dismissNotification(notification)">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="card-body">
+                <p class="card-text">{{ notification.message }}</p>
+            </div>
+        </div>
+    </ng-container>
+    <ng-template #noNotificationsTemplate>
+        <div class="alert alert-info" role="alert">
+            No new notifications.
+        </div>
+    </ng-template>
+</div>

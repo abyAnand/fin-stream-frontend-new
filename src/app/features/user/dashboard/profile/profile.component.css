@@ -24,3 +24,21 @@
   color: #fff;
 }
 
+.img-thumbnail {
+  object-fit: cover;
+}
+
+.profile-pic-container {
+  position: relative;
+  display: inline-block;
+}
+
+.edit-icon {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  background: #007bff;
+  color: white;
+  border-radius: 50%;
+  padding: 5px;
+}

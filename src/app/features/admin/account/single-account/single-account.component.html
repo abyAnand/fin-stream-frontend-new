@@ -1,87 +1,95 @@
 <!-- single-account.component.html -->
 <app-top-navbar></app-top-navbar>
-<div class="row justify-content-center mt-4">
-  <div class="col-md-10">
-    <div class="card">
-      <div class="card-header bg-primary text-white">
-        <h3 class="m-0 text-center ">Account Details</h3>
-      </div>
-      <div class="card-body">
-        <div *ngIf="account">
-          <div>
-            <strong>Bank Name: </strong> {{ account.bank ? account.bank.name : 'N/A' }}
-          </div>
-          <div>
-            <strong>Account Type: </strong> {{ account.accountSettingDto.accountType }}
-          </div>
-          <div>
-            <strong>Account Name: </strong> {{ account.accountSettingDto.accountName }}
-          </div>
-          <div>
-            <strong>User: </strong> {{ account.userDto.firstName }} {{ account.userDto.lastName }}
-          </div>
-          <div>
-            <strong>Balance: </strong> {{ account.balance }}
-          </div>
-          <div>
-            <strong>Total Transactions: </strong> {{ account.totalTransaction }}
-          </div>
+
+<div class="container mt-4">
+  <div class="row justify-content-center">
+    <div class="col-md-8">
+      <div class="card border-0 rounded-3 shadow-lg">
+        <div class="card-header bg-gradient-primary text-white rounded-top">
+          <h3 class="m-0 text-center">Account Details</h3>
         </div>
-        <div *ngIf="accountDto">
-          <div>
-            <strong>Account ID: </strong> {{ accountDto.id }}
+        <div class="card-body">
+          <div *ngIf="account">
+            <div class="mb-3">
+              <strong>Bank Name: </strong> {{ account.bank ? account.bank.name : 'N/A' }}
+            </div>
+            <div class="mb-3">
+              <strong>Account Type: </strong> {{ account.accountSettingDto.accountType }}
+            </div>
+            <div class="mb-3">
+              <strong>Account Name: </strong> {{ account.accountSettingDto.accountName }}
+            </div>
+            <div class="mb-3">
+              <strong>User: </strong> {{ account.userDto.firstName }} {{ account.userDto.lastName }}
+            </div>
+            <div class="mb-3">
+              <strong>Balance: </strong> {{ account.balance }}
+            </div>
+            <div class="mb-3">
+              <strong>Total Transactions: </strong> {{ account.totalTransaction }}
+            </div>
           </div>
-          <div>
-            <strong>Bank ID: </strong> {{ accountDto.bankId }}
+          <div *ngIf="accountDto">
+            <div class="mb-3">
+              <strong>Account ID: </strong> {{ accountDto.id }}
+            </div>
+            <div class="mb-3">
+              <strong>Bank ID: </strong> {{ accountDto.bankId }}
+            </div>
+            <div class="mb-3">
+              <strong>Account Setting ID: </strong> {{ accountDto.accountSettingId }}
+            </div>
+            <!-- Add more fields from AccountDto as needed -->
           </div>
-          <div>
-            <strong>Account Setting ID: </strong> {{ accountDto.accountSettingId }}
+          <div *ngIf="!account && !accountDto" class="text-center">
+            No account data available.
           </div>
-          <!-- Add more fields from AccountDto as needed -->
-        </div>
-        <div *ngIf="!account && !accountDto">
-          No account data available.
         </div>
       </div>
     </div>
   </div>
 </div>
-<div class="row justify-content-center mt-4">
-  <div class="col-md-10">
-    <div class="card">
-      <div class="card-header bg-primary text-white">
-        <h3 class="m-0">Transactions</h3>
-      </div>
-      <div class="table-responsive">
-        <table class="table table-striped">
-          <thead>
-            <tr>
-              <th>Action</th>
-              <th>Amount</th>
-              <th>Status</th>
-            </tr>
-          </thead>
-          <tbody *ngIf="transactionHistoryList && transactionHistoryList.length > 0; else noTransactions">
-            <tr *ngFor="let transaction of transactionHistoryList">
-              <td>
-                <span *ngIf="transaction.self"><i class="bi bi-person"></i> Self</span>
-                <span *ngIf="!transaction.self && transaction.sender.userId === accountDto.userId"><i class="bi bi-arrow-up-circle"></i> Sent to {{ transaction.receiver.username }}</span>
-                <span *ngIf="!transaction.self && transaction.receiver.userId === accountDto.userId"><i class="bi bi-arrow-down-circle"></i> Received from {{ transaction.sender.username }}</span>
-              </td>
-              <td>{{ transaction.amount | currency:'INR ':true }}</td>
-              <td [ngClass]="{
-                'text-success': transaction.status === 'COMPLETED',
-                'text-danger': transaction.status === 'FAILED',
-                'text-warning': transaction.status === 'PENDING'
-              }">{{ transaction.status }}</td>
-            </tr>
-          </tbody>
-          <ng-template #noTransactions>
-            <tr>
-              <td colspan="3">No transactions data available.</td>
-            </tr>
-          </ng-template>
-        </table>
+
+<div class="container mt-4">
+  <div class="row justify-content-center">
+    <div class="col-md-8">
+      <div class="card border-0 rounded-3 shadow-lg">
+        <div class="card-header bg-gradient-primary text-white rounded-top">
+          <h3 class="m-0 text-center">Transactions</h3>
+        </div>
+        <div class="card-body">
+          <div class="table-responsive">
+            <table class="table table-striped">
+              <thead>
+                <tr>
+                  <th>Action</th>
+                  <th>Amount</th>
+                  <th>Status</th>
+                </tr>
+              </thead>
+              <tbody *ngIf="transactionHistoryList && transactionHistoryList.length > 0; else noTransactions">
+                <tr *ngFor="let transaction of transactionHistoryList">
+                  <td>
+                    <span *ngIf="transaction.self" class="text-primary"><i class="bi bi-person"></i> Self</span>
+                    <span *ngIf="!transaction.self && transaction.sender.userId === accountDto.userId" class="text-success"><i class="bi bi-arrow-up-circle"></i> Sent to {{ transaction.receiver.username }}</span>
+                    <span *ngIf="!transaction.self && transaction.receiver.userId === accountDto.userId" class="text-danger"><i class="bi bi-arrow-down-circle"></i> Received from {{ transaction.sender.username }}</span>
+                  </td>
+                  <td>{{ transaction.amount | currency:'INR ':true }}</td>
+                  <td [ngClass]="{
+                    'text-success': transaction.status === 'COMPLETED',
+                    'text-danger': transaction.status === 'FAILED',
+                    'text-warning': transaction.status === 'PENDING'
+                  }">{{ transaction.status }}</td>
+                </tr>
+              </tbody>
+              <ng-template #noTransactions>
+                <tr>
+                  <td colspan="3" class="text-center">No transactions data available.</td>
+                </tr>
+              </ng-template>
+            </table>
+          </div>
+        </div>
       </div>
     </div>
   </div>

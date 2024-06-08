@@ -1,25 +1,50 @@
 <app-top-navbar></app-top-navbar>
-<div class="row">
-  <div class="col-md-6">
-    <div class="chart-container">
-      <canvas id="bankAccountsChart"></canvas>
+
+<div class="container mt-5">
+  <div class="row">
+    <div class="col-md-6">
+      <div class="card">
+        <div class="card-body">
+          <h4 class="card-title">Bank Accounts Chart</h4>
+          <div class="chart-container">
+            <apx-chart
+              [series]="bankAccountsChart.series"
+              [chart]="bankAccountsChart.chart"
+              [plotOptions]="bankAccountsChart.plotOptions"
+              [xaxis]="bankAccountsChart.xaxis"
+              [colors]="bankAccountsChart.colors"
+              [stroke]="bankAccountsChart.stroke"
+              [grid]="bankAccountsChart.grid"
+              [tooltip]="bankAccountsChart.tooltip"
+            ></apx-chart>
+          </div>
+          <ul class="list-group mt-4">
+            <li class="list-group-item bg-light" *ngFor="let bank of banks">{{ bank.name }}</li>
+          </ul>
+        </div>
+      </div>
     </div>
-    <div>
-      <h4> Banks</h4>
-      <ul class="list-group">
-        <li class="list-group-item list-group-item-sm" *ngFor="let bank of banks">{{ bank.name }}</li>
-      </ul>
-    </div>
-  </div>
-  <div class="col-md-6">
-    <div class="chart-container">
-      <canvas id="userRegistrationsChart"></canvas>
-    </div>
-    <div>
-      <h4> Users</h4>
-      <ul class="list-group">
-        <li class="list-group-item list-group-item-sm" *ngFor="let user of users">{{ user.firstName }} {{ user.lastName }}</li>
-      </ul>
+    <div class="col-md-6">
+      <div class="card">
+        <div class="card-body">
+          <h4 class="card-title">User Registrations Chart</h4>
+          <div class="chart-container">
+            <apx-chart
+              [series]="userRegistrationsChart.series"
+              [chart]="userRegistrationsChart.chart"
+              [plotOptions]="userRegistrationsChart.plotOptions"
+              [xaxis]="userRegistrationsChart.xaxis"
+              [colors]="userRegistrationsChart.colors"
+              [stroke]="userRegistrationsChart.stroke"
+              [grid]="userRegistrationsChart.grid"
+              [tooltip]="userRegistrationsChart.tooltip"
+            ></apx-chart>
+          </div>
+          <ul class="list-group mt-4">
+            <li class="list-group-item bg-light" *ngFor="let user of users">{{ user.firstName }} {{ user.lastName }}</li>
+          </ul>
+        </div>
+      </div>
     </div>
   </div>
 </div>

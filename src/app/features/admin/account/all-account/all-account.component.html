@@ -1,46 +1,49 @@
 <!-- account-details.component.html -->
 <app-top-navbar></app-top-navbar>
-<div class="row justify-content-center mt-4">
-  <div class="col-md-10">
-    <div class="card">
-      <div class="card-header bg-primary text-white">
-        <h3 class="m-0 text-center ">Account Details</h3>
-      </div>
-      <div class="card-body">
-        <div class="table-responsive">
-          <table class="table table-striped">
-            <thead>
-              <tr>
-                <th>#</th>
-                <th>User</th>
-                <th>Bank Name</th>
-                <th>Account Type</th>
-                <th>Account Name</th>
-                <th>Balance</th>
-                <th>Total Transactions</th>
-                <th>Action</th> <!-- Added Action column for button -->
-              </tr>
-            </thead>
-            <tbody *ngIf="accounts && accounts.length > 0; else noAccounts">
-              <tr *ngFor="let account of accounts; let i = index">
-                <td>{{ i + 1 }}</td>
-                <td>{{ account.userDto.firstName }} {{ account.userDto.lastName }}</td>
-                <td>{{ account.bank.name }}</td>
-                <td>{{ account.accountSettingDto.accountType }}</td>
-                <td>{{ account.accountSettingDto.accountName }}</td>
-                <td>{{ account.balance }}</td>
-                <td>{{ account.totalTransaction }}</td>
-                <td>
-                  <button class="btn btn-primary btn-sm" (click)="viewAccountDetails(account)">View Details</button>
-                </td> <!-- Button to view account details -->
-              </tr>
-            </tbody>
-            <ng-template #noAccounts>
-              <tr>
-                <td colspan="8">No account data available.</td>
-              </tr>
-            </ng-template>
-          </table>
+
+<div class="container mt-4">
+  <div class="row justify-content-center">
+    <div class="col-md-10">
+      <div class="card shadow">
+        <div class="card-header bg-primary text-white">
+          <h3 class="m-0 text-center">Account Details</h3>
+        </div>
+        <div class="card-body">
+          <div class="table-responsive">
+            <table class="table table-hover table-bordered">
+              <thead class="table-dark">
+                <tr>
+                  <th>#</th>
+                  <th>User</th>
+                  <th>Bank Name</th>
+                  <th>Account Type</th>
+                  <th>Account Name</th>
+                  <th>Balance</th>
+                  <th>Total Transactions</th>
+                  <th>Action</th>
+                </tr>
+              </thead>
+              <tbody *ngIf="accounts && accounts.length > 0; else noAccounts">
+                <tr *ngFor="let account of accounts; let i = index">
+                  <td>{{ i + 1 }}</td>
+                  <td>{{ account.userDto.firstName }} {{ account.userDto.lastName }}</td>
+                  <td>{{ account.bank.name }}</td>
+                  <td>{{ account.accountSettingDto.accountType }}</td>
+                  <td>{{ account.accountSettingDto.accountName }}</td>
+                  <td>{{ account.balance }}</td>
+                  <td>{{ account.totalTransaction }}</td>
+                  <td>
+                    <button class="btn btn-primary btn-sm" (click)="viewAccountDetails(account)">View Details</button>
+                  </td>
+                </tr>
+              </tbody>
+              <ng-template #noAccounts>
+                <tr>
+                  <td colspan="8" class="text-center">No account data available.</td>
+                </tr>
+              </ng-template>
+            </table>
+          </div>
         </div>
       </div>
     </div>

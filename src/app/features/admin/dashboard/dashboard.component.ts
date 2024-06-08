@@ -12,25 +12,33 @@ import { UserService } from 'src/app/core/services/user/user.service';
 })
 export class DashboardComponent implements OnInit {
 
-  bankAccountsChart: Chart | undefined;
-  userRegistrationsChart: Chart | undefined;
+  bankAccountsChart: ChartOptions = {};
+  userRegistrationsChart: ChartOptions = {};
   users: UserDto[] = [];
   banks: BankEntity[] = [];
+  totalUsers: number = 0;
+  totalBanks: number = 0;
 
   constructor(
     private userService: UserService,
     private bankService: BankService
-    ) { }
+  ) { }
 
   ngOnInit(): void {
+    this.loadData();
+  }
+
+  loadData(): void {
     this.bankService.getAllBankEntity().subscribe(bankAccounts => {
       this.banks = bankAccounts;
-      const accountsByMonth = this.aggregateByMonth(bankAccounts);
-      this.renderBankAccountsChart(accountsByMonth);
+      this.totalBanks = bankAccounts.length;
+      const banksByMonth = this.aggregateByMonth(bankAccounts);
+      this.renderBankAccountsChart(banksByMonth);
     });
 
     this.userService.getAllUsers().subscribe(userRegistrations => {
       this.users = userRegistrations;
+      this.totalUsers = userRegistrations.length;
       const usersByMonth = this.aggregateByMonth(userRegistrations);
       this.renderUserRegistrationsChart(usersByMonth);
     });
@@ -41,122 +49,79 @@ export class DashboardComponent implements OnInit {
 
     entities.forEach(entity => {
       const date = new Date(entity.createdDate);
-      const monthName = date.toLocaleString('default', { month: 'long' });
-      const count = dataByMonth.get(monthName) || 0;
-      dataByMonth.set(monthName, count + 1);
+      const monthYear = `${date.getMonth() + 1}/${date.getFullYear()}`;
+      const count = dataByMonth.get(monthYear) || 0;
+      dataByMonth.set(monthYear, count + 1);
     });
 
     return dataByMonth;
   }
 
-  renderBankAccountsChart(accountsByMonth: Map<string, number>): void {
-    const labels = Array.from(accountsByMonth.keys());
-    const data = Array.from(accountsByMonth.values());
+  renderBankAccountsChart(banksByMonth: Map<string, number>): void {
+    const labels = Array.from(banksByMonth.keys());
+    const data = Array.from(banksByMonth.values());
 
-    const ctx = document.getElementById('bankAccountsChart') as HTMLCanvasElement;
-    if (!ctx) return;
-
-    this.bankAccountsChart = new Chart(ctx, {
-      type: 'line',
-      data: {
-        labels: labels,
-        datasets: [{
-          label: 'Bank Accounts Created',
-          data: data,
-          backgroundColor: 'rgba(54, 162, 235, 0.2)',
-          borderColor: 'rgba(54, 162, 235, 1)',
-          borderWidth: 2,
-          pointRadius: 5,
-          pointBackgroundColor: 'rgba(54, 162, 235, 1)',
-          pointBorderColor: '#fff',
-          pointHoverRadius: 8,
-          pointHoverBackgroundColor: '#fff',
-          pointHoverBorderColor: 'rgba(54, 162, 235, 1)'
-        }]
+    this.bankAccountsChart = {
+      series: [{
+        name: 'Banks Created',
+        data: data
+      }],
+      chart: {
+        type: 'line'
       },
-      options: {
-        responsive: true,
-        plugins: {
-          legend: {
-            display: false
-          },
-          title: {
-            display: true,
-            text: 'Bank Accounts Created by Month'
-          }
-        },
-        scales: {
-          x: {
-            title: {
-              display: true,
-              text: 'Month'
-            }
-          },
-          y: {
-            beginAtZero: true,
-            title: {
-              display: true,
-              text: 'Number of Accounts'
-            }
-          }
+      plotOptions: {},
+      xaxis: {
+        categories: labels
+      },
+      yaxis: {
+        title: {
+          text: 'Number of Banks'
         }
-      }
-    });
+      },
+      colors: ['#369ef5'],
+      stroke: {},
+      grid: {},
+      tooltip: {}
+    };
   }
 
   renderUserRegistrationsChart(usersByMonth: Map<string, number>): void {
     const labels = Array.from(usersByMonth.keys());
     const data = Array.from(usersByMonth.values());
 
-    const ctx = document.getElementById('userRegistrationsChart') as HTMLCanvasElement;
-    if (!ctx) return;
-
-    this.userRegistrationsChart = new Chart(ctx, {
-      type: 'line',
-      data: {
-        labels: labels,
-        datasets: [{
-          label: 'User Registrations',
-          data: data,
-          backgroundColor: 'rgba(255, 206, 86, 0.2)',
-          borderColor: 'rgba(255, 206, 86, 1)',
-          borderWidth: 2,
-          pointRadius: 5,
-          pointBackgroundColor: 'rgba(255, 206, 86, 1)',
-          pointBorderColor: '#fff',
-          pointHoverRadius: 8,
-          pointHoverBackgroundColor: '#fff',
-          pointHoverBorderColor: 'rgba(255, 206, 86, 1)'
-        }]
+    this.userRegistrationsChart = {
+      series: [{
+        name: 'Users Registered',
+        data: data
+      }],
+      chart: {
+        type: 'line'
       },
-      options: {
-        responsive: true,
-        plugins: {
-          legend: {
-            display: false
-          },
-          title: {
-            display: true,
-            text: 'User Registrations by Month'
-          }
-        },
-        scales: {
-          x: {
-            title: {
-              display: true,
-              text: 'Month'
-            }
-          },
-          y: {
-            beginAtZero: true,
-            title: {
-              display: true,
-              text: 'Number of Users'
-            }
-          }
+      plotOptions: {},
+      xaxis: {
+        categories: labels
+      },
+      yaxis: {
+        title: {
+          text: 'Number of Users'
         }
-      }
-    });
+      },
+      colors: ['#3eb87e'],
+      stroke: {},
+      grid: {},
+      tooltip: {}
+    };
   }
+}
 
+interface ChartOptions {
+  series?: any[];
+  chart?: any;
+  plotOptions?: any;
+  xaxis?: any;
+  yaxis?: any;
+  colors?: string[];
+  stroke?: any;
+  grid?: any;
+  tooltip?: any;
 }

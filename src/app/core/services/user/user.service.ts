@@ -35,12 +35,18 @@ export class UserService {
   }
 
   getUserById(userId: number | string):Observable<any>{
-
   return this.http.get<UserDto>(`${URL}/${userId}`, {headers})
     .pipe(
       catchError(this.handleError)
     );
   }
+
+  deleteUserById(userId: number | string):Observable<any>{
+    return this.http.delete(`${URL}/${userId}`, {headers})
+      .pipe(
+        catchError(this.handleError)
+      );
+    }
 
   getAllUsers():Observable<UserDto[]>{
     return this.http.get<UserDto[]>(`${URL}`, {headers})

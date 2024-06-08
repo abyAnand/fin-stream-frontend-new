@@ -21,4 +21,5 @@ export interface BankEntity {
   createdDate: string;
   updateDate: string;
   deleted: boolean;
+  blocked?: boolean;
 }

@@ -1,102 +1,118 @@
+<app-top-navbar></app-top-navbar>
 <div class="container mt-5">
-  <div class="border border-primary rounded p-4">
-    <div class="row justify-content-center">
+  <div class="card border-0 shadow-lg rounded p-4" style="background-color: #f8f9fa;">
+
+    <!-- Bank Details -->
+    <div class="row justify-content-center mb-4">
       <div class="col-md-8">
-        <div class="card border-0 shadow-lg">
-          <div class="card-header bg-primary text-white">
+        <div class="card border-0 shadow-sm" style="background-color: #ffffff;">
+          <div class="card-header bg-primary text-white d-flex justify-content-between align-items-center">
             <h4 class="card-title mb-0">Bank Details</h4>
+            <div *ngIf="!isEditing">
+              <button class="btn btn-light" (click)="enableEditing()">Edit</button>
+            </div>
+            <div *ngIf="isEditing">
+              <button class="btn btn-success" (click)="submitChanges()">Submit</button>
+              <button class="btn btn-secondary" (click)="cancelEditing()">Cancel</button>
+            </div>
           </div>
           <div class="card-body">
-            <!-- Bank Details -->
             <div class="row mb-3">
               <div class="col-md-6">
-                <p><strong>Name:</strong></p>
-                <p>{{ bank?.name }}</p>
+                <p><strong>Name:</strong>
+                  <span *ngIf="!isEditing">{{ bank?.name }}</span>
+                  <input *ngIf="isEditing" [(ngModel)]="editableBank.name" class="form-control" />
+                </p>
               </div>
               <div class="col-md-6">
-                <p><strong>Short Name:</strong></p>
-                <p>{{ bank?.shortName }}</p>
+                <p><strong>Short Name:</strong>
+                  <span *ngIf="!isEditing">{{ bank?.shortName }}</span>
+                  <input *ngIf="isEditing" [(ngModel)]="editableBank.shortName" class="form-control" />
+                </p>
               </div>
             </div>
             <div class="row mb-3">
               <div class="col-md-6">
-                <p><strong>Email:</strong></p>
-                <p>{{ bank?.email }}</p>
+                <p><strong>Email:</strong>
+                  <span>{{ bank?.email }}</span>
+                </p>
               </div>
               <div class="col-md-6">
-                <p><strong>Verified:</strong></p>
-                <p [style.color]="bank?.verified ? 'green' : 'red'">{{ bank?.verified ? 'Yes' : 'No' }}</p>
+                <p><strong>Verified:</strong>
+                  <span *ngIf="!isEditing" class="badge bg-{{ bank?.verified ? 'success' : 'danger' }}">
+                    {{ bank?.verified ? 'Yes' : 'No' }}
+                  </span>
+                  <input *ngIf="isEditing" type="checkbox" [(ngModel)]="editableBank.verified" />
+                </p>
               </div>
             </div>
           </div>
         </div>
       </div>
     </div>
+
     <!-- Account Settings -->
-    <div class="row justify-content-center mt-4">
+    <div class="row justify-content-center mb-4">
       <div class="col-md-8">
-        <div class="card border-0 shadow-lg">
+        <div class="card border-0 shadow-sm" style="background-color: #ffffff;">
           <div class="card-header bg-info text-white">
             <h3 class="m-0 text-center">Account Settings</h3>
           </div>
-          <div class="card-body" style="max-height: 300px; overflow-y: auto;">
+          <div class="card-body">
             <ng-container *ngIf="bank?.accountSettingDtoList?.length > 0; else noAccountSettings">
-              <table class="table table-striped">
-                <thead>
-                  <tr>
-                    <th>Account Type</th>
-                    <th>Account Name</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr *ngFor="let accountSetting of bank?.accountSettingDtoList">
-                    <td>{{ accountSetting.accountType }}</td>
-                    <td>{{ accountSetting.accountName }}</td>
-                  </tr>
-                </tbody>
-              </table>
+              <div class="row">
+                <div *ngFor="let accountSetting of bank?.accountSettingDtoList" class="col-md-4 mb-3">
+                  <div class="card h-100" (click)="openAccountModal(accountSetting)">
+                    <div class="card-body">
+                      <div class="d-flex w-100 justify-content-between">
+                        <img class="card-img-fixed" [src]="accountSetting.image?.imageUrl || getImage(accountSetting.accountType)" alt="Account Type Image">
+                      </div>
+                      <h3>{{ accountSetting.accountName }}</h3>
+                      <h3 class="mb-1">Account Type: {{ accountSetting.accountType }}</h3>
+                    </div>
+                  </div>
+                </div>
+              </div>
             </ng-container>
             <ng-template #noAccountSettings>
-              <p class="text-center">No account settings available.</p>
+              <p class="text-center text-muted">No account settings available.</p>
             </ng-template>
           </div>
         </div>
       </div>
     </div>
+
     <!-- Loan Settings -->
-    <div class="row justify-content-center mt-4">
+    <div class="row justify-content-center">
       <div class="col-md-8">
-        <div class="card border-0 shadow-lg">
+        <div class="card border-0 shadow-sm" style="background-color: #ffffff;">
           <div class="card-header bg-info text-white">
             <h3 class="m-0 text-center">Loan Settings</h3>
           </div>
-          <div class="card-body" style="max-height: 300px; overflow-y: auto;">
+          <div class="card-body">
             <ng-container *ngIf="bank?.loanSettingDtoList?.length > 0; else noLoanSettings">
-              <table class="table table-striped">
-                <thead>
-                  <tr>
-                    <th>Type</th>
-                    <th>Name</th>
-                    <th>Loan Amount</th>
-                    <th>Loan Term (Months)</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr *ngFor="let loanSetting of bank?.loanSettingDtoList">
-                    <td>{{ loanSetting.loanTypeDto.loanCategory }}</td>
-                    <td>{{ loanSetting.name }}</td>
-                    <td>{{ loanSetting.loanAmount }}</td>
-                    <td>{{ loanSetting.loanTermMonths }}</td>
-                  </tr>
-                </tbody>
-              </table>
+              <div class="row">
+                <div *ngFor="let loanSetting of bank?.loanSettingDtoList" class="col-md-4 mb-3">
+                  <div class="card h-100" (click)="openLoanModal(loanSetting)">
+                    <div class="card-body">
+                      <div class="d-flex w-100 justify-content-between">
+                        <img class="card-img-fixed" [src]="loanSetting.loanTypeDto?.image?.imageUrl || getImageLoan(loanSetting.loanTypeDto?.loanCategory)" alt="Loan Category Image">
+                      </div>
+                      <h3>{{ loanSetting.name }}</h3>
+                      <h3 class="mb-1">Loan Amount: {{ loanSetting.loanAmount }}</h3>
+                      <h3>Loan Term (Months): {{ loanSetting.loanTermMonths }}</h3>
+                    </div>
+                  </div>
+                </div>
+              </div>
             </ng-container>
             <ng-template #noLoanSettings>
-              <p class="text-center">No loan settings available.</p>
+              <p class="text-center text-muted">No loan settings available.</p>
             </ng-template>
           </div>
         </div>
       </div>
     </div>
+
   </div>
 </div>

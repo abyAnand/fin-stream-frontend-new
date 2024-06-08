@@ -1,7 +1,7 @@
-<div class="container mt-5">
+<div class="container">
   <div class="row justify-content-center">
-    <div class="col-md-6 border border-warning p-4">
-      <h2 class="text-center mb-4">Login</h2>
+    <div class="col-12 col-md-8 col-lg-6 border border-warning p-4 bg-light rounded shadow custom-form-width">
+      <h2 class="text-center mb-4 text-warning">Login</h2>
       <form [formGroup]="loginForm">
         <div class="mb-3">
           <label for="loginEmail" class="form-label">Email address</label>
@@ -17,22 +17,21 @@
             Please enter Password.
           </div>
 
-          <div class="d-flex flex-row justify-content-around  mt-2">
+          <div class="d-flex flex-row justify-content-between mt-2">
             <div class="mb-3 text-center">
-              <a routerLink="/auth/forgot-password" class="text-decoration-none">Forgot Password?</a>
+              <a routerLink="/auth/forgot-password" class="text-decoration-none text-warning">Forgot Password?</a>
             </div>
             <div class="mt-1 text-center">
-              <a routerLink="/register" class="text-decoration-none">Open an Account</a>
+              <a routerLink="/register" class="text-decoration-none text-warning">Open an Account</a>
             </div>
           </div>
         </div>
 
-
         <div class="mb-3 text-center">
-          <a routerLink="/auth/bank/login" class="text-decoration-none">Login as Bank </a>
+          <a routerLink="/auth/bank/login" class="text-decoration-none text-warning">Login as Bank</a>
         </div>
         <div class="mb-3 text-center">
-          <a routerLink="/auth/admin/login" class="text-decoration-none">Login as Admin </a>
+          <a routerLink="/auth/admin/login" class="text-decoration-none text-warning">Login as Admin</a>
         </div>
         <div class="d-grid">
           <button (click)="login()" [disabled]="!loginForm.valid" type="submit" class="btn btn-warning">Login</button>

@@ -3,6 +3,7 @@ export interface Bank {
   name: string;
   shortName: string;
   verified: boolean;
+  blocked?: boolean;
   status: Status; // Assuming 'Status' is a string
   address: string;
   email: string;

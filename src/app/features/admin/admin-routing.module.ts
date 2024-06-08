@@ -11,6 +11,8 @@ import { AllAccountComponent } from './account/all-account/all-account.component
 import { SingleAccountComponent } from './account/single-account/single-account.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { LoginComponent } from './login/login.component';
+import { NotificationComponent } from './notification/notification.component';
+import { EditUserComponent } from './user/edit-user/edit-user.component';
 
 const routes: Routes = [
   {path: 'login', component: LoginComponent},
@@ -18,11 +20,13 @@ const routes: Routes = [
   {path:'user', component: AllUsersComponent},
   {path: 'user/single', component: SingleUserComponent},
   {path: 'user/create', component: CreateUserComponent},
+  {path:'user/edit', component: EditUserComponent},
   {path: 'bank', component: AllBankComponent},
   {path: 'bank/single', component: SingleBankComponent},
   {path: 'bank/create',component: CreateBankComponent},
   {path: 'account', component: AllAccountComponent},
-  {path: 'account/single', component: SingleAccountComponent}
+  {path: 'account/single', component: SingleAccountComponent},
+  {path: 'notification', component: NotificationComponent}
 
 ];
 

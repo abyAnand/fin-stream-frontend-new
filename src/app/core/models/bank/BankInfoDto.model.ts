@@ -7,6 +7,7 @@ export interface BankInfoDto {
     shortName: string;
     email: string;
     verified: boolean;
+    blocked?: boolean;
     accountSettingDtoList: AccountSettingDto[];
     loanSettingDtoList: LoanSetting[];
 }

@@ -8,5 +8,6 @@ export interface BankDto {
   address: string;
   email: string;
   phoneNumber: string;
+  blocked?: boolean;
 }
 

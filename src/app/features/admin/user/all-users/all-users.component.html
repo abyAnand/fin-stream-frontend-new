@@ -1,49 +1,62 @@
 <app-top-navbar></app-top-navbar>
-<div class="row justify-content-center mt-4">
-  <div class="col-md-10">
-    <div class="card">
-      <div class="card-header bg-primary text-white">
-        <h3 class="m-0">User Information</h3>
-      </div>
-      <div class="card-body">
-        <button class="btn btn-sm btn-success mb-3" (click)="createUser()">Create User</button>
-        <div class="table-responsive">
-          <table class="table table-striped">
-            <thead>
-              <tr>
-                <th>#</th>
-                <th>User Name</th>
-                <th>Email</th>
-                <th>Employment Status</th>
-                <th>Number of Accounts</th>
-                <th>Number of Loans</th>
-                <th>Action</th>
-              </tr>
-            </thead>
-            <tbody *ngIf="users && users.length > 0; else noUsers">
-              <tr *ngFor="let user of users; let i = index">
-                <td>{{ i + 1 }}</td>
-                <td>{{ user.firstName }} {{ user.lastName }}</td>
-                <td>{{ user.email }}</td>
-                <td>{{ user.employmentStatus }}</td>
-                <td>{{ user.accountList.length }}</td>
-                <td>{{ user.loanList.length }}</td>
-                <td>
-                  <button class="btn btn-sm btn-primary" (click)="viewUser(user)">
-                    View User
-                  </button>
-                </td>
-              </tr>
-            </tbody>
-            <ng-template #noUsers>
-              <tr>
-                <td colspan="7">No user data available.</td>
-              </tr>
-            </ng-template>
-          </table>
+<div class="container">
+    <div class="row">
+        <div class="col-12 mb-3 mt-5 mb-lg-5">
+            <div class="overflow-hidden card table-nowrap table-card">
+                <div class="card-header d-flex justify-content-between align-items-center">
+                    <h2 class="mt-2">User Information</h2>
+                    <button class="btn btn-primary btn-sm" (click)="createUser()">
+                        <i class="fa fa-user-plus me-1"></i> Create User
+                    </button>
+                </div>
+                <div class="table-responsive">
+                    <table class="table mb-0">
+                        <thead class="small text-uppercase bg-body text-muted">
+                            <tr>
+                                <th>#</th>
+                                <th>User Name</th>
+                                <th>Email</th>
+                                <th>Employment Status</th>
+                                <th>Number of Accounts</th>
+                                <th>Number of Loans</th>
+                                <th>Created Date</th>
+                                <th class="text-end">Action</th>
+                            </tr>
+                        </thead>
+                        <tbody *ngIf="users && users.length > 0; else noUsers">
+                            <tr class="align-middle" *ngFor="let user of users; let i = index">
+                                <td>{{ i + 1 }}</td>
+                                <td>
+                                    <div class="d-flex align-items-center">
+                                        <img *ngIf="user.image" [src]="user.image.imageUrl" class="avatar sm rounded-pill me-3 flex-shrink-0" alt="User Image">
+                                        <img *ngIf="!user.image" src="https://bootdey.com/img/Content/avatar/avatar1.png" class="avatar sm rounded-pill me-3 flex-shrink-0" alt="Default Avatar">
+                                        <div>
+                                            <div class="h6 mb-0 lh-1">{{ user.firstName }} {{ user.lastName }}</div>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td>{{ user.email }}</td>
+                                <td>{{ user.employmentStatus }}</td>
+                                <td>{{ user.accountList.length }}</td>
+                                <td>{{ user.loanList.length }}</td>
+                                <td>{{ user.createdDate | date:'dd MMM, yyyy' }}</td>
+                                <td class="text-end">
+                                    <div class="btn-group" role="group" aria-label="User Actions">
+                                        <button class="btn btn-sm btn-info" (click)="editUser(user)"><i class="fa fa-edit"></i></button>
+                                        <button class="btn btn-sm btn-danger" (click)="deleteUser(user)"><i class="fa fa-trash"></i></button>
+                                        <button class="btn btn-sm btn-warning" (click)="blockUser(user)"><i class="fa fa-ban"></i></button>
+                                    </div>
+                                </td>
+                            </tr>
+                        </tbody>
+                        <ng-template #noUsers>
+                            <tr>
+                                <td colspan="8">No user data available.</td>
+                            </tr>
+                        </ng-template>
+                    </table>
+                </div>
+            </div>
         </div>
-      </div>
     </div>
-  </div>
 </div>
-

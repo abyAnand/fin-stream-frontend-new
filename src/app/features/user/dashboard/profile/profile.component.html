@@ -1,6 +1,19 @@
 <div class="container-lg my-3">
   <h2 class="text-center mb-4">Update User</h2>
   <form class="row g-3 border rounded p-4" [formGroup]="updateForm" style="box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);">
+    <!-- Profile Picture Section -->
+    <div class="col-12 text-center">
+      <div class="profile-pic-container">
+        <img class="img-thumbnail rounded-circle mb-3"
+    [src]="user?.image?.imageUrl || '/assets/user_profile.png'"
+    alt="Profile Picture"
+    style="width: 150px; height: 150px;">
+        <span class="edit-icon" [hidden]="!isEditMode">
+          <i class="fa fa-camera" (click)="openImageUploadModal()"></i>
+        </span>
+      </div>
+    </div>
+
     <!-- Personal Information Section -->
     <div class="col-md-12 mb-3">
       <h3 class="border-bottom pb-2 display-5 fw-bold">Personal Information</h3>
@@ -23,11 +36,9 @@
       <div class="row g-3">
         <div class="col-md-4">
           <label for="employmentStatus" class="form-label">Employment Status</label>
-      
           <ng-container *ngIf="!isEditMode">
             <input type="text" formControlName="employmentStatus" class="form-control" id="employmentStatus" readonly>
           </ng-container>
-     
           <ng-container *ngIf="isEditMode">
             <select formControlName="employmentStatus" class="form-select" id="employmentStatus">
               <option value="" disabled [selected]="!updateForm.get('employmentStatus').value">Select Employment Status</option>
@@ -56,39 +67,7 @@
     </div>
     <!-- End of Employment Information Section -->
 
-    <!-- Collateral Information Section -->
-    <!-- <div class="col-md-12 mb-3">
-      <h3 class="border-bottom pb-2 display-5 fw-bold">Collateral Information</h3>
-      <div class="row g-3">
-        <div class="col-md-4">
-          <label for="collateralType" class="form-label">Collateral Type</label>
-          <select formControlName="collateralType" class="form-select" [disabled]="!isEditMode" id="collateralType">
-            <option value="" disabled>Select Collateral Type</option>
-            <option value="Vehicle">Vehicle</option>
-            <option value="Savings Account">Savings Account</option>
-          </select>
-        </div>
-        <div class="col-md-4">
-          <label for="collateralDescription" class="form-label">Collateral Description</label>
-          <input type="text" formControlName="collateralDescription" class="form-control" [readonly]="!isEditMode" id="collateralDescription" placeholder="Enter Collateral Description">
-        </div>
-        <div class="col-md-4">
-          <label for="collateralValue" class="form-label">Collateral Value</label>
-          <input type="number" formControlName="collateralValue" class="form-control" [readonly]="!isEditMode" id="collateralValue" placeholder="Enter Collateral Value">
-        </div>
-        <div class="col-md-4" *ngIf="updateForm.get('collateralType').value === 'Vehicle'">
-          <label for="vehicleNumber" class="form-label">Vehicle Number</label>
-          <input type="text" formControlName="vehicleNumber" class="form-control" [readonly]="!isEditMode" id="vehicleNumber" placeholder="Enter Vehicle Number">
-        </div>
-        <div class="col-md-4" *ngIf="updateForm.get('collateralType').value === 'Savings Account'">
-          <label for="collateralAccount" class="form-label">Collateral Account</label>
-          <input type="text" formControlName="collateralAccount" class="form-control" [readonly]="!isEditMode" id="collateralAccount" placeholder="Enter Collateral Account">
-        </div>
-      </div>
-    </div> -->
-    <!-- End of Collateral Information Section -->
-
-    <div class="col-12">
+    <div class="col-12 text-center">
       <button type="button" class="btn btn-update-user btn-outline-warning" (click)="toggleEditMode()">
         {{ isEditMode ? 'Save Changes' : 'Edit' }}
       </button>

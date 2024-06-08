@@ -14,6 +14,11 @@ import { AllAccountComponent } from './account/all-account/all-account.component
 import { SingleAccountComponent } from './account/single-account/single-account.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { LoginComponent } from './login/login.component';
+import { AccountDetailModalComponent } from './bank/single-bank/account-detail-modal/account-detail-modal.component';
+import { MatDialogActions } from '@angular/material/dialog';
+import { NotificationComponent } from './notification/notification.component';
+import { EditUserComponent } from './user/edit-user/edit-user.component';
+import { NgApexchartsModule } from 'ng-apexcharts';
 
 
 @NgModule({
@@ -28,13 +33,20 @@ import { LoginComponent } from './login/login.component';
     AllAccountComponent,
     SingleAccountComponent,
     DashboardComponent,
-    LoginComponent
+    LoginComponent,
+
+    AccountDetailModalComponent,
+      NotificationComponent,
+      EditUserComponent
   ],
   imports: [
     AdminRoutingModule,
     FormsModule,
     ReactiveFormsModule,
     CommonModule,
+    NgApexchartsModule
+
+
 
   ]
 })

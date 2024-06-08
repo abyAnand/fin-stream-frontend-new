@@ -1,0 +1,144 @@
+<app-top-navbar></app-top-navbar>
+<div class="container mt-5">
+  <div class="card border-0 shadow-lg rounded p-4" style="background-color: #f8f9fa;">
+
+    <!-- User Details -->
+    <div class="row justify-content-center mb-4">
+      <div class="col-md-8">
+        <div class="card border-0 shadow-sm" style="background-color: #ffffff;">
+          <div class="card-header bg-primary text-white d-flex justify-content-between align-items-center">
+            <h4 class="card-title mb-0">User Details</h4>
+            <button *ngIf="!isEditing" class="btn btn-light" (click)="enableEditing()">Edit</button>
+            <button *ngIf="isEditing" class="btn btn-success" (click)="submitChanges()">Submit</button>
+            <button *ngIf="isEditing" class="btn btn-secondary" (click)="cancelEditing()">Cancel</button>
+          </div>
+          <div class="card-body">
+            <div class="row mb-3">
+              <div class="col-md-6">
+                <p><strong>First Name:</strong>
+                  <span *ngIf="!isEditing">{{ user?.firstName }}</span>
+                  <input *ngIf="isEditing" [(ngModel)]="editableUser.firstName" class="form-control" />
+                </p>
+              </div>
+              <div class="col-md-6">
+                <p><strong>Last Name:</strong>
+                  <span *ngIf="!isEditing">{{ user?.lastName }}</span>
+                  <input *ngIf="isEditing" [(ngModel)]="editableUser.lastName" class="form-control" />
+                </p>
+              </div>
+            </div>
+            <div class="row mb-3">
+              <div class="col-md-6">
+                <p><strong>Email:</strong>
+                  <span>{{ user?.email }}</span>
+                </p>
+              </div>
+              <div class="col-md-6">
+                <p><strong>Employment Status:</strong>
+                  <span *ngIf="!isEditing">{{ user?.employmentStatus }}</span>
+                  <select *ngIf="isEditing" [(ngModel)]="editableUser.employmentStatus" class="form-control">
+                    <option *ngFor="let status of employmentStatusOptions" [value]="status">{{ status }}</option>
+                  </select>
+                </p>
+              </div>
+            </div>
+            <div class="row mb-3">
+              <div class="col-md-6">
+                <p><strong>Monthly Income:</strong>
+                  <span *ngIf="!isEditing">{{ user?.monthlyIncome | currency }}</span>
+                  <input *ngIf="isEditing" [(ngModel)]="editableUser.monthlyIncome" type="number" class="form-control" />
+                </p>
+              </div>
+              <div class="col-md-6">
+                <p><strong>Total Assets:</strong>
+                  <span *ngIf="!isEditing">{{ user?.totalAssets | currency }}</span>
+                  <input *ngIf="isEditing" [(ngModel)]="editableUser.totalAssets" type="number" class="form-control" />
+                </p>
+              </div>
+            </div>
+            <div class="row mb-3">
+              <div class="col-md-6">
+                <p><strong>Total Liabilities:</strong>
+                  <span *ngIf="!isEditing">{{ user?.totalLiabilities | currency }}</span>
+                  <input *ngIf="isEditing" [(ngModel)]="editableUser.totalLiabilities" type="number" class="form-control" />
+                </p>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-12">
+                <p><strong>Account Created:</strong>
+                  <span>{{ user?.createdDate | date }}</span>
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Account Details -->
+    <div class="row justify-content-center mb-4">
+      <div class="col-md-8">
+        <div class="card border-0 shadow-sm" style="background-color: #ffffff;">
+          <div class="card-header bg-info text-white">
+            <h3 class="m-0 text-center">Account Details</h3>
+          </div>
+          <div class="card-body">
+            <ng-container *ngIf="user?.accountList?.length > 0; else noAccounts">
+              <div class="row">
+                <div *ngFor="let account of user?.accountList" class="col-md-4 mb-3">
+                  <div class="card h-100" (click)="openAccountModal(account)">
+                    <div class="card-body">
+                      <div class="d-flex w-100 justify-content-between">
+                        <img class="card-img-fixed" [src]="getImage(account.accountType)" alt="Account Type Image">
+                      </div>
+                      <h3>{{ account.accountName }}</h3>
+                      <h3 class="mb-1">Account Type: {{ account.accountType }}</h3>
+                      <h3>Balance: {{ account.balance | currency }}</h3>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </ng-container>
+            <ng-template #noAccounts>
+              <p class="text-center text-muted">No accounts available.</p>
+            </ng-template>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Loan Details -->
+    <div class="row justify-content-center">
+      <div class="col-md-8">
+        <div class="card border-0 shadow-sm" style="background-color: #ffffff;">
+          <div class="card-header bg-info text-white">
+            <h3 class="m-0 text-center">Loan Details</h3>
+          </div>
+          <div class="card-body">
+            <ng-container *ngIf="user?.loanList?.length > 0; else noLoans">
+              <div class="row">
+                <div *ngFor="let loan of user?.loanList" class="col-md-4 mb-3">
+                  <div class="card h-100" (click)="openLoanModal(loan)">
+                    <div class="card-body">
+                      <div class="d-flex w-100 justify-content-between">
+                        <img class="card-img-fixed" [src]="getImageLoan(loan.loanCategory)" alt="Loan Category Image">
+                      </div>
+                      <h3>{{ loan.loanName }}</h3>
+                      <h3 class="mb-1">Loan Amount: {{ loan.loanAmount | currency }}</h3>
+                      <h3>Loan Term (Months): {{ loan.loanTermMonths }}</h3>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </ng-container>
+            <ng-template #noLoans>
+              <p class="text-center text-muted">No loans available.</p>
+            </ng-template>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>

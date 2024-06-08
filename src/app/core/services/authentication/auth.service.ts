@@ -104,6 +104,19 @@ export class AuthService {
       );
   }
 
+  blockUser(userId: any): Observable<any> {
+    return this.http.post(`${URL}/block/${userId}`,{ observe: 'response' })
+      .pipe(
+        tap((res: HttpResponse<any>) => {
+          return res;
+        }),
+        catchError((error) => {
+          console.error('User Blocking failed', error);
+          throw error;
+        })
+      );
+  }
+
 
 
   log(message: string) {

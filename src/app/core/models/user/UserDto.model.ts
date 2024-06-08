@@ -1,4 +1,5 @@
 import { AccountDto } from "../account/AccountDto.model";
+import { Image } from "../Image.model";
 import { LoanDto } from "../loan/LoanDto.model";
 
 
@@ -7,6 +8,7 @@ export interface UserDto {
   firstName: string;
   lastName: string;
   email: string;
+  image?: Image;
   employmentStatus?: EmploymentStatus;
   monthlyIncome?: number;
   totalAssets?: number;
@@ -14,6 +16,8 @@ export interface UserDto {
   accountList?: AccountDto[];
   loanList?: LoanDto[];
   createdDate?: string;
+  deleted?: boolean;
+  blocked?: boolean;
 }
 
 

@@ -1,10 +1,12 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { UserDto } from 'src/app/core/models/user/UserDto.model';
 import { StorageService } from 'src/app/core/services/storage/storage.service';
 import { ToasterService } from 'src/app/core/services/toaster/toaster.service';
 import { UserService } from 'src/app/core/services/user/user.service';
+import { ImageUploadComponent } from 'src/app/features/bank/bank-home/bank-top-navbar/accounts/account-settings/image-upload/image-upload.component';
 
 
 @Component({
@@ -12,43 +14,32 @@ import { UserService } from 'src/app/core/services/user/user.service';
   templateUrl: './profile.component.html',
   styleUrls: ['./profile.component.css']
 })
-export class ProfileComponent implements OnInit{
+export class ProfileComponent implements OnInit {
 
-  userId! : any;
+  userId!: any;
   user: UserDto;
-
-
-
-
+  profilePic: string | ArrayBuffer | null = null;
+  isEditMode: boolean = false;
 
   constructor(
     private formBuilder: FormBuilder,
     private route: ActivatedRoute,
     private userService: UserService,
     private notification: ToasterService,
-
-
-    ){}
+    private modalService: NgbModal
+  ) {}
 
   ngOnInit(): void {
     this.userId = StorageService.getUserIdFromToken();
-    console.log("page ng on init invoked")
     this.getUserByUserId(this.userId);
-
   }
 
-  getUserByUserId(userId: number): any{
-    this.userService.getUserById(userId).subscribe((res) =>{
+  getUserByUserId(userId: number): any {
+    this.userService.getUserById(userId).subscribe((res) => {
+      this.user = res;
       this.updateForm.patchValue(res);
     });
-
   }
-
-  isEditMode: boolean = false;
-
-
-
-
 
   updateForm = this.formBuilder.group({
     firstName: ['', Validators.required],
@@ -59,15 +50,8 @@ export class ProfileComponent implements OnInit{
     employmentStatus: [''],
     monthlyIncome: [''],
     totalAssets: [''],
-    totalLiabilities: [''],
-    // collateralType: [''],
-    // collateralDescription: [''],
-    // collateralValue: [''],
-    // vehicleNumber: [''],
-    // collateralAccount: ['']
+    totalLiabilities: ['']
   }, { validator: this.passwordMatchValidator });
-
-
 
   passwordMatchValidator(formGroup: FormGroup) {
     const password = formGroup.get('password')?.value;
@@ -81,7 +65,6 @@ export class ProfileComponent implements OnInit{
   }
 
   toggleEditMode() {
-
     this.isEditMode = !this.isEditMode;
     if (!this.isEditMode) {
       const userDto: UserDto = {
@@ -92,30 +75,32 @@ export class ProfileComponent implements OnInit{
         employmentStatus: this.updateForm.get(['employmentStatus'])!.value,
         monthlyIncome: this.updateForm.get(['monthlyIncome'])!.value,
         totalAssets: this.updateForm.get(['totalAssets'])!.value,
-        totalLiabilities: this.updateForm.get(['totalLiabilities'])!.value,
-        // collateralType: this.updateForm.get(['collateralType'])!.value,
-        // collateralDescription: this.updateForm.get(['collateralDescription'])!.value,
-        // collateralValue: this.updateForm.get(['collateralValue'])!.value,
-        // vehicleNumber: this.updateForm.get(['vehicleNumber'])!.value,
-        // collateralAccount: this.updateForm.get(['collateralAccount'])!.value
+        totalLiabilities: this.updateForm.get(['totalLiabilities'])!.value
       };
-      console.log(userDto);
-
 
       this.userService.updateUser(userDto).subscribe(
-        () =>{
-          this.notification.success("User updated Successfully", "Updated");
+        () => {
+          this.notification.success("User updated successfully!","Success");
+          this.getUserByUserId(this.userId);
         },
-        (error)=>{
-          this.notification.info("User updation failed", "Failed");
+        (error) => {
+          this.notification.error("Failed to update user!", "Fail");
+          console.error(error);
         }
-      )
-
-
-
+      );
     }
   }
 
+  openImageUploadModal() {
+    const modalRef = this.modalService.open(ImageUploadComponent);
+    modalRef.componentInstance.userId = this.userId;
 
-
+    modalRef.result.then((result) => {
+      if (result === 'success') {
+        this.getUserByUserId(this.userId);
+      }
+    }).catch((error) => {
+      console.error('Image upload modal closed with error:', error);
+    });
+  }
 }
