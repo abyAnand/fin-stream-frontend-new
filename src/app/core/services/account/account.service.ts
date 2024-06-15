@@ -4,8 +4,11 @@ import { ToasterService } from '../toaster/toaster.service';
 import { AccountDto } from '../../models/account/AccountDto.model';
 import { Observable, catchError, tap } from 'rxjs';
 import { BankAccountDto } from '../../models/account/BankAccountDto.model';
+import { K8ExternalIp } from '../URL';
 
-const URL = 'http://localhost:8072/finStream/account/';
+// const URL = 'http://localhost:8072/finStream/account/';
+
+const URL = K8ExternalIp+'/finStream/account/';
 
 @Injectable({
   providedIn: 'root'

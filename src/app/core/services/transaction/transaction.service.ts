@@ -5,8 +5,11 @@ import { TransactionDto } from '../../models/transaction/TransactionDto.model';
 import { Observable, catchError, tap, throwError } from 'rxjs';
 import { TransactionHistory } from '../../models/transaction/TransactionHistory.model';
 import { BankTransactionHistory } from '../../models/transaction/BankTransactionHistory.model';
+import { K8ExternalIp } from '../URL';
 
-const URL = 'http://localhost:8072/finStream/transaction/transactions';
+// const URL = 'http://localhost:8072/finStream/transaction/transactions';
+
+const URL = K8ExternalIp+'/finStream/transaction/transactions';
 
 
 @Injectable({

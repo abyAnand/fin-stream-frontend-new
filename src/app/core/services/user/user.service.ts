@@ -2,8 +2,11 @@ import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http
 import { Injectable } from '@angular/core';
 import { UserDto } from '../../models/user/UserDto.model';
 import { Observable, catchError, throwError } from 'rxjs';
+import { K8ExternalIp } from '../URL';
 
-const URL = 'http://localhost:8072/finStream/user/users';
+// const URL = 'http://localhost:8072/finStream/user/users';
+
+const URL = K8ExternalIp+'/finStream/user/users';
 
   const headers = new HttpHeaders({'Content-Type': 'application/json'});
 

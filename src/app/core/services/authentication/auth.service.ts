@@ -5,8 +5,11 @@ import { AuthRequest } from '../../models/auth/AuthRequest.model';
 import { Observable, catchError, map, tap } from 'rxjs';
 import { RegisterRequest } from '../../models/auth/RegisterRequest.model';
 import { BankRequest } from '../../models/auth/BankRequest.model';
+import { K8ExternalIp } from '../URL';
 
-const URL = ['http://localhost:8072/finStream/auth/auth/']
+// const URL = ['http://localhost:8072/finStream/auth/auth/']
+
+const URL = K8ExternalIp+'/finStream/auth/auth/';
 
 @Injectable({
   providedIn: 'root'

@@ -3,8 +3,11 @@ import { Injectable } from '@angular/core';
 import { ToasterService } from '../toaster/toaster.service';
 import { LoanDto } from '../../models/loan/LoanDto.model';
 import { Observable, catchError, tap, throwError } from 'rxjs';
+import { K8ExternalIp } from '../URL';
 
-const URL = 'http://localhost:8072/finStream/loan/loans';
+// const URL = 'http://localhost:8072/finStream/loan/loans';
+
+const URL = K8ExternalIp+'/finStream/loan/loans';
 
 @Injectable({
   providedIn: 'root'

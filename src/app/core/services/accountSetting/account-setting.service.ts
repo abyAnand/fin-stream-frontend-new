@@ -5,8 +5,11 @@ import { AccountTypeListRequestDto } from '../../models/account/AccountTypeListR
 import { Observable, catchError, tap, throwError } from 'rxjs';
 import { AccountSettingDto } from '../../models/bank/settings/AccountSettingDto.model';
 import { AccountTypeSetting } from '../../models/account/AccountTypeSetting.model';
+import { K8ExternalIp } from '../URL';
 
-const URL = 'http://localhost:8072/finStream/bank/';
+// const URL = 'http://localhost:8072/finStream/bank/';
+
+const URL = K8ExternalIp+'/finStream/bank/';
 
 @Injectable({
   providedIn: 'root'
@@ -30,7 +33,7 @@ export class AccountSettingService {
   }
 
   addImageToAccountSetting(formData: FormData): Observable<AccountSettingDto> {
-  
+
     return this.http.post<AccountSettingDto>(`${URL}accounts/settings/image`, formData).pipe(
       catchError(this.handleError)
     );
