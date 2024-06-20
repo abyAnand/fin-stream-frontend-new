@@ -7,6 +7,7 @@ import { StorageService } from 'src/app/core/services/storage/storage.service';
 import { UserloanService } from 'src/app/core/services/userLoan/userloan.service';
 import { AccountService } from 'src/app/core/services/account/account.service';
 import { AccountDto } from 'src/app/core/models/account/AccountDto.model';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-user-loan-apply',
@@ -31,7 +32,8 @@ export class UserLoanApplyComponent implements OnInit{
 
   constructor(
     private loanService: UserloanService,
-    private accountService: AccountService
+    private accountService: AccountService,
+    private router: Router
   ){
 
   }
@@ -106,6 +108,7 @@ export class UserLoanApplyComponent implements OnInit{
     this.loanService.applyLoan(newLoanAppliation).subscribe(
       (response) => {
         console.log('Loan Application Submitted successfully:', response);
+        this.router.navigate(['bank']);
       },
       (error) => {
         console.error('Error occurred while Applying for loan:', error);
