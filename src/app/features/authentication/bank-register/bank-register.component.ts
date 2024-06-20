@@ -48,7 +48,7 @@ export class BankRegisterComponent implements OnInit {
       .subscribe(
         () => {
           this.notification.success('Bank registered successfully', "Success");
-          this.router.navigate(['bank/login']);
+          this.router.navigate(['/auth/bank/login']);
         },
         (error) => {
           this.notification.error(error, 'Failed');
