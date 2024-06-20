@@ -56,7 +56,7 @@ export class CreateBankAccountComponent implements OnInit {
 
   }
 
-  payNow(){
+  payNow(account: AccountDto): void {
     const RazorpayOptions = {
       description: 'Sample Razorpay demo',
       currency: 'INR',
@@ -77,17 +77,30 @@ export class CreateBankAccountComponent implements OnInit {
           console.log('dismissed');
         }
       }
-    }
+    };
 
     const successCallback = (paymentId: any) => {
       console.log(paymentId);
-    }
+      this.createAccount(account);
+    };
 
     const failureCallback = (e: any) => {
       console.log(e);
-    }
+    };
 
-    Razorpay.open(RazorpayOptions, successCallback, failureCallback)
+    Razorpay.open(RazorpayOptions, successCallback, failureCallback);
+  }
+
+  createAccount(account: AccountDto): void {
+    this.accountService.createAccount(account).subscribe(
+      (banks) => {
+        this.router.navigate(['/account/deposit']);
+      },
+      (error) => {
+        this.notification.error(error, 'Error fetching Accounts:');
+        this.error = true;
+      }
+    );
   }
 
   initializeForm(): void {
@@ -176,9 +189,6 @@ export class CreateBankAccountComponent implements OnInit {
   }
 
   createSavingsAccount(): void {
-
-    this.payNow();
-
     const account: AccountDto = {
       bankId: this.account.bankId,
       accountSettingId: this.account.id,
@@ -186,21 +196,9 @@ export class CreateBankAccountComponent implements OnInit {
       balance: this.savingsAccountForm.get(['initialDeposit'])!.value,
       accountType: this.account.accountType,
       interestRate: this.account.interestRate
-
     };
 
-    console.log(account);
-
-    this.accountService.createAccount(account).subscribe(
-      (banks) => {
-        // this.account = banks;
-        this.router.navigate(['/account/deposit']);
-      },
-      (error) => {
-        this.notification.error(error, 'Error fetching Accounts:');
-        this.error = true;
-      }
-    );
+    this.payNow(account);
 
   }
 
@@ -216,17 +214,7 @@ export class CreateBankAccountComponent implements OnInit {
     };
 
     console.log(account);
-
-    this.accountService.createAccount(account).subscribe(
-      (banks) => {
-        // this.account = banks;
-        this.router.navigate(['account/deposit']);
-      },
-      (error) => {
-        this.notification.error(error, 'Error fetching Accounts:');
-        this.error = true;
-      }
-    );
+    this.payNow(account);
 
   }
 
@@ -244,18 +232,7 @@ export class CreateBankAccountComponent implements OnInit {
     };
 
     console.log(account);
-
-    this.accountService.createAccount(account).subscribe(
-      (banks) => {
-        // this.account = banks;
-        this.router.navigate(['/account/deposit']);
-      },
-      (error) => {
-        this.notification.error(error, 'Error fetching Accounts:');
-        this.error = true;
-      }
-    );
-
+    this.payNow(account);
   }
 
 }
