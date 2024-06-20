@@ -85,7 +85,7 @@ export class CreateBankAccountComponent implements OnInit {
     };
 
     const failureCallback = (e: any) => {
-      console.log(e);
+      this.notification.error(e, 'Error fetching Accounts:');
     };
 
     Razorpay.open(RazorpayOptions, successCallback, failureCallback);
@@ -214,7 +214,7 @@ export class CreateBankAccountComponent implements OnInit {
     };
 
     console.log(account);
-    this.payNow(account);
+    this.payNow(account)
 
   }
 
@@ -233,6 +233,7 @@ export class CreateBankAccountComponent implements OnInit {
 
     console.log(account);
     this.payNow(account);
+
   }
 
 }
