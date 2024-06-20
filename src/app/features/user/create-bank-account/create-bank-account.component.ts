@@ -168,8 +168,8 @@ export class CreateBankAccountComponent implements OnInit {
     const options = {
       description: 'Sample Razorpay demo',
       currency: 'INR',
-      amount: 30000,
-      name: 'Aby',
+      amount: account.balance * 100,
+      name: 'Fin-Stream',
       key: 'rzp_test_ti4COoTWxp1e7t',
       image: 'https://www.dreamstime.com/welded-metal-chain-various-rigging-works-as-cargo-support-insurance-structures-their-elements-short-link-image264081101',
       prefill: {
