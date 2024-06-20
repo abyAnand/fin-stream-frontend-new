@@ -7,12 +7,16 @@ import { AccountDto } from '../../../core/models/account/AccountDto.model';
 import { AccountService } from 'src/app/core/services/account/account.service';
 import { ToasterService } from 'src/app/core/services/toaster/toaster.service';
 
+declare var Razorpay: any;
+
 @Component({
   selector: 'app-create-bank-account',
   templateUrl: './create-bank-account.component.html',
   styleUrls: ['./create-bank-account.component.css']
 })
 export class CreateBankAccountComponent implements OnInit {
+
+
 
   accountType: string;
 
@@ -50,6 +54,40 @@ export class CreateBankAccountComponent implements OnInit {
 
     this.initializeForm();
 
+  }
+
+  payNow(){
+    const RazorpayOptions = {
+      description: 'Sample Razorpay demo',
+      currency: 'INR',
+      amount: 30000,
+      name: 'Aby',
+      key: 'rzp_test_ti4COoTWxp1e7t',
+      image: 'https://www.dreamstime.com/welded-metal-chain-various-rigging-works-as-cargo-support-insurance-structures-their-elements-short-link-image264081101',
+      prefill: {
+        name: 'Aby Anand',
+        email: "abianand382@gmail.com",
+        phone: '9544888497'
+      },
+      theme: {
+        color: '#f37254'
+      },
+      modal: {
+        ondismiss: () => {
+          console.log('dismissed');
+        }
+      }
+    }
+
+    const successCallback = (paymentId: any) => {
+      console.log(paymentId);
+    }
+
+    const failureCallback = (e: any) => {
+      console.log(e);
+    }
+
+    Razorpay.open(RazorpayOptions, successCallback, failureCallback)
   }
 
   initializeForm(): void {
@@ -138,6 +176,8 @@ export class CreateBankAccountComponent implements OnInit {
   }
 
   createSavingsAccount(): void {
+
+    this.payNow();
 
     const account: AccountDto = {
       bankId: this.account.bankId,
