@@ -9,7 +9,7 @@
             <div class="card-body">
               <h5 class="card-title">{{ account.accountName }}</h5>
               <p class="card-text">Account Type: {{ account.accountType }}</p>
-              <a [routerLink]="['/dashboard/create/', account.accountType]" class="btn btn-primary btn-sm">Show Details</a>
+              <a [routerLink]="['/dashboard/create/', account.accountType]" (click)="showAccountDetails(account)" class="btn btn-primary btn-sm">Show Details</a>
             </div>
           </div>
         </div>
