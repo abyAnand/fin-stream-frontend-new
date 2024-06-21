@@ -37,9 +37,8 @@ export class UserAccountsComponent implements OnInit{
     return user.firstName + ' ' + user.lastName;
   }
 
-  viewAccount(accountId: string){
-    
-  }
+  // viewAccount(accountId: 
+  // }
 
 
 
